@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#faf9f5" />
+  <!-- Anthropic-style radial spike mark, rendered in brand coral -->
+  <g fill="#cc785c">
+    <path d="M16 4 L18 14 L16 16 L14 14 Z" />
+    <path d="M16 28 L14 18 L16 16 L18 18 Z" />
+    <path d="M4 16 L14 14 L16 16 L14 18 Z" />
+    <path d="M28 16 L18 18 L16 16 L18 14 Z" />
+    <path d="M7.5 7.5 L15 13 L16 16 L13 15 Z" />
+    <path d="M24.5 24.5 L17 19 L16 16 L19 17 Z" />
+    <path d="M24.5 7.5 L17 13 L16 16 L19 15 Z" />
+    <path d="M7.5 24.5 L15 19 L16 16 L13 17 Z" />
+  </g>
+</svg>
