@@ -123,7 +123,5 @@ export const session04: Session = {
   ],
 
   sources: [
-    { label: "Google Workspace for Education (공식)", url: "https://edu.google.com/workspace-for-education/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 4강 재구성" },
-  ],
+    { label: "Google Workspace for Education (공식)", url: "https://edu.google.com/workspace-for-education/", lastVerified: "2026-07-10" },  ],
 };

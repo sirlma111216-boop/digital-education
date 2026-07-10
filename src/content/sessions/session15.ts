@@ -129,9 +129,7 @@ export const session15: Session = {
 
   sources: [
     { label: "Claude (Artifacts/Code) 공식", url: "https://claude.ai/", lastVerified: "2026-07-10" },
-    { label: "Google AI Studio (공식)", url: "https://aistudio.google.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 15강 재구성" },
-  ],
+    { label: "Google AI Studio (공식)", url: "https://aistudio.google.com/", lastVerified: "2026-07-10" },  ],
 
   cautions: ["API 키·학생 개인정보 보안을 최우선으로 지키세요. 배포 도구·요금은 변동됩니다."],
 };

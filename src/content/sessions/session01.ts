@@ -41,7 +41,7 @@ export const session01: Session = {
 
   theoryBlocks: [
     {
-      heading: "EdTech와 EduTech가 강조하는 관점",
+      heading: "에듀테크가 강조하는 관점",
       body: "‘Edu + Tech’라는 표현에서 핵심은 **교육(Edu)이 앞선다**는 점입니다. 기술은 교육을 대체하는 것이 아니라 지원하고, 기존에는 어렵던 교육 문제를 해결하는 수단입니다. 그래서 좋은 질문은 ‘이 도구로 무엇을 할 수 있나?’가 아니라 ‘어떤 교육 문제를, 왜, 이 도구로 해결하려는가?’입니다.",
     },
     {
@@ -120,7 +120,6 @@ export const session01: Session = {
   sources: [
     { label: "ISTE Standards (공식)", url: "https://iste.org/standards", lastVerified: "2026-07-10" },
     { label: "CAST — Universal Design for Learning Guidelines", url: "https://udlguidelines.cast.org/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 1강 재구성", note: "본 차시는 강의 교안을 재구성한 것입니다." },
   ],
 
   cautions: [

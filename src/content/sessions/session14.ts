@@ -122,9 +122,7 @@ export const session14: Session = {
 
   sources: [
     { label: "NotebookLM (공식)", url: "https://notebooklm.google/", lastVerified: "2026-07-10" },
-    { label: "Google AI Studio (공식)", url: "https://aistudio.google.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 14강 재구성" },
-  ],
+    { label: "Google AI Studio (공식)", url: "https://aistudio.google.com/", lastVerified: "2026-07-10" },  ],
 
   cautions: ["서비스 기능·정책은 변동됩니다. API 키·학생 개인정보를 외부 AI에 노출하지 마세요."],
 };

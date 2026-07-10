@@ -122,9 +122,7 @@ export const session12: Session = {
 
   sources: [
     { label: "Spatial (공식)", url: "https://www.spatial.io/", note: "이용 가능 플랫폼은 변경될 수 있음", lastVerified: "2026-07-10" },
-    { label: "Desmos (공식)", url: "https://www.desmos.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 12강 재구성" },
-  ],
+    { label: "Desmos (공식)", url: "https://www.desmos.com/", lastVerified: "2026-07-10" },  ],
 
   cautions: ["플랫폼·도구의 제공 여부와 기능은 변경될 수 있으니 공식 문서를 확인하세요."],
 };

@@ -123,7 +123,5 @@ export const session08: Session = {
 
   sources: [
     { label: "Microsoft Teams for Education (공식)", url: "https://www.microsoft.com/en-us/education/products/teams", lastVerified: "2026-07-10" },
-    { label: "Learning Accelerators (Microsoft Learn)", url: "https://learn.microsoft.com/en-us/training/educator-center/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 8강 재구성" },
-  ],
+    { label: "Learning Accelerators (Microsoft Learn)", url: "https://learn.microsoft.com/en-us/training/educator-center/", lastVerified: "2026-07-10" },  ],
 };

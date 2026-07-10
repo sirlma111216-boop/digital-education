@@ -122,9 +122,7 @@ export const session11: Session = {
 
   sources: [
     { label: "Kahoot! (공식)", url: "https://kahoot.com/", lastVerified: "2026-07-10" },
-    { label: "Quizlet (공식)", url: "https://quizlet.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 11강 재구성" },
-  ],
+    { label: "Quizlet (공식)", url: "https://quizlet.com/", lastVerified: "2026-07-10" },  ],
 
   cautions: ["도구의 무료/유료 범위와 기능은 변동될 수 있으니 공식 문서를 확인하세요."],
 };

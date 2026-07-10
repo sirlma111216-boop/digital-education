@@ -117,9 +117,7 @@ export const session06: Session = {
 
   sources: [
     { label: "Microsoft Education (공식)", url: "https://www.microsoft.com/en-us/education", lastVerified: "2026-07-10" },
-    { label: "microsofta3.com (교사용 참고)", url: "https://microsofta3.com/", note: "라이선스·기능은 공식 문서로 최종 확인", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 6강 재구성" },
-  ],
+    { label: "microsofta3.com (교사용 참고)", url: "https://microsofta3.com/", note: "라이선스·기능은 공식 문서로 최종 확인", lastVerified: "2026-07-10" },  ],
 
   cautions: [
     "라이선스와 기능 제공 여부는 Microsoft 공식 Education·Learn 문서를 최우선으로 검증하세요.",

@@ -122,7 +122,5 @@ export const session05: Session = {
 
   sources: [
     { label: "Google Classroom 도움말(공식)", url: "https://support.google.com/edu/classroom/", lastVerified: "2026-07-10" },
-    { label: "Brisk Teaching(공식)", url: "https://www.briskteaching.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 5강 재구성" },
-  ],
+    { label: "Brisk Teaching(공식)", url: "https://www.briskteaching.com/", lastVerified: "2026-07-10" },  ],
 };

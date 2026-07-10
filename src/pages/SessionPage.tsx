@@ -13,7 +13,6 @@ import {
   CompareTableView,
   CaseStudyView,
   CautionCallout,
-  ReflectionPrompt,
   GlossaryList,
   SourceList,
 } from "@/components/content/blocks";
@@ -21,7 +20,7 @@ import {
 export function SessionPage() {
   const { param } = useParams();
   const session = param ? getSessionByRouteParam(param) : undefined;
-  const { isCompleted, toggleCompleted, isBookmarked, toggleBookmarked, getReflection, setReflection, visit } =
+  const { isCompleted, toggleCompleted, isBookmarked, toggleBookmarked, visit } =
     useProgress();
 
   useEffect(() => {
@@ -120,19 +119,6 @@ export function SessionPage() {
 
         {/* 이해 점검 */}
         <CheckpointQuiz items={session.quiz} />
-
-        {/* 성찰 + 성찰 메모 (localStorage) */}
-        <ReflectionPrompt items={session.reflection} />
-        <section className="block reflection-memo">
-          <label className="label" htmlFor="reflection-memo">나의 성찰 메모 (기기에 저장됩니다)</label>
-          <textarea
-            id="reflection-memo"
-            className="textarea"
-            value={getReflection(session.id)}
-            onChange={(e) => setReflection(session.id, e.target.value)}
-            placeholder="이 차시에서 배운 점, 내 수업에 적용할 점을 적어 보세요."
-          />
-        </section>
 
         {session.cautions && session.cautions.length > 0 && (
           <CautionCallout items={session.cautions} />

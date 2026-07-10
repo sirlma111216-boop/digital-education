@@ -121,7 +121,5 @@ export const session07: Session = {
   ],
 
   sources: [
-    { label: "Microsoft OneDrive/SharePoint 도움말(공식)", url: "https://support.microsoft.com/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 7강 재구성" },
-  ],
+    { label: "Microsoft OneDrive/SharePoint 도움말(공식)", url: "https://support.microsoft.com/", lastVerified: "2026-07-10" },  ],
 };

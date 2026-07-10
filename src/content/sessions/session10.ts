@@ -121,7 +121,5 @@ export const session10: Session = {
 
   sources: [
     { label: "Microsoft 365 (공식)", url: "https://www.microsoft.com/microsoft-365", lastVerified: "2026-07-10" },
-    { label: "Minecraft Education (공식)", url: "https://education.minecraft.net/", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 10강 재구성" },
-  ],
+    { label: "Minecraft Education (공식)", url: "https://education.minecraft.net/", lastVerified: "2026-07-10" },  ],
 };

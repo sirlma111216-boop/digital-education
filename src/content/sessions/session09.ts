@@ -120,9 +120,7 @@ export const session09: Session = {
   ],
 
   sources: [
-    { label: "OneNote Class Notebook (공식)", url: "https://www.onenote.com/classnotebook", lastVerified: "2026-07-10" },
-    { label: "업로드 강의 교안 — 디지털 교육 9강 재구성" },
-  ],
+    { label: "OneNote Class Notebook (공식)", url: "https://www.onenote.com/classnotebook", lastVerified: "2026-07-10" },  ],
 
   cautions: ["상담 기록 등 민감 정보는 개인정보와 접근 권한을 특별히 주의하세요."],
 };
