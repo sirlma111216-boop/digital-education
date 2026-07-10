@@ -1,0 +1,7 @@
+# Cloudflare Pages 배포 설정 (정적 SPA)
+# - 빌드 명령: npm run build
+# - 빌드 출력 디렉터리: dist
+# SPA 라우팅 폴백은 public/_redirects 에서 처리합니다.
+name = "digital-education"
+compatibility_date = "2025-06-01"
+pages_build_output_dir = "dist"
