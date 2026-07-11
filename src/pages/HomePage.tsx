@@ -32,6 +32,13 @@ export function HomePage() {
               성장합니다.
             </p>
             <div className="hero__actions">
+              <a
+                href="https://labbitory.com/lecture-univ"
+                className="btn btn-secondary"
+                aria-label="강의 홈으로 이동 (labbitory.com)"
+              >
+                🏠 홈
+              </a>
               <Link to="/course" className="btn btn-primary">
                 15차시 살펴보기
               </Link>
