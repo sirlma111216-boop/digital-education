@@ -57,9 +57,13 @@ export function Header() {
             </>
           ) : (
             <>
-              <Link to="/contact" className="nav-link">
-                교수에게 질문
-              </Link>
+              <a
+                href="https://labbitory.com/lecture-univ"
+                className="nav-link"
+                aria-label="labbitory.com 강의 홈으로 이동"
+              >
+                labbitory.com
+              </a>
               <Link to="/login" className="btn btn-primary btn-sm">
                 로그인
               </Link>
@@ -98,9 +102,13 @@ export function Header() {
               </>
             ) : (
               <>
-                <NavLink to="/contact" className="drawer__link">
-                  교수에게 질문
-                </NavLink>
+                <a
+                  href="https://labbitory.com/lecture-univ"
+                  className="drawer__link"
+                  aria-label="labbitory.com 강의 홈으로 이동"
+                >
+                  labbitory.com
+                </a>
                 <NavLink to="/login" className="btn btn-primary btn-block">
                   로그인
                 </NavLink>
