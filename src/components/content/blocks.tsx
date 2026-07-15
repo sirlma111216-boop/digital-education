@@ -11,6 +11,7 @@ import type {
   SourceLink,
 } from "@/types/content";
 import { Markdown } from "@/components/common/Markdown";
+import { ZoomableImage } from "./ZoomableImage";
 
 /** 섹션 래퍼: eyebrow(작은 라벨) + 제목 + 내용. */
 export function Block({
@@ -68,12 +69,7 @@ export function TheoryCard({
       {images && images.length > 0 && (
         <div className="theory-card__figures">
           {images.map((img) => (
-            <figure key={img.src} className="content-figure">
-              <img src={img.src} alt={img.alt} loading="lazy" />
-              {img.caption && (
-                <figcaption className="content-figure__caption">{img.caption}</figcaption>
-              )}
-            </figure>
+            <ZoomableImage key={img.src} image={img} />
           ))}
         </div>
       )}
