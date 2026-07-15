@@ -21,11 +21,20 @@ export interface ConceptNode {
   description?: string;
 }
 
-/** A body-learning block: a heading + markdown prose. */
+/** An image asset shown inside content (local asset, never a hotlink). */
+export interface ContentImage {
+  src: string; // e.g. "/assets/sessions/01/ISTE01.png"
+  alt: string;
+  caption?: string;
+}
+
+/** A body-learning block: a heading + markdown prose (+ optional images). */
 export interface TheoryBlock {
   heading: string;
   /** Markdown string, rendered with react-markdown + sanitize. */
   body: string;
+  /** Optional figures rendered under the prose. */
+  images?: ContentImage[];
 }
 
 /** A comparison table (structured, mobile-friendly). */

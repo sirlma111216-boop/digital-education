@@ -5,6 +5,7 @@
 import type {
   CaseStudy,
   CompareTable,
+  ContentImage,
   KeyTerm,
   LearningObjective,
   SourceLink,
@@ -51,11 +52,31 @@ export function KeyQuestion({ text }: { text: string }) {
   );
 }
 
-export function TheoryCard({ heading, body }: { heading: string; body: string }) {
+export function TheoryCard({
+  heading,
+  body,
+  images,
+}: {
+  heading: string;
+  body: string;
+  images?: ContentImage[];
+}) {
   return (
     <article className="theory-card">
       <h3 className="theory-card__heading">{heading}</h3>
       <Markdown>{body}</Markdown>
+      {images && images.length > 0 && (
+        <div className="theory-card__figures">
+          {images.map((img) => (
+            <figure key={img.src} className="content-figure">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+              {img.caption && (
+                <figcaption className="content-figure__caption">{img.caption}</figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      )}
     </article>
   );
 }

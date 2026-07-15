@@ -95,7 +95,7 @@ export function SessionPage() {
           <p className="eyebrow">Study · 본문 학습</p>
           <div className="theory-stack">
             {session.theoryBlocks.map((b, i) => (
-              <TheoryCard key={i} heading={b.heading} body={b.body} />
+              <TheoryCard key={i} heading={b.heading} body={b.body} images={b.images} />
             ))}
           </div>
         </section>
