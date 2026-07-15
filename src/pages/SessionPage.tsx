@@ -43,7 +43,6 @@ export function SessionPage() {
             <span aria-hidden="true"> / </span>
             <span>{categoryLabel(session.category)}</span>
           </nav>
-          <p className="eyebrow">{session.id}차시 · {categoryLabel(session.category)}</p>
           <h1 className="display-lg">{session.title}</h1>
           <p className="lead">{session.summary}</p>
           <div className="session__actions">
