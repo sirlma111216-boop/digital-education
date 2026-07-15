@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { courseConfig, categories, buildMailto } from "@/data/courseConfig";
 import { instructor } from "@/data/instructor";
-import { courseSchedule, formatScheduleDate } from "@/data/courseSchedule";
 import { allSessions, sessionRouteParam, getSessionById } from "@/content/sessions";
 import { SessionCard } from "@/components/course/SessionCard";
 import { BrandMark } from "@/components/common/BrandMark";
@@ -133,32 +132,6 @@ export function HomePage() {
               <SessionCard key={s.id} session={s} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* --- 15주 일정 요약 --- */}
-      <section className="section section--tight">
-        <div className="container">
-          <div className="section-head section-head--row">
-            <h2 className="display-md">15주 일정 요약</h2>
-            <Link to="/schedule" className="text-link">전체 일정 →</Link>
-          </div>
-          <ul className="schedule-mini">
-            {courseSchedule.slice(0, 5).map((w) => {
-              const s = getSessionById(w.sessionId);
-              return (
-                <li key={w.week} className="schedule-mini__item">
-                  <span className="schedule-mini__week">{w.week}주차</span>
-                  {s ? (
-                    <Link to={`/course/${sessionRouteParam(s)}`} className="schedule-mini__title">{w.title}</Link>
-                  ) : (
-                    <span className="schedule-mini__title">{w.title}</span>
-                  )}
-                  <span className="schedule-mini__date muted">{formatScheduleDate(w.date)}</span>
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </section>
 
