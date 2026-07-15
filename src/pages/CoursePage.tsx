@@ -4,7 +4,6 @@ import { allSessions, sessionRouteParam } from "@/content/sessions";
 import { categories } from "@/data/courseConfig";
 import type { CategoryId } from "@/types/content";
 import { SessionCard } from "@/components/course/SessionCard";
-import { useProgress } from "@/hooks/useProgress";
 
 type View = "card" | "list";
 
@@ -13,7 +12,6 @@ export function CoursePage() {
   const activeCat = (params.get("category") as CategoryId | null) ?? "all";
   const query = params.get("q") ?? "";
   const [view, setView] = useState<View>("card");
-  const { isCompleted } = useProgress();
 
   const filtered = useMemo(() => {
     return allSessions.filter((s) => {
@@ -126,7 +124,6 @@ export function CoursePage() {
                   <span className="course-list__meta muted">
                     {s.level} · {s.duration}분
                   </span>
-                  {isCompleted(s.id) && <span className="status-chip status-chip--done">✓</span>}
                 </Link>
               </li>
             ))}

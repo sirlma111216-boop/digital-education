@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 import { courseSchedule, formatScheduleDate } from "@/data/courseSchedule";
 import { getSessionById, sessionRouteParam } from "@/content/sessions";
-import { useProgress } from "@/hooks/useProgress";
 
 export function SchedulePage() {
-  const { isCompleted } = useProgress();
-
   return (
     <div className="section">
       <div className="container">
@@ -21,12 +18,11 @@ export function SchedulePage() {
         <ol className="timeline">
           {courseSchedule.map((w) => {
             const s = getSessionById(w.sessionId);
-            const done = s ? isCompleted(s.id) : false;
             const undated = !w.date;
             return (
-              <li key={w.week} className={`timeline__item ${done ? "is-done" : ""}`}>
+              <li key={w.week} className="timeline__item">
                 <div className="timeline__marker" aria-hidden="true">
-                  {done ? "✓" : w.week}
+                  {w.week}
                 </div>
                 <div className="timeline__content card-canvas">
                   <div className="timeline__row">
@@ -35,7 +31,6 @@ export function SchedulePage() {
                       {formatScheduleDate(w.date)}
                     </span>
                     {w.mode && <span className="badge badge-outline">{w.mode}</span>}
-                    {done && <span className="status-chip status-chip--done">완료</span>}
                   </div>
                   {s ? (
                     <Link to={`/course/${sessionRouteParam(s)}`} className="timeline__title">

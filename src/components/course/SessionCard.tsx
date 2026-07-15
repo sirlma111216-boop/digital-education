@@ -5,8 +5,7 @@ import { categoryLabel } from "@/data/courseConfig";
 import { useProgress } from "@/hooks/useProgress";
 
 export function SessionCard({ session }: { session: Session }) {
-  const { isCompleted, isBookmarked } = useProgress();
-  const done = isCompleted(session.id);
+  const { isBookmarked } = useProgress();
   const marked = isBookmarked(session.id);
 
   return (
@@ -41,7 +40,6 @@ export function SessionCard({ session }: { session: Session }) {
       </div>
 
       <div className="session-card__status">
-        {done && <span className="status-chip status-chip--done">✓ 완료</span>}
         {marked && <span className="status-chip status-chip--mark">★ 북마크</span>}
       </div>
     </Link>

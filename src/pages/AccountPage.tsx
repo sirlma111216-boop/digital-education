@@ -1,11 +1,11 @@
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
-import { allSessions, getSessionById, sessionRouteParam } from "@/content/sessions";
+import { getSessionById, sessionRouteParam } from "@/content/sessions";
 
 export function AccountPage() {
   const { user, profile, role, loading, configured } = useAuth();
-  const { state, rate } = useProgress();
+  const { state } = useProgress();
 
   if (configured && loading) {
     return (
@@ -19,8 +19,6 @@ export function AccountPage() {
 
   if (!user) return <Navigate to="/login" replace />;
 
-  const percent = rate(allSessions.length);
-  const completedCount = Object.values(state.completed).filter(Boolean).length;
   const bookmarks = Object.entries(state.bookmarked)
     .filter(([, v]) => v)
     .map(([id]) => getSessionById(id))
@@ -38,23 +36,7 @@ export function AccountPage() {
           <p className="muted">{user.email}</p>
         </div>
 
-        <div className="grid grid-2 account-grid">
-          <div className="card">
-            <h2 className="title-md">학습 진행</h2>
-            <div className="account-progress">
-              <div className="hero__progress-row">
-                <span className="muted">전체 진행률</span>
-                <strong>{percent}% ({completedCount}/{allSessions.length})</strong>
-              </div>
-              <div className="progress" role="progressbar" aria-valuenow={percent} aria-valuemin={0} aria-valuemax={100}>
-                <span style={{ width: `${percent}%` }} />
-              </div>
-            </div>
-            <div className="account-links">
-              <Link to="/course" className="text-link">이어서 학습하기 →</Link>
-            </div>
-          </div>
-
+        <div className="account-grid">
           <div className="card-canvas">
             <h2 className="title-md">수업 소통</h2>
             <ul className="contact-links">

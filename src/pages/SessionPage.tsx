@@ -20,8 +20,7 @@ import {
 export function SessionPage() {
   const { param } = useParams();
   const session = param ? getSessionByRouteParam(param) : undefined;
-  const { isCompleted, toggleCompleted, isBookmarked, toggleBookmarked, visit } =
-    useProgress();
+  const { isBookmarked, toggleBookmarked, visit } = useProgress();
 
   useEffect(() => {
     if (session) visit(session.id);
@@ -30,7 +29,6 @@ export function SessionPage() {
   if (!session) return <Navigate to="/course" replace />;
 
   const { prev, next } = getPrevNext(session.id);
-  const done = isCompleted(session.id);
   const marked = isBookmarked(session.id);
 
   return (
@@ -47,14 +45,7 @@ export function SessionPage() {
           <p className="lead">{session.summary}</p>
           <div className="session__actions">
             <button
-              className={`btn ${done ? "btn-secondary" : "btn-primary"}`}
-              onClick={() => toggleCompleted(session.id)}
-              aria-pressed={done}
-            >
-              {done ? "✓ 완료됨 — 완료 취소" : "이 차시 완료 표시"}
-            </button>
-            <button
-              className="btn btn-secondary"
+              className={`btn ${marked ? "btn-secondary" : "btn-primary"}`}
               onClick={() => toggleBookmarked(session.id)}
               aria-pressed={marked}
             >

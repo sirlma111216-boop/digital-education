@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
 import { courseConfig, categories, buildMailto } from "@/data/courseConfig";
 import { instructor } from "@/data/instructor";
-import { allSessions, sessionRouteParam, getSessionById } from "@/content/sessions";
+import { allSessions } from "@/content/sessions";
 import { SessionCard } from "@/components/course/SessionCard";
 import { BrandMark } from "@/components/common/BrandMark";
-import { useProgress } from "@/hooks/useProgress";
 import { NoticesPreview } from "@/features/board/NoticesPreview";
 
 export function HomePage() {
-  const { rate, state } = useProgress();
-  const percent = rate(allSessions.length);
-  const recent = state.lastVisited.map(getSessionById).filter(Boolean).slice(0, 1)[0];
-
   return (
     <>
       {/* --- Hero --- */}
@@ -40,22 +35,6 @@ export function HomePage() {
               <Link to="/contact" className="btn btn-secondary">
                 교수에게 질문하기
               </Link>
-            </div>
-
-            {/* 진행률 / 최근 학습 (색상만이 아니라 텍스트로도 표시) */}
-            <div className="hero__progress">
-              <div className="hero__progress-row">
-                <span className="muted">현재 학습 진행률</span>
-                <strong>{percent}% ({Object.values(state.completed).filter(Boolean).length}/{allSessions.length}차시)</strong>
-              </div>
-              <div className="progress" role="progressbar" aria-valuenow={percent} aria-valuemin={0} aria-valuemax={100}>
-                <span style={{ width: `${percent}%` }} />
-              </div>
-              {recent && (
-                <p className="muted hero__recent">
-                  최근 학습: <Link to={`/course/${sessionRouteParam(recent)}`}>{recent.id}차시 · {recent.title}</Link>
-                </p>
-              )}
             </div>
           </div>
 
