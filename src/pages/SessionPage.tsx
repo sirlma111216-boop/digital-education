@@ -46,12 +46,6 @@ export function SessionPage() {
           <p className="eyebrow">{session.id}차시 · {categoryLabel(session.category)}</p>
           <h1 className="display-lg">{session.title}</h1>
           <p className="lead">{session.summary}</p>
-          <div className="session__meta">
-            <span className="badge">{session.level}</span>
-            <span className="badge">약 {session.duration}분</span>
-            <span className="badge">이론 {session.theoryRatio} · 실습 {session.practiceRatio}</span>
-            <span className="badge">최종 수정 {session.lastUpdated}</span>
-          </div>
           <div className="session__actions">
             <button
               className={`btn ${done ? "btn-secondary" : "btn-primary"}`}

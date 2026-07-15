@@ -66,11 +66,6 @@ export function HomePage() {
               <div className="hero__orbit hero__orbit--1" />
               <div className="hero__orbit hero__orbit--2" />
             </div>
-            <div className="hero__aside-labels">
-              {["이론", "Google", "Microsoft", "에듀테크", "생성형 AI"].map((t) => (
-                <span key={t} className="badge">{t}</span>
-              ))}
-            </div>
           </aside>
         </div>
       </section>
