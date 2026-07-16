@@ -183,13 +183,19 @@
 }
 .session-card__top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-sm);
+}
+.session-card__top .badge {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .session-card__cat {
   font-size: var(--text-caption);
   color: var(--color-muted);
+  text-align: right;
+  min-width: 0;
 }
 .session-card__title {
   font-family: var(--font-serif);
