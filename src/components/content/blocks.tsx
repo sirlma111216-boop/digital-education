@@ -57,16 +57,39 @@ export function TheoryCard({
   heading,
   body,
   images,
+  imageLayout = "bottom",
 }: {
   heading: string;
   body: string;
   images?: ContentImage[];
+  imageLayout?: "side" | "bottom";
 }) {
+  const hasImages = images && images.length > 0;
+
+  // "side": 첫 이미지를 본문 옆(넓은 화면 기준)에 배치. 모바일에서는 자동으로 세로 스택.
+  if (hasImages && imageLayout === "side") {
+    return (
+      <article className="theory-card">
+        <h3 className="theory-card__heading">{heading}</h3>
+        <div className="theory-card__side">
+          <div className="theory-card__side-figure">
+            {images.map((img) => (
+              <ZoomableImage key={img.src} image={img} />
+            ))}
+          </div>
+          <div className="theory-card__side-body">
+            <Markdown>{body}</Markdown>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article className="theory-card">
       <h3 className="theory-card__heading">{heading}</h3>
       <Markdown>{body}</Markdown>
-      {images && images.length > 0 && (
+      {hasImages && (
         <div className="theory-card__figures">
           {images.map((img) => (
             <ZoomableImage key={img.src} image={img} />
