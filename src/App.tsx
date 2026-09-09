@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { RequireInstructor } from "@/components/auth/RequireInstructor";
 import { HomePage } from "@/pages/HomePage";
 import { IntroductionPage } from "@/pages/IntroductionPage";
 import { SchedulePage } from "@/pages/SchedulePage";
@@ -11,8 +12,10 @@ import { ToolsPage } from "@/pages/ToolsPage";
 import { GlossaryPage } from "@/pages/GlossaryPage";
 import { AboutPage } from "@/pages/AboutPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { OnboardingPage } from "@/pages/OnboardingPage";
 import { AccountPage } from "@/pages/AccountPage";
 import { BoardPage } from "@/pages/BoardPage";
+import { TeacherPage } from "@/pages/TeacherPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
 export function App() {
@@ -30,7 +33,18 @@ export function App() {
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/account" element={<AccountPage />} />
+
+        {/* 교수자 전용 */}
+        <Route
+          path="/teacher"
+          element={
+            <RequireInstructor>
+              <TeacherPage />
+            </RequireInstructor>
+          }
+        />
 
         {/* 게시판: 탭 기반. /board 는 공지로 리다이렉트 */}
         <Route path="/board" element={<Navigate to="/board/notices" replace />} />

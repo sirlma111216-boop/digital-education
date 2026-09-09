@@ -1,76 +1,39 @@
 /* ==========================================================================
-   Session registry. To add a new session: create sessionNN.ts and add it to
-   the `allSessions` array below. Everything else (routing, lists, schedule
-   links, prev/next) picks it up automatically.
+   Session registry. 목록·라우팅은 경량 메타데이터(meta.ts)만 동기적으로 쓴다.
+   차시 본문(Session)은 loadSession(id) 로 차시별 청크를 동적 import 한다.
 
-   Dev-time validation runs on import: missing fields, duplicate id/slug, and
-   the "1~3차시 must NOT have practice / 4~15차시 MUST have practice" rule.
+   새 차시 추가: sessionNN.ts 를 만들고 meta.ts 배열에 메타데이터를 추가한다.
+   (본문은 import.meta.glob 이 자동으로 잡는다.)
    ========================================================================== */
 
-import type { CategoryId, Session } from "@/types/content";
-import { session01 } from "./session01";
-import { session02 } from "./session02";
-import { session03 } from "./session03";
-import { session04 } from "./session04";
-import { session05 } from "./session05";
-import { session06 } from "./session06";
-import { session07 } from "./session07";
-import { session08 } from "./session08";
-import { session09 } from "./session09";
-import { session10 } from "./session10";
-import { session11 } from "./session11";
-import { session12 } from "./session12";
-import { session13 } from "./session13";
-import { session14 } from "./session14";
-import { session15 } from "./session15";
+import type { CategoryId, Session, SessionMeta } from "@/types/content";
+import { sessionMetas } from "./meta";
 
-const registry: Session[] = [
-  session01,
-  session02,
-  session03,
-  session04,
-  session05,
-  session06,
-  session07,
-  session08,
-  session09,
-  session10,
-  session11,
-  session12,
-  session13,
-  session14,
-  session15,
-];
-
-/** Published sessions in order, used by the whole app. */
-export const allSessions: Session[] = registry
+/** Published metas in order — used by lists, routing, schedule, prev/next. */
+export const allSessions: SessionMeta[] = sessionMetas
   .filter((s) => s.published)
   .sort((a, b) => a.id.localeCompare(b.id));
 
-/** Lookup helpers. */
 const byId = new Map(allSessions.map((s) => [s.id, s]));
 const bySlug = new Map(allSessions.map((s) => [s.slug, s]));
 
-export function getSessionById(id: string): Session | undefined {
+export function getSessionById(id: string): SessionMeta | undefined {
   return byId.get(id);
 }
-export function getSessionBySlug(slug: string): Session | undefined {
+export function getSessionBySlug(slug: string): SessionMeta | undefined {
   return bySlug.get(slug);
 }
 
 /** Route param is `NN-slug` (e.g. "01-digital-education-foundations"). */
-export function getSessionByRouteParam(param: string): Session | undefined {
+export function getSessionMetaByRouteParam(param: string): SessionMeta | undefined {
   const id = param.slice(0, 2);
   return byId.get(id) ?? bySlug.get(param.replace(/^\d+-/, ""));
 }
-export function sessionRouteParam(s: Session): string {
+export function sessionRouteParam(s: SessionMeta): string {
   return `${s.id}-${s.slug}`;
 }
 
-export function getPrevNext(id: string): {
-  prev?: Session;
-  next?: Session;
-} {
+export function getPrevNext(id: string): { prev?: SessionMeta; next?: SessionMeta } {
   const idx = allSessions.findIndex((s) => s.id === id);
   if (idx === -1) return {};
   return {
@@ -79,32 +42,47 @@ export function getPrevNext(id: string): {
   };
 }
 
-export function sessionsByCategory(category: CategoryId): Session[] {
+export function sessionsByCategory(category: CategoryId): SessionMeta[] {
   return allSessions.filter((s) => s.category === category);
 }
 
+/* --- 차시 본문 동적 로드 (차시별 청크) --- */
+const loaders = import.meta.glob("./session[0-9][0-9].ts");
+
+/** 차시 본문(Session)을 필요할 때 로드. 없으면 undefined. */
+export async function loadSession(id: string): Promise<Session | undefined> {
+  const loader = loaders[`./session${id}.ts`];
+  if (!loader) return undefined;
+  const mod = (await loader()) as Record<string, Session>;
+  return mod[`session${id}`];
+}
+
 /* ------------------------------------------------------------------ */
-/* Dev-only integrity checks — surfaced as console warnings in `dev`.  */
+/* Dev-only integrity checks: meta 중복 + 본문과 메타 불일치 + 실습 규칙   */
 /* ------------------------------------------------------------------ */
 if (import.meta.env.DEV) {
   const seenId = new Set<string>();
   const seenSlug = new Set<string>();
-  for (const s of registry) {
+  for (const s of sessionMetas) {
     if (seenId.has(s.id)) console.warn(`[content] 중복 ID: ${s.id}`);
     if (seenSlug.has(s.slug)) console.warn(`[content] 중복 slug: ${s.slug}`);
     seenId.add(s.id);
     seenSlug.add(s.slug);
-
-    const requiredFilled =
-      s.title && s.summary && s.objectives.length >= 2 && s.terms.length >= 5;
-    if (!requiredFilled)
-      console.warn(`[content] 필수 필드 누락 가능: ${s.id} ${s.title}`);
-
-    const week = Number(s.id);
-    const isTheory = week >= 1 && week <= 3;
-    if (isTheory && s.practice)
-      console.warn(`[content] 1~3차시에는 실습이 없어야 합니다: ${s.id}`);
-    if (!isTheory && !s.practice)
-      console.warn(`[content] 4~15차시에는 실습이 있어야 합니다: ${s.id}`);
   }
+  // 본문을 로드해 메타 일치·실습 규칙 검사 (비동기, 개발 편의용)
+  void Promise.all(
+    allSessions.map(async (m) => {
+      const full = await loadSession(m.id);
+      if (!full) {
+        console.warn(`[content] 본문 없음: ${m.id}`);
+        return;
+      }
+      if (full.slug !== m.slug || full.title !== m.title)
+        console.warn(`[content] 메타 불일치: ${m.id} (meta.ts 와 session${m.id}.ts 를 맞추세요)`);
+      const week = Number(m.id);
+      const isTheory = week >= 1 && week <= 3;
+      if (isTheory && full.practice) console.warn(`[content] 1~3차시에는 실습이 없어야 합니다: ${m.id}`);
+      if (!isTheory && !full.practice) console.warn(`[content] 4~15차시에는 실습이 있어야 합니다: ${m.id}`);
+    }),
+  );
 }

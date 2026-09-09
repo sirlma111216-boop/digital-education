@@ -240,6 +240,17 @@
   background-color: color-mix(in srgb, var(--color-accent-amber) 22%, var(--color-canvas));
   color: #8a5a12;
 }
+/* 잠긴 차시 카드 */
+.session-card--locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.session-card__lock {
+  font-size: 18px;
+}
+.session-card__hidden-badge {
+  margin-right: 6px;
+}
 
 /* --- Concept map --- */
 .concept-map {
@@ -256,14 +267,16 @@
 }
 .concept-map__flow {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* 노드 4~5개를 한 줄에 균등 배치 */
   align-items: stretch;
   gap: var(--space-xs);
 }
 .concept-map__item {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-xs);
+  flex: 1 1 0; /* 모든 노드가 같은 폭으로 균등하게 줄어듦 */
+  min-width: 0;
 }
 .concept-map__node {
   display: flex;
@@ -273,7 +286,9 @@
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
-  min-width: 120px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere; /* 설명이 길어도 두 줄로 접히고 넘치지 않음 */
 }
 .concept-map__label {
   font-weight: 600;
@@ -288,6 +303,22 @@
   color: var(--color-primary);
   font-size: 22px;
   line-height: 1;
+  flex: 0 0 auto;
+  align-self: center;
+}
+/* 좁은 화면: 세로로 쌓고 화살표를 아래로 */
+@media (max-width: 640px) {
+  .concept-map__flow {
+    flex-direction: column;
+  }
+  .concept-map__item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .concept-map__arrow {
+    transform: rotate(90deg);
+    align-self: center;
+  }
 }
 .concept-map__caption {
   margin-top: var(--space-md);

@@ -43,6 +43,14 @@ export function Header() {
               {n.label}
             </NavLink>
           ))}
+          {role === "instructor" && (
+            <NavLink
+              to="/teacher"
+              className={({ isActive }) => `nav-link ${isActive ? "nav-link--active" : ""}`}
+            >
+              교수자
+            </NavLink>
+          )}
         </nav>
 
         <div className="top-nav__cta">
@@ -90,6 +98,11 @@ export function Header() {
                 {n.label}
               </NavLink>
             ))}
+            {role === "instructor" && (
+              <NavLink to="/teacher" className="drawer__link">
+                교수자
+              </NavLink>
+            )}
             <div className="drawer__divider" />
             {user ? (
               <>

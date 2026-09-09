@@ -1,0 +1,78 @@
+rules_version = '2';
+
+// 디지털 교육 포털 — Firestore 보안 규칙
+// 권한은 화면이 아니라 이 규칙으로 강제한다.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function profileOf(uid) {
+      return get(/databases/$(database)/documents/profiles/$(uid)).data;
+    }
+    function hasProfile() {
+      return isSignedIn() && exists(/databases/$(database)/documents/profiles/$(request.auth.uid));
+    }
+    function isInstructor() {
+      return hasProfile() && profileOf(request.auth.uid).role == 'instructor';
+    }
+    function notBlocked() {
+      return isSignedIn() && (!hasProfile() || profileOf(request.auth.uid).blocked != true);
+    }
+
+    // 프로필: 본인만 읽기·수정, role/blocked 는 본인이 못 바꿈. 교수자는 전체.
+    match /profiles/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isInstructor());
+      allow create: if isSignedIn()
+        && request.auth.uid == uid
+        && request.resource.data.role == 'student'
+        && request.resource.data.blocked == false;
+      allow update: if isSignedIn() && (
+        (request.auth.uid == uid
+          && request.resource.data.role == resource.data.role
+          && request.resource.data.blocked == resource.data.blocked)
+        || isInstructor()
+      );
+      allow delete: if isInstructor();
+    }
+
+    // 차시 공개 범위: 읽기는 누구나, 쓰기는 교수자만.
+    match /courseSettings/{docId} {
+      allow read: if true;
+      allow write: if isInstructor();
+    }
+
+    // 공지: 읽기는 (차단되지 않은) 로그인 사용자, 쓰기는 교수자만.
+    match /notices/{id} {
+      allow read: if isSignedIn() && notBlocked();
+      allow write: if isInstructor();
+    }
+
+    // MS365 계정 등록: 본인 문서 + 교수자만.
+    match /ms365Registrations/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isInstructor());
+      allow write: if isInstructor() || (request.auth.uid == uid && notBlocked());
+    }
+
+    // Q&A: 비밀글은 작성자·교수자만. 목록에서 가리는 것이 아니라 규칙으로 차단.
+    match /qna/{qid} {
+      allow read: if isInstructor()
+        || (isSignedIn() && notBlocked()
+            && (resource.data.isPrivate == false || resource.data.authorId == request.auth.uid));
+      allow create: if isSignedIn() && notBlocked()
+        && request.resource.data.authorId == request.auth.uid;
+      allow update, delete: if isInstructor()
+        || (isSignedIn() && resource.data.authorId == request.auth.uid);
+
+      // 답변: 질문을 볼 수 있으면 읽기, 작성은 교수자만.
+      match /answers/{aid} {
+        allow read: if isInstructor()
+          || (isSignedIn() && notBlocked()
+              && (get(/databases/$(database)/documents/qna/$(qid)).data.isPrivate == false
+                  || get(/databases/$(database)/documents/qna/$(qid)).data.authorId == request.auth.uid));
+        allow create, update, delete: if isInstructor();
+      }
+    }
+  }
+}

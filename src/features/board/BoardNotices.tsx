@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { supabase, isSupabaseConfigured, toFriendlyError } from "@/lib/supabase";
+import { isFirebaseConfigured, toFriendlyError } from "@/lib/firebase";
+import { fmtDateTime } from "@/lib/time";
 import { useAuth } from "@/hooks/useAuth";
 import type { Notice, Visibility } from "@/types/board";
 import { Markdown } from "@/components/common/Markdown";
-import { Loading, ErrorState, EmptyState, NotConfigured } from "./states";
+import { createNotice, deleteNotice, listNotices, updateNotice } from "./api";
+import { Loading, ErrorState, EmptyState, NotConfigured, NeedLogin } from "./states";
 
+/** 공지 목록 + (교수자) 작성/고정/삭제. 게시판 탭과 교수자 화면이 함께 재사용. */
 export function BoardNotices() {
   const { user, role } = useAuth();
   const isInstructor = role === "instructor";
@@ -13,20 +16,19 @@ export function BoardNotices() {
 
   const load = useCallback(async () => {
     setError(null);
-    const { data, error } = await supabase
-      .from("notices")
-      .select("*")
-      .order("is_pinned", { ascending: false })
-      .order("created_at", { ascending: false });
-    if (error) setError(toFriendlyError(error));
-    else setNotices((data ?? []) as Notice[]);
+    try {
+      setNotices(await listNotices());
+    } catch (e) {
+      setError(toFriendlyError(e));
+    }
   }, []);
 
   useEffect(() => {
-    if (isSupabaseConfigured) void load();
-  }, [load]);
+    if (isFirebaseConfigured && user) void load();
+  }, [load, user]);
 
-  if (!isSupabaseConfigured) return <NotConfigured />;
+  if (!isFirebaseConfigured) return <NotConfigured />;
+  if (!user) return <NeedLogin action="공지 확인" />;
 
   return (
     <div className="board-panel">
@@ -37,7 +39,7 @@ export function BoardNotices() {
         </div>
       </div>
 
-      {isInstructor && user && <NoticeForm authorId={user.id} onCreated={load} />}
+      {isInstructor && user && <NoticeForm authorId={user.uid} onCreated={load} />}
 
       {error ? (
         <ErrorState message={error} onRetry={load} />
@@ -51,12 +53,12 @@ export function BoardNotices() {
             <li key={n.id} className="notice-item card-canvas">
               <div className="notice-item__head">
                 <div className="notice-item__badges">
-                  {n.is_pinned && <span className="badge badge-coral">고정</span>}
+                  {n.isPinned && <span className="badge badge-coral">고정</span>}
                   <span className="badge badge-outline">
                     {n.visibility === "public" ? "전체 공개" : "수강생 공개"}
                   </span>
                 </div>
-                <span className="muted">{new Date(n.created_at).toLocaleString("ko-KR")}</span>
+                <span className="muted">{fmtDateTime(n.createdAt)}</span>
               </div>
               <h3 className="notice-item__title">{n.title}</h3>
               <Markdown>{n.body}</Markdown>
@@ -65,17 +67,17 @@ export function BoardNotices() {
                   <button
                     className="btn btn-secondary btn-sm"
                     onClick={async () => {
-                      await supabase.from("notices").update({ is_pinned: !n.is_pinned }).eq("id", n.id);
+                      await updateNotice(n.id, { isPinned: !n.isPinned });
                       void load();
                     }}
                   >
-                    {n.is_pinned ? "고정 해제" : "상단 고정"}
+                    {n.isPinned ? "고정 해제" : "상단 고정"}
                   </button>
                   <button
                     className="btn btn-secondary btn-sm danger"
                     onClick={async () => {
                       if (!confirm("이 공지를 삭제할까요?")) return;
-                      await supabase.from("notices").delete().eq("id", n.id);
+                      await deleteNotice(n.id);
                       void load();
                     }}
                   >
@@ -108,23 +110,18 @@ function NoticeForm({ authorId, onCreated }: { authorId: string; onCreated: () =
     }
     setBusy(true);
     setError(null);
-    const { error } = await supabase.from("notices").insert({
-      title: title.trim(),
-      body: body.trim(),
-      is_pinned: pinned,
-      visibility,
-      author_id: authorId,
-    });
-    setBusy(false);
-    if (error) {
-      setError(toFriendlyError(error));
-      return;
+    try {
+      await createNotice({ title: title.trim(), body: body.trim(), isPinned: pinned, visibility, authorId });
+      setTitle("");
+      setBody("");
+      setPinned(false);
+      setOpen(false);
+      onCreated();
+    } catch (err) {
+      setError(toFriendlyError(err));
+    } finally {
+      setBusy(false);
     }
-    setTitle("");
-    setBody("");
-    setPinned(false);
-    setOpen(false);
-    onCreated();
   }
 
   return (

@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { courseSchedule, formatScheduleDate } from "@/data/courseSchedule";
 import { getSessionById, sessionRouteParam } from "@/content/sessions";
+import { useAuth } from "@/hooks/useAuth";
+import { useSessionVisibility } from "@/hooks/useSessionVisibility";
 
 export function SchedulePage() {
+  const { role } = useAuth();
+  const { isOpen } = useSessionVisibility();
+  const isInstructor = role === "instructor";
   return (
     <div className="section">
       <div className="container">
@@ -19,6 +24,8 @@ export function SchedulePage() {
           {courseSchedule.map((w) => {
             const s = getSessionById(w.sessionId);
             const undated = !w.date;
+            const open = isOpen(w.sessionId);
+            const linkable = s && (isInstructor || open);
             return (
               <li key={w.week} className="timeline__item">
                 <div className="timeline__marker" aria-hidden="true">
@@ -31,8 +38,10 @@ export function SchedulePage() {
                       {formatScheduleDate(w.date)}
                     </span>
                     {w.mode && <span className="badge badge-outline">{w.mode}</span>}
+                    {isInstructor && !open && <span className="badge badge-amber">비공개</span>}
+                    {!isInstructor && !open && <span className="badge badge-outline">🔒 미공개</span>}
                   </div>
-                  {s ? (
+                  {linkable && s ? (
                     <Link to={`/course/${sessionRouteParam(s)}`} className="timeline__title">
                       {w.title}
                     </Link>

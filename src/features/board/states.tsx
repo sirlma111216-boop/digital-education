@@ -30,7 +30,7 @@ export function NotConfigured() {
   return (
     <div className="alert alert-info board-state">
       <p>
-        게시판은 백엔드(Supabase)에 연결되어야 동작합니다. <code>.env.local</code>에 키를 설정한 뒤
+        게시판은 백엔드(Firebase)에 연결되어야 동작합니다. <code>.env.local</code>에 키를 설정한 뒤
         새로고침해 주세요. 설정 방법은 README를 참고하세요.
       </p>
     </div>
@@ -41,7 +41,18 @@ export function NeedLogin({ action = "이용" }: { action?: string }) {
   return (
     <div className="alert alert-info board-state">
       <p>
-        이 기능을 {action}하려면 로그인이 필요합니다. <Link to="/login" className="text-link">로그인 / 회원가입 →</Link>
+        이 기능을 {action}하려면 로그인이 필요합니다. <Link to="/login" className="text-link">구글 계정으로 로그인 →</Link>
+      </p>
+    </div>
+  );
+}
+
+export function NeedOnboarding() {
+  return (
+    <div className="alert alert-info board-state">
+      <p>
+        게시판을 이용하려면 먼저 표시명(실명)과 학번을 등록해야 합니다.{" "}
+        <Link to="/onboarding" className="text-link">정보 입력하러 가기 →</Link>
       </p>
     </div>
   );

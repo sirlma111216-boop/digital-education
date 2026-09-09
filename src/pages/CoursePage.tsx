@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, useLocation, Link } from "react-router-dom";
 import { allSessions, sessionRouteParam } from "@/content/sessions";
 import { categories } from "@/data/courseConfig";
 import type { CategoryId } from "@/types/content";
 import { SessionCard } from "@/components/course/SessionCard";
+import { useAuth } from "@/hooks/useAuth";
+import { useSessionVisibility } from "@/hooks/useSessionVisibility";
 
 type View = "card" | "list";
 
@@ -12,6 +14,13 @@ export function CoursePage() {
   const activeCat = (params.get("category") as CategoryId | null) ?? "all";
   const query = params.get("q") ?? "";
   const [view, setView] = useState<View>("card");
+  const location = useLocation();
+  const lockedNotice = Boolean(
+    location.state && typeof location.state === "object" && "lockedNotice" in location.state,
+  );
+  const { role } = useAuth();
+  const { isOpen } = useSessionVisibility();
+  const isInstructor = role === "instructor";
 
   const filtered = useMemo(() => {
     return allSessions.filter((s) => {
@@ -101,32 +110,63 @@ export function CoursePage() {
           ))}
         </div>
 
+        {lockedNotice && (
+          <div className="alert alert-info" style={{ marginBottom: "var(--space-md)" }}>
+            아직 공개되지 않은 차시입니다. 공개되면 이곳에서 학습할 수 있습니다.
+          </div>
+        )}
+
         <p className="muted course-count">{filtered.length}개 차시</p>
 
         {filtered.length === 0 ? (
           <div className="empty-state">검색 결과가 없습니다. 다른 키워드로 시도해 보세요.</div>
         ) : view === "card" ? (
           <div className="grid grid-3">
-            {filtered.map((s) => (
-              <SessionCard key={s.id} session={s} />
-            ))}
+            {filtered.map((s) => {
+              const open = isOpen(s.id);
+              return (
+                <SessionCard
+                  key={s.id}
+                  session={s}
+                  locked={!isInstructor && !open}
+                  lockedBadge={isInstructor && !open}
+                />
+              );
+            })}
           </div>
         ) : (
           <ul className="course-list">
-            {filtered.map((s) => (
-              <li key={s.id}>
-                <Link to={`/course/${sessionRouteParam(s)}`} className="course-list__row card-canvas card-link">
-                  <span className="badge badge-outline">{s.id}차시</span>
-                  <div className="course-list__body">
-                    <span className="course-list__title">{s.title}</span>
-                    <span className="muted course-list__summary">{s.summary}</span>
-                  </div>
-                  <span className="course-list__meta muted">
-                    {s.level} · {s.duration}분
-                  </span>
-                </Link>
-              </li>
-            ))}
+            {filtered.map((s) => {
+              const open = isOpen(s.id);
+              if (!isInstructor && !open) {
+                return (
+                  <li key={s.id}>
+                    <div className="course-list__row card-canvas session-card--locked" aria-disabled="true">
+                      <span className="badge badge-outline">{s.id}차시</span>
+                      <div className="course-list__body">
+                        <span className="course-list__title">{s.title}</span>
+                        <span className="muted course-list__summary">아직 공개되지 않았습니다.</span>
+                      </div>
+                      <span className="course-list__meta muted" aria-hidden="true">🔒</span>
+                    </div>
+                  </li>
+                );
+              }
+              return (
+                <li key={s.id}>
+                  <Link to={`/course/${sessionRouteParam(s)}`} className="course-list__row card-canvas card-link">
+                    <span className="badge badge-outline">{s.id}차시</span>
+                    <div className="course-list__body">
+                      <span className="course-list__title">{s.title}</span>
+                      <span className="muted course-list__summary">{s.summary}</span>
+                    </div>
+                    <span className="course-list__meta muted">
+                      {isInstructor && !open && <span className="badge badge-amber">비공개</span>} {s.level} · {s.duration}분
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

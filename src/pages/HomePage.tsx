@@ -5,8 +5,13 @@ import { allSessions } from "@/content/sessions";
 import { SessionCard } from "@/components/course/SessionCard";
 import { BrandMark } from "@/components/common/BrandMark";
 import { NoticesPreview } from "@/features/board/NoticesPreview";
+import { useAuth } from "@/hooks/useAuth";
+import { useSessionVisibility } from "@/hooks/useSessionVisibility";
 
 export function HomePage() {
+  const { role } = useAuth();
+  const { isOpen } = useSessionVisibility();
+  const isInstructor = role === "instructor";
   return (
     <>
       {/* --- Hero --- */}
@@ -102,9 +107,17 @@ export function HomePage() {
             <Link to="/course" className="text-link">전체 보기 →</Link>
           </div>
           <div className="grid grid-3">
-            {allSessions.slice(0, 6).map((s) => (
-              <SessionCard key={s.id} session={s} />
-            ))}
+            {allSessions.slice(0, 6).map((s) => {
+              const open = isOpen(s.id);
+              return (
+                <SessionCard
+                  key={s.id}
+                  session={s}
+                  locked={!isInstructor && !open}
+                  lockedBadge={isInstructor && !open}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

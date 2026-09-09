@@ -1,14 +1,17 @@
+import { Link } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
-import { supabase, isSupabaseConfigured, toFriendlyError } from "@/lib/supabase";
+import { isFirebaseConfigured, toFriendlyError } from "@/lib/firebase";
 import { useAuth } from "@/hooks/useAuth";
 import type { Ms365Registration } from "@/types/board";
-import { Loading, ErrorState, NotConfigured, NeedLogin } from "./states";
+import { getMyMs365, upsertMs365 } from "./api";
+import { Loading, NotConfigured, NeedLogin } from "./states";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SCHOOL_DOMAIN = "@office.khu.ac.kr";
 
 export function BoardMs365() {
   const { user, role } = useAuth();
-  if (!isSupabaseConfigured) return <NotConfigured />;
+  if (!isFirebaseConfigured) return <NotConfigured />;
   if (!user) return <NeedLogin action="계정 등록" />;
 
   return (
@@ -17,8 +20,8 @@ export function BoardMs365() {
         <div>
           <h2 className="display-sm">MS365 계정 등록</h2>
           <p className="muted">
-            학교용 Microsoft 365 계정을 교수자에게 제출하는 <strong>비공개 등록</strong>입니다. 입력한
-            정보는 다른 학생에게 공개되지 않습니다.
+            6~10차시 수업에서 사용할 <strong>학교 Microsoft 365 계정</strong>을 등록하는 비공개 폼입니다.
+            입력한 정보는 다른 학생에게 공개되지 않습니다.
           </p>
         </div>
       </div>
@@ -28,13 +31,20 @@ export function BoardMs365() {
         다른 학생에게 공개되지 않습니다.
       </div>
 
-      {role === "instructor" ? <InstructorList /> : <StudentRegistration userId={user.id} />}
+      {role === "instructor" ? (
+        <div className="alert alert-info board-state">
+          교수자는 <Link to="/teacher" className="text-link">교수자 화면</Link>에서 전체 등록 현황과
+          미등록자를 확인할 수 있습니다.
+        </div>
+      ) : (
+        <StudentRegistration uid={user.uid} />
+      )}
     </div>
   );
 }
 
-/* ---------- 학생: 본인 등록/수정 ---------- */
-function StudentRegistration({ userId }: { userId: string }) {
+function StudentRegistration({ uid }: { uid: string }) {
+  const { profile } = useAuth();
   const [reg, setReg] = useState<Ms365Registration | null>(null);
   const [loading, setLoading] = useState(true);
   const [studentNumber, setStudentNumber] = useState("");
@@ -49,27 +59,31 @@ function StudentRegistration({ userId }: { userId: string }) {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("ms365_registrations")
-      .select("*")
-      .eq("student_id", userId)
-      .maybeSingle();
-    if (data) {
-      const r = data as Ms365Registration;
-      setReg(r);
-      setStudentNumber(r.student_number);
-      setStudentName(r.student_name);
-      setEmail(r.ms365_email);
-      setEmailConfirm(r.ms365_email);
-      setNote(r.note ?? "");
-      setConsent(true);
+    try {
+      const r = await getMyMs365(uid);
+      if (r) {
+        setReg(r);
+        setStudentNumber(r.studentNumber);
+        setStudentName(r.studentName);
+        setEmail(r.ms365Email);
+        setEmailConfirm(r.ms365Email);
+        setNote(r.note ?? "");
+        setConsent(true);
+      } else {
+        // 프로필의 표시명·학번으로 초기값 채움
+        setStudentName(profile?.displayName ?? "");
+        setStudentNumber(profile?.studentNumber ?? "");
+      }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }, [userId]);
+  }, [uid, profile]);
 
   useEffect(() => {
     void load();
   }, [load]);
+
+  const domainWarn = email.length > 0 && !email.toLowerCase().endsWith(SCHOOL_DOMAIN);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -81,23 +95,20 @@ function StudentRegistration({ userId }: { userId: string }) {
     if (!consent) return setError("개인정보 이용 안내에 동의해 주세요.");
 
     setBusy(true);
-    const { error } = await supabase.from("ms365_registrations").upsert(
-      {
-        student_id: userId,
-        student_number: studentNumber.trim(),
-        student_name: studentName.trim(),
-        ms365_email: email.trim().toLowerCase(),
+    try {
+      await upsertMs365(uid, {
+        studentNumber: studentNumber.trim(),
+        studentName: studentName.trim(),
+        ms365Email: email.trim().toLowerCase(),
         note: note.trim() || null,
-      },
-      { onConflict: "student_id" },
-    );
-    setBusy(false);
-    if (error) {
-      setError(toFriendlyError(error));
-      return;
+      });
+      setMsg("등록 정보가 저장되었습니다.");
+      void load();
+    } catch (err) {
+      setError(toFriendlyError(err));
+    } finally {
+      setBusy(false);
     }
-    setMsg("등록 정보가 저장되었습니다.");
-    void load();
   }
 
   if (loading) return <Loading />;
@@ -116,8 +127,11 @@ function StudentRegistration({ userId }: { userId: string }) {
         </div>
       </div>
       <div className="field">
-        <label className="label" htmlFor="ms-email">MS365 계정 이메일</label>
-        <input id="ms-email" className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@school.edu" />
+        <label className="label" htmlFor="ms-email">학교 MS365 계정 이메일</label>
+        <input id="ms-email" className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={`name${SCHOOL_DOMAIN}`} />
+        {domainWarn && (
+          <p className="field-hint">보통 학교 MS365 계정은 <code>{SCHOOL_DOMAIN}</code>로 끝납니다. 맞는지 확인해 주세요.</p>
+        )}
       </div>
       <div className="field">
         <label className="label" htmlFor="ms-email2">확인용 이메일 재입력</label>
@@ -137,102 +151,5 @@ function StudentRegistration({ userId }: { userId: string }) {
         {busy ? "저장 중…" : reg ? "등록 정보 수정" : "등록하기"}
       </button>
     </form>
-  );
-}
-
-/* ---------- 교수자: 전체 목록 ---------- */
-function maskEmail(email: string): string {
-  const [local, domain] = email.split("@");
-  if (!domain) return email;
-  const shown = local.slice(0, 2);
-  return `${shown}${"*".repeat(Math.max(1, local.length - 2))}@${domain}`;
-}
-
-function InstructorList() {
-  const [rows, setRows] = useState<Ms365Registration[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const [masked, setMasked] = useState(true);
-
-  const load = useCallback(async () => {
-    setError(null);
-    const { data, error } = await supabase
-      .from("ms365_registrations")
-      .select("*")
-      .order("student_number", { ascending: true });
-    if (error) setError(toFriendlyError(error));
-    else setRows((data ?? []) as Ms365Registration[]);
-  }, []);
-
-  useEffect(() => {
-    void load();
-  }, [load]);
-
-  function exportCsv() {
-    if (!rows) return;
-    const header = ["student_number", "student_name", "ms365_email", "note", "consented_at"];
-    const csv = [header, ...rows.map((r) => [r.student_number, r.student_name, r.ms365_email, r.note ?? "", r.consented_at])]
-      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
-      .join("\n");
-    const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "ms365-registrations.csv";
-    link.click();
-    URL.revokeObjectURL(link.href);
-  }
-
-  if (error) return <ErrorState message={error} onRetry={load} />;
-  if (!rows) return <Loading />;
-
-  const filtered = rows.filter(
-    (r) =>
-      !query ||
-      r.student_name.includes(query) ||
-      r.student_number.includes(query) ||
-      r.ms365_email.includes(query),
-  );
-
-  return (
-    <div className="stack">
-      <div className="board-panel__head ms365-admin-head">
-        <input
-          className="input"
-          type="search"
-          placeholder="이름·학번·이메일 검색"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="등록 검색"
-        />
-        <div className="ms365-admin-actions">
-          <label className="check">
-            <input type="checkbox" checked={masked} onChange={(e) => setMasked(e.target.checked)} /> 이메일 마스킹
-          </label>
-          <button className="btn btn-secondary btn-sm" onClick={exportCsv} disabled={rows.length === 0}>CSV 내보내기</button>
-        </div>
-      </div>
-      <p className="muted">등록 {rows.length}명</p>
-      <div className="table-wrap">
-        <table className="data-table">
-          <thead>
-            <tr><th>학번</th><th>이름</th><th>MS365 이메일</th><th>비고</th></tr>
-          </thead>
-          <tbody>
-            {filtered.map((r) => (
-              <tr key={r.id}>
-                <td>{r.student_number}</td>
-                <td>{r.student_name}</td>
-                <td className="mono-cell">{masked ? maskEmail(r.ms365_email) : r.ms365_email}</td>
-                <td>{r.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p className="muted ms365-retention">
-        강의 종료 후에는 등록 데이터를 삭제할 수 있습니다. 삭제는 Supabase 관리 콘솔 또는 관리
-        스크립트로 수행하세요. (README의 ‘학기 종료 후 정리’ 참고)
-      </p>
-    </div>
   );
 }

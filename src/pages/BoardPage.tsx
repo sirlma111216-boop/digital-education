@@ -1,18 +1,23 @@
 import { useParams, Navigate, NavLink } from "react-router-dom";
 import { BoardNotices } from "@/features/board/BoardNotices";
-import { BoardAssignments } from "@/features/board/BoardAssignments";
 import { BoardMs365 } from "@/features/board/BoardMs365";
-import { BoardAnonymous } from "@/features/board/BoardAnonymous";
+import { BoardQna } from "@/features/board/BoardQna";
 
 const tabs = [
   { key: "notices", label: "공지사항", path: "/board/notices" },
-  { key: "assignments", label: "과제", path: "/board/assignments" },
   { key: "ms365-registration", label: "MS365 계정 등록", path: "/board/ms365-registration" },
-  { key: "anonymous", label: "익명 질문", path: "/board/anonymous" },
+  { key: "qna", label: "Q&A", path: "/board/qna" },
 ];
+
+// 삭제된 옛 탭 경로는 새 탭으로 안내한다.
+const redirects: Record<string, string> = {
+  assignments: "/board/notices",
+  anonymous: "/board/qna",
+};
 
 export function BoardPage() {
   const { tab } = useParams();
+  if (tab && redirects[tab]) return <Navigate to={redirects[tab]} replace />;
   const valid = tabs.some((t) => t.key === tab);
   if (!valid) return <Navigate to="/board/notices" replace />;
 
@@ -29,7 +34,7 @@ export function BoardPage() {
             <NavLink
               key={t.key}
               to={t.path}
-              className={({ isActive }) => `tab ${isActive ? "" : ""}`}
+              className="tab"
               aria-selected={t.key === tab}
               role="tab"
             >
@@ -40,9 +45,8 @@ export function BoardPage() {
 
         <div className="board-content">
           {tab === "notices" && <BoardNotices />}
-          {tab === "assignments" && <BoardAssignments />}
           {tab === "ms365-registration" && <BoardMs365 />}
-          {tab === "anonymous" && <BoardAnonymous />}
+          {tab === "qna" && <BoardQna />}
         </div>
       </div>
     </div>
