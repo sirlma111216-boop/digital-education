@@ -63,7 +63,7 @@ export function TheoryCard({
   heading: string;
   body: string;
   images?: ContentImage[];
-  imageLayout?: "side" | "bottom";
+  imageLayout?: "side" | "bottom" | "row";
   variant?: "normal" | "highlight";
 }) {
   const hasImages = images && images.length > 0;
@@ -102,7 +102,7 @@ export function TheoryCard({
       <h3 className="theory-card__heading">{heading}</h3>
       <Markdown>{body}</Markdown>
       {hasImages && (
-        <div className="theory-card__figures">
+        <div className={`theory-card__figures ${imageLayout === "row" ? "theory-card__figures--row" : ""}`}>
           {images.map((img) => (
             <ZoomableImage key={img.src} image={img} />
           ))}

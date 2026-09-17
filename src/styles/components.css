@@ -409,9 +409,11 @@
 }
 .theory-card--highlight .prose p {
   font-family: var(--font-serif);
-  font-size: var(--text-display-sm);
-  line-height: 1.35;
+  /* 정의 문장이 넓은 화면에서 한 줄에 들어오도록 크기를 살짝 낮춤 */
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  line-height: 1.4;
   letter-spacing: -0.3px;
+  word-break: keep-all; /* 한국어는 어절 단위로만 줄바꿈 */
 }
 .theory-card--highlight .prose strong {
   color: var(--color-on-primary);
@@ -422,6 +424,17 @@
   flex-direction: column;
   gap: var(--space-md);
   margin-top: var(--space-md);
+}
+/* 이미지 양옆 배치 (넓은 화면: 2열, 좁은 화면: 세로) */
+.theory-card__figures--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .theory-card__figures--row {
+    grid-template-columns: 1fr;
+  }
 }
 /* 이미지 옆 배치 레이아웃 (넓은 화면: 그림 좌 · 설명 우, 좁은 화면: 세로 스택) */
 .theory-card__side {
