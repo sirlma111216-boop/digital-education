@@ -133,6 +133,7 @@ export function SessionPage() {
                     body={b.body}
                     images={b.images}
                     imageLayout={b.imageLayout}
+                    variant={b.variant}
                   />
                 ))}
               </div>

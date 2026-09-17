@@ -388,6 +388,35 @@
   color: var(--color-ink);
   margin-bottom: var(--space-sm);
 }
+/* 강조 정의 박스 */
+.theory-card--highlight {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+}
+.theory-card__highlight-heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption-upper);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-on-primary) 82%, transparent);
+  margin-bottom: var(--space-sm);
+}
+.theory-card--highlight .prose {
+  color: var(--color-on-primary);
+}
+.theory-card--highlight .prose p {
+  font-family: var(--font-serif);
+  font-size: var(--text-display-sm);
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+}
+.theory-card--highlight .prose strong {
+  color: var(--color-on-primary);
+  border-bottom: 2px solid color-mix(in srgb, var(--color-on-primary) 60%, transparent);
+}
 .theory-card__figures {
   display: flex;
   flex-direction: column;

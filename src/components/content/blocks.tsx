@@ -58,13 +58,25 @@ export function TheoryCard({
   body,
   images,
   imageLayout = "bottom",
+  variant = "normal",
 }: {
   heading: string;
   body: string;
   images?: ContentImage[];
   imageLayout?: "side" | "bottom";
+  variant?: "normal" | "highlight";
 }) {
   const hasImages = images && images.length > 0;
+
+  // "highlight": 정의·핵심 문장을 크게 강조하는 박스.
+  if (variant === "highlight") {
+    return (
+      <aside className="theory-card theory-card--highlight">
+        <h3 className="theory-card__highlight-heading">{heading}</h3>
+        <Markdown>{body}</Markdown>
+      </aside>
+    );
+  }
 
   // "side": 첫 이미지를 본문 옆(넓은 화면 기준)에 배치. 모바일에서는 자동으로 세로 스택.
   if (hasImages && imageLayout === "side") {

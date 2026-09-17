@@ -37,6 +37,8 @@ export interface TheoryBlock {
   images?: ContentImage[];
   /** "side" places the (first) image beside the prose on wide screens. Default: below. */
   imageLayout?: "side" | "bottom";
+  /** "highlight" renders the block as a large emphasized definition box. */
+  variant?: "normal" | "highlight";
 }
 
 /** A comparison table (structured, mobile-friendly). */
