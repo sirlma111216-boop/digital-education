@@ -39,7 +39,41 @@ export interface TheoryBlock {
   imageLayout?: "side" | "bottom" | "row";
   /** "highlight" renders the block as a large emphasized definition box. */
   variant?: "normal" | "highlight";
+  /** Optional interactive figure rendered under the prose (diagram drawn in code, not an image). */
+  figure?: TheoryFigure;
 }
+
+/** One step of a step-by-step figure: what appears, and how to explain it. */
+export interface FigureStep {
+  title: string;
+  /** Markdown string. */
+  body: string;
+}
+
+export type TpackRegionId = "TK" | "PK" | "CK" | "TPK" | "TCK" | "PCK" | "TPACK";
+
+/** One knowledge region of the TPACK diagram. */
+export interface TpackRegion {
+  id: TpackRegionId;
+  /** e.g. "테크놀로지 지식" */
+  name: string;
+  /** e.g. "Technological Knowledge" */
+  en: string;
+  /** Markdown string. */
+  body: string;
+  /** A short classroom example. */
+  example?: string;
+}
+
+/**
+ * Interactive figures. The drawing lives in components/content/figures/;
+ * the explanatory text lives here in the session file so editors can change it.
+ * - "metaverse-model": 8 steps that build the 메타버스 교수학습 설계 모형 one piece at a time.
+ * - "tpack": clickable TPACK Venn diagram (7 regions).
+ */
+export type TheoryFigure =
+  | { type: "metaverse-model"; steps: FigureStep[] }
+  | { type: "tpack"; regions: TpackRegion[] };
 
 /** A comparison table (structured, mobile-friendly). */
 export interface CompareTable {

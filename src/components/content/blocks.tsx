@@ -9,9 +9,11 @@ import type {
   KeyTerm,
   LearningObjective,
   SourceLink,
+  TheoryFigure,
 } from "@/types/content";
 import { Markdown } from "@/components/common/Markdown";
 import { ZoomableImage } from "./ZoomableImage";
+import { TheoryFigureView } from "./figures";
 
 /** 섹션 래퍼: eyebrow(작은 라벨) + 제목 + 내용. */
 export function Block({
@@ -59,12 +61,14 @@ export function TheoryCard({
   images,
   imageLayout = "bottom",
   variant = "normal",
+  figure,
 }: {
   heading: string;
   body: string;
   images?: ContentImage[];
   imageLayout?: "side" | "bottom" | "row";
   variant?: "normal" | "highlight";
+  figure?: TheoryFigure;
 }) {
   const hasImages = images && images.length > 0;
 
@@ -106,6 +110,11 @@ export function TheoryCard({
           {images.map((img) => (
             <ZoomableImage key={img.src} image={img} />
           ))}
+        </div>
+      )}
+      {figure && (
+        <div className="theory-card__figure">
+          <TheoryFigureView figure={figure} />
         </div>
       )}
     </article>

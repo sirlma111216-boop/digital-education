@@ -102,6 +102,16 @@ practice: {
 - 외부 사이트 이미지를 그대로 링크(핫링크)하지 마세요. 저작권·안정성 문제가 생깁니다.
 - 아직 이미지가 없으면 화면에는 “이미지 에셋 자리” 플레이스홀더가 표시됩니다.
 
+### 7-1. 인터랙티브 그림 (`figure`)
+
+`theoryBlocks` 항목에 `figure` 를 넣으면 본문 아래에 코드로 그린 인터랙티브 그림이 붙습니다.
+그림의 모양은 `src/components/content/figures/` 에 있고, **설명 문구는 차시 파일에서 고칩니다.**
+
+- `{ type: "metaverse-model", steps: [...] }` — 메타버스 교수학습 설계 모형을 8단계로 하나씩 완성하는 그림.
+  `steps` 의 각 항목(`title`, `body`)이 1~8단계 설명입니다(3차시 참고).
+- `{ type: "tpack", regions: [...] }` — 누를 수 있는 TPACK 벤다이어그램.
+  `regions` 의 각 항목(`id`·`name`·`en`·`body`·`example`)이 영역 설명입니다(3차시 참고).
+
 ## 8. 외부 링크 수정
 
 - 교수 외부 소개 페이지·이메일: `src/data/instructor.ts`, `src/data/courseConfig.ts`

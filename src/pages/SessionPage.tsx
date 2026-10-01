@@ -134,6 +134,7 @@ export function SessionPage() {
                     images={b.images}
                     imageLayout={b.imageLayout}
                     variant={b.variant}
+                    figure={b.figure}
                   />
                 ))}
               </div>

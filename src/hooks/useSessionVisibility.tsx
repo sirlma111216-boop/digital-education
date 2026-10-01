@@ -22,6 +22,11 @@ function firstOnly(): Record<string, boolean> {
   return Object.fromEntries(SESSION_IDS.map((id) => [id, id === "01"]));
 }
 
+/** 로컬 개발 서버 + Firebase 미설정: 콘텐츠 편집 미리보기를 위해 전 차시 공개. 배포 빌드에는 영향 없음. */
+function devPreviewAll(): Record<string, boolean> {
+  return Object.fromEntries(SESSION_IDS.map((id) => [id, true]));
+}
+
 interface Ctx {
   visibility: Record<string, boolean>;
   loading: boolean;
@@ -34,12 +39,14 @@ interface Ctx {
 const VisibilityContext = createContext<Ctx | null>(null);
 
 export function SessionVisibilityProvider({ children }: { children: ReactNode }) {
-  const [visibility, setVisibility] = useState<Record<string, boolean>>(firstOnly);
+  const [visibility, setVisibility] = useState<Record<string, boolean>>(() =>
+    !isFirebaseConfigured && import.meta.env.DEV ? devPreviewAll() : firstOnly(),
+  );
   const [loading, setLoading] = useState<boolean>(isFirebaseConfigured);
 
   useEffect(() => {
     if (!isFirebaseConfigured) {
-      setVisibility(firstOnly());
+      setVisibility(import.meta.env.DEV ? devPreviewAll() : firstOnly());
       setLoading(false);
       return;
     }
