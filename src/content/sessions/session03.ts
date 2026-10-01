@@ -16,13 +16,13 @@ export const session03: Session = {
   sourceFiles: ["디지털 교육 교안 3강"],
 
   overview:
-    "디지털을 이용해 가르친다는 것은 무엇을 의미할까요? 이 차시는 두 개의 질문으로 이루어집니다. 먼저 ‘어떻게(How) 가르칠 것인가’ — 인공지능 튜터 기반 개인 맞춤형 학습이라는 방향과 이를 위한 다섯 가지 구성 요소를 살펴보고, 교실과 가정을 하나의 순환으로 잇는 메타버스 교수학습 설계 모형을 단계별로 따라가 봅니다. 이어서 ‘무엇을(What) 가르칠 것인가’ — 교사 전문성의 틀인 TPACK으로 기술·교수법·내용 지식이 어떻게 결합되어야 하는지 탐구하고, 마지막으로 앞으로 계속 만날 에듀테크 핵심 용어를 정리합니다.",
+    "디지털을 이용해 가르친다는 것은 무엇을 의미할까요? 이 차시는 두 개의 질문으로 이루어집니다. 먼저 ‘어떻게(How) 가르칠 것인가’ — 인공지능 튜터 기반 개인 맞춤형 학습이라는 방향과 이를 위한 다섯 가지 구성 요소를 살펴보고, 교실과 가정을 하나의 순환으로 잇는 메타버스 교수학습 설계 모형을 단계별로 따라가 봅니다. 이어서 ‘무엇을(What) 가르칠 것인가’ — 교사 전문성의 틀인 TPACK으로 기술·교수법·내용 지식이 어떻게 결합되어야 하는지 탐구하고, 마지막으로 플랫폼·LMS·AI 코스웨어 등 앞으로 계속 만날 에듀테크 핵심 용어를 대표 서비스와 함께 정리합니다.",
 
   objectives: [
     "디지털로 가르친다는 것의 방향(인공지능 튜터 기반 개인 맞춤형 학습)과 이를 위한 다섯 가지 구성 요소를 설명할 수 있다.",
     "메타버스 교수학습 설계 모형이 교실–학습 데이터–인공지능 튜터–가정으로 순환하는 과정을 단계별로 설명할 수 있다.",
     "TPACK의 일곱 가지 지식 영역을 구분하고, 좋은 디지털 수업과 연결할 수 있다.",
-    "학습 방식·플랫폼·데이터 관련 핵심 용어를 범주로 묶어 설명할 수 있다.",
+    "플랫폼·LMS·CMS·SIS·빌더·올인원, ITS·DTS·AI 코스웨어 등 에듀테크 핵심 용어를 대표 서비스와 연결해 설명할 수 있다.",
   ],
 
   keyQuestion:
@@ -171,16 +171,80 @@ export const session03: Session = {
 
     /* ---------------- 에듀테크 핵심 용어 ---------------- */
     {
-      heading: "학습 방식 용어 정리",
-      body: "- **e-Learning / Blended / Hybrid**: 온라인·대면의 결합 정도\n- **Adaptive / Personalized**: 반응에 따른 조정 vs 학습자 맞춤 전반\n- **Microlearning / On-demand**: 짧은 단위·필요할 때\n- **Synchronous / Asynchronous**: 실시간 vs 비실시간\n- **PBL / PjBL / Competency-Based / Social Learning**: 문제·프로젝트·역량·사회적 학습",
+      heading: "에듀테크에서 자주 쓰는 용어",
+      body: "이제 에듀테크에서 자주 쓰는 용어들을 살펴봅니다. 용어는 암기 대상이 아니라 **서로의 관계**로 이해할 때 오래 남습니다. 앞에서 본 메타버스 교수학습 설계 모형의 조각들(디바이스·학습 데이터·인공지능 튜터)이 실제로는 어떤 시스템과 서비스로 구현되는지 연결하며 읽어 보세요.\n\n- **수업과 데이터를 담는 그릇**: 플랫폼 · LMS · CMS · SIS · 빌더 · 올인원 시스템\n- **AI가 가르치는 방식**: ITS · DTS · AI 코스웨어 (+ AI 디지털교과서 사업)\n- **기기와 학습 방식**: MDM · 드릴/프랙티스 · BYOD와 디벗 · 동기식/비동기식 학습",
     },
     {
-      heading: "플랫폼·기기·데이터 용어",
-      body: "- **플랫폼**: LMS(학습관리) · CMS(콘텐츠관리) · SIS(학생정보) · Builder · All-in-one\n- **기기·AI 도구**: MDM(기기관리) · ITS(지능형 튜터) · DTS · AI Courseware\n- **운영·데이터**: BYOD · OER · Educational Data Mining · Data Governance · Dashboard · DX · UI · UX · Drilling/Practice\n\n용어는 암기 대상이 아니라 **서로의 관계**로 이해할 때 오래 남습니다.",
+      heading: "① 플랫폼 (Platform)",
+      body: "에듀테크에서 **플랫폼**은 교사·학생·학부모가 **하나의 계정으로 모여 수업 도구, 콘텐츠, 데이터를 함께 쓰는 기반 환경**입니다. 기차역 승강장(platform)에 여러 열차가 들어오고 사람들이 오가듯, 플랫폼 위에 여러 서비스가 올라타고 사용자들이 그 안에서 만납니다. 아래의 LMS·CMS·SIS 같은 기능들은 대부분 플랫폼 위에서 작동합니다.\n\n**대표 서비스**\n- [Google Workspace for Education](https://edu.google.com/workspace-for-education/) — Classroom·Drive·Docs·Forms를 하나의 학교 계정으로 연결 (4~5차시)\n- [Microsoft 365 Education](https://www.microsoft.com/en-us/education) — Teams·OneDrive·OneNote 등 (6~10차시)\n- [웨일 스페이스](https://whale.naver.com/space/) — 네이버 웨일 브라우저 기반의 국내 교육 플랫폼",
+    },
+    {
+      heading: "② LMS — 학습관리시스템 (Learning Management System)",
+      body: "**LMS**는 **수업과 학습 과정을 관리**하는 시스템입니다. 수업(클래스) 개설, 학생 등록, 자료 배포, 과제 제출과 채점, 출결과 진도, 공지와 소통처럼 **‘누가, 무엇을, 어디까지 배웠는가’** 를 관리합니다. 학교에서 ‘온라인 교실’이라고 부르는 것, 대학의 ‘사이버캠퍼스(e-class)’가 대부분 LMS입니다.\n\n**대표 서비스**\n- [Google Classroom](https://edu.google.com/workspace-for-education/classroom/), [Microsoft Teams for Education](https://www.microsoft.com/en-us/education/products/teams)(과제·성적 기능)\n- 국내 공공: **e학습터**(한국교육학술정보원), [EBS 온라인클래스](https://www.ebsoc.co.kr/)\n- 국내 민간: [클래스팅](https://www.classting.com/)\n- 해외·대학: [Canvas](https://www.instructure.com/canvas), [Moodle](https://moodle.org/)(오픈소스), Blackboard",
+    },
+    {
+      heading: "③ CMS — 콘텐츠관리시스템 (Content Management System)",
+      body: "**CMS**는 **학습 콘텐츠를 만들고, 저장하고, 정리해 다시 쓰도록** 관리하는 시스템입니다. LMS가 **‘학습자와 학습 과정’** 을 관리한다면, CMS는 **‘콘텐츠 그 자체’** 를 관리합니다. 원래는 웹사이트의 글·이미지·영상을 관리하는 도구를 가리키는 말로, 학교 홈페이지나 교과 자료실도 CMS로 운영됩니다. 학습 콘텐츠에 특화된 것을 **LCMS**(Learning Content Management System)라고도 부릅니다.\n\n**대표 서비스**\n- 웹사이트형: [WordPress](https://wordpress.org/) — 전 세계 웹사이트에서 가장 널리 쓰이는 CMS, 학교·학급 홈페이지와 자료실\n- 교육 콘텐츠 저장소: [에듀넷·티-클리어](https://www.edunet.net/)(한국교육학술정보원) — 교과별 디지털 콘텐츠를 검색·활용\n- 가까운 예: 교사가 공유 드라이브(Google Drive·OneDrive)에 단원별 자료를 체계적으로 정리해 두는 것도 작은 CMS 역할을 합니다.",
+    },
+    {
+      heading: "④ SIS — 학생정보시스템 (Student Information System)",
+      body: "**SIS**는 **학생에 관한 공식 행정 정보**를 관리하는 시스템입니다. 학적(입학·전학·졸업), 출결, 성적, 학교생활기록부, 건강 기록 등이 여기에 해당합니다. 학습 활동 자체보다 **‘공식 기록’** 을 다루므로 개인정보 보호와 접근 권한 관리가 특히 중요합니다.\n\n**대표 서비스**\n- 국내: [나이스(NEIS, 교육행정정보시스템)](https://www.neis.go.kr/) — 전국 초·중·고의 학적·성적·생활기록부를 관리하는 대표적인 SIS (2023년 4세대 나이스로 개편)\n- 해외: PowerSchool SIS, Infinite Campus 등",
+    },
+    {
+      heading: "⑤ 빌더 (Builder)",
+      body: "**빌더**는 코딩을 몰라도(노코드·로우코드) **교사가 직접 학습 자료, 웹사이트, 앱을 만들 수 있게 해 주는 저작 도구**입니다. 이미 만들어진 콘텐츠를 쓰는 데 그치지 않고, **우리 반 학생에게 맞는 자료를 교사가 직접 설계**할 수 있게 해 준다는 점에서 의미가 큽니다.\n\n**대표 서비스**\n- 디자인·발표 자료: [Canva for Education](https://www.canva.com/education/), [미리캔버스](https://www.miricanvas.com/)\n- 인터랙티브 학습 자료: [Genially](https://genially.com/), [H5P](https://h5p.org/)(퀴즈·드래그앤드롭 등)\n- 웹사이트: [Google Sites](https://sites.google.com/)\n- 앱: [Glide](https://www.glideapps.com/) 같은 노코드 앱 빌더, 그리고 말로 설명해 앱을 만드는 AI 바이브 코딩 도구(15차시)",
+    },
+    {
+      heading: "⑥ 올인원(All-in-one) 교육 플랫폼",
+      body: "**올인원 시스템**은 위의 **플랫폼·LMS·CMS·SIS·빌더를 하나로 묶어**, 한 번의 로그인(SSO)으로 수업 운영, 콘텐츠, 학생 정보, 학습 데이터를 모두 연결하는 통합 환경입니다.\n\n도구가 따로따로 움직이면 교사는 여러 계정과 화면을 오가야 하고, 학생의 학습 데이터도 여기저기 흩어집니다. 올인원 시스템은 데이터를 한곳에 모아 **대시보드**로 보여 주고, 앞에서 본 **인공지능 튜터가 학습 이력을 판단할 수 있는 기반**이 됩니다. 그래서 **학습 데이터 표준**이 중요합니다.\n\n**대표 사례**\n- Google Workspace for Education · Microsoft 365 Education — 하나의 계정 안에 LMS(Classroom·Teams), 콘텐츠 저장(Drive·OneDrive), 저작 도구(Sites·Forms·Sway)가 함께 들어 있어 올인원에 가깝습니다.\n- [PowerSchool](https://www.powerschool.com/) — 해외에서 SIS·LMS(Schoology)·평가를 한 제품군으로 묶어 제공\n- 교육청 플랫폼 — 경기도교육청의 **하이러닝**처럼 수업 운영·AI 학습 분석·맞춤 콘텐츠를 한 플랫폼에 모으는 사례",
+    },
+    {
+      heading: "ITS와 DTS — 지능형 튜터링 시스템과 대화형 튜터링 시스템",
+      body: "**ITS(Intelligent Tutoring System, 지능형 튜터링 시스템)** 는 학생의 응답과 풀이 과정을 분석해 **‘지금 이 학생에게 맞는’ 힌트, 피드백, 다음 문제**를 제시하는 시스템입니다. 일반적으로 무엇을 가르칠지(**영역 모델**), 학생이 무엇을 알고 모르는지(**학습자 모델**), 어떻게 도울지(**교수 모델**)를 바탕으로 작동합니다. 정답과 풀이 단계가 분명한 수학·과학에서 먼저 발전했습니다.\n- 대표 예: [MATHia](https://www.carnegielearning.com/)(카네기 러닝, 수학), [ALEKS](https://www.aleks.com/)(수학·화학)\n\n**DTS(Dialogue-based Tutoring System, 대화형 튜터링 시스템)** 는 ITS를 **대화 방식**으로 구현한 것입니다. 정답을 바로 알려 주지 않고 **질문을 던지고, 학생의 설명을 듣고, 힌트를 주며** 스스로 생각하도록 이끄는 **소크라테스식 대화**를 지향합니다. 학생이 자기 말로 설명하는 과정에서 이해가 깊어집니다.\n- 대표 예: AutoTutor(미국 멤피스 대학교의 대표적인 연구용 DTS), [칸미고(Khanmigo)](https://www.khanmigo.ai/)(칸아카데미의 AI 튜터), 듀오링고의 AI 대화 연습 기능\n\n생성형 AI(LLM)로 자연스러운 대화가 가능해지면서, 오늘날의 AI 튜터는 **ITS의 분석 기능과 DTS의 대화 기능을 함께 갖추는** 방향으로 발전하고 있습니다.",
+    },
+    {
+      heading: "AI 코스웨어 — ITS가 교실로 들어오다",
+      body: "**코스웨어(Courseware)** 는 코스(course)와 소프트웨어(software)를 합친 말로, **교육과정에 맞춰 만든 디지털 학습 프로그램**입니다. 여기에 ITS의 개념을 더해 **AI가 학생의 수준을 진단하고 학습 경로·문항·피드백을 개인에 맞게 조정**하는 것이 **AI 코스웨어**입니다. 메타버스 교수학습 설계 모형의 **‘인공지능 튜터’가 실제 서비스로 구현된 모습**이라고 볼 수 있습니다.\n\n**수학** — 풀이 단계가 분명해 AI 코스웨어가 가장 활발한 과목\n- [똑똑! 수학탐험대](https://www.toctocmath.kr/) — 교육부·한국교육학술정보원의 초등(1~6학년) AI 수학 학습 서비스(무료)\n- [풀리수학·풀리스쿨](https://pulleyai.co.kr/school) — 취약 유형 진단과 맞춤 문제·오답 관리\n- [콴다(QANDA)](https://qanda.ai/) — 문제 사진으로 풀이를 찾고 AI 튜터에게 질문\n- [칸아카데미](https://ko.khanacademy.org/) — 숙달(mastery) 기반 연습과 AI 튜터 칸미고\n- [MATHia](https://www.carnegielearning.com/) — 대표적인 해외 ITS 기반 수학 코스웨어\n\n**영어** — 음성 인식과 대화형 AI로 말하기 연습이 크게 발전한 과목\n- **AI 펭톡** — 교육부·EBS의 초등 영어 말하기 연습 서비스(무료)\n- [듀오링고(Duolingo)](https://www.duolingo.com/) — 게임형 단계 학습과 AI 대화 연습\n- [스픽(Speak)](https://www.speak.com/) — AI와 영어로 대화하며 말하기 연습\n- [리딩앤](https://www.readingn.com/) — 영어 원서 읽기 + 음원·퀴즈\n- [ELSA Speak](https://elsaspeak.com/) — AI 발음 진단·교정\n- **산타(Santa)** — 뤼이드의 AI 토익 학습\n\n**전과목(가정 학습)**: 아이스크림 홈런, 밀크T, 엘리하이, 웅진스마트올 등 학습지·홈스쿨링 회사의 AI 학습 서비스도 같은 흐름에 있습니다.",
+    },
+    {
+      heading: "AI 디지털교과서 사업 — 짧게 짚어 보기",
+      body: "AI 코스웨어의 흐름은 국가 정책으로도 이어졌습니다. 교육부는 2023년 디지털 기반 교육혁신 계획(2차시 참고)에서 **AI 디지털교과서(AIDT)** 도입을 발표하고, **2025년 초3·4, 중1, 고1의 수학·영어·정보** 교과부터 단계적으로 확대할 계획이었습니다. 수학은 AI 튜터링으로 수준별 학습을, 영어는 음성 인식으로 듣기·말하기 연습을 지원하는 것이 핵심이었습니다.\n\n그러나 디지털 과몰입, 문해력, 개인정보, 교사 부담, 비용 등을 둘러싼 논쟁 속에 2025년에는 희망하는 학교 중심으로 도입되었고, **2025년 8월 초·중등교육법 개정**으로 AI 디지털교과서는 ‘교과서’가 아닌 **‘교육자료’** 로 지위가 바뀌었습니다. 이제는 학교장이 학교운영위원회 심의를 거쳐 선택해 활용합니다.\n\n> 기술의 가능성만큼 **현장의 준비, 교사의 역할, 사회적 합의**가 중요하다는 것을 보여 주는 사례입니다. TPACK과 하이터치를 다시 떠올려 보세요.",
+    },
+    {
+      heading: "MDM — 학교 기기를 한꺼번에 관리하기",
+      body: "**MDM(Mobile Device Management, 모바일 기기 관리)** 은 학교의 수많은 태블릿·노트북을 **원격으로 한꺼번에 설정하고 관리**하는 시스템입니다. 앱 설치·삭제, 유해 사이트와 게임 차단, 사용 시간 제한, 분실 기기 잠금, 운영체제 업데이트 등을 관리자가 한 화면에서 처리합니다. **1인 1디바이스 환경을 안전하게 운영하기 위한 필수 기반**입니다.\n- 대표 예: Microsoft Intune(윈도·다양한 기기), Jamf School(아이패드), Google 관리 콘솔(크롬북)",
+    },
+    {
+      heading: "드릴(Drilling)과 프랙티스(Practice)의 차이",
+      body: "둘 다 ‘연습’으로 번역되지만 목적이 다릅니다.\n\n- **드릴(Drilling)** — 같은 유형을 **빠르게 반복**해 기초 기능을 **자동화**하는 연습입니다. 구구단, 영단어, 연산처럼 **정확성과 속도**가 목표이며, 즉시 정답을 확인하는 것이 핵심입니다. (예: 플래시카드 앱, 연산 반복 앱)\n- **프랙티스(Practice)** — 배운 개념을 **다양한 상황과 문제에 적용**하며 이해를 깊게 하는 연습입니다. 틀린 이유에 대한 피드백과 점점 깊어지는 과제가 핵심이며, 목표는 **전이**입니다. (예: 칸아카데미의 숙달 연습, 시뮬레이션 과제)\n\n초기 컴퓨터 보조 수업(CAI)의 ‘드릴 앤 프랙티스’ 프로그램이 오늘날 AI 코스웨어로 발전했습니다. 좋은 AI 코스웨어는 드릴에 머무르지 않고 프랙티스로 이어지도록 설계됩니다. (2차시의 ‘죽은 지식’과 ‘전이되는 지식’을 떠올려 보세요.)",
+    },
+    {
+      heading: "BYOD와 서울시교육청 ‘디벗’",
+      body: "**BYOD(Bring Your Own Device)** 는 학생이 **자기 기기(스마트폰·태블릿·노트북)를 가져와** 수업에 활용하는 방식입니다. 예산 부담이 적고 익숙한 기기를 쓴다는 장점이 있지만, 기기 사양이 제각각이고, 기기가 없는 학생과의 **디지털 격차**, 관리·보안의 어려움이 과제입니다.\n\n반대로 교육청이 기기를 일괄 보급하는 방식도 있습니다. 대표 사례가 **서울시교육청의 ‘디벗’** 입니다. ‘디지털’과 친구를 뜻하는 ‘벗’을 합친 이름으로, **2022년 중학교 1학년 신입생**부터 1인 1태블릿을 보급하기 시작해 대상을 넓혀 왔습니다. 도입 과정에서 기기 파손·분실, 게임·유해 사이트 등 과몰입 우려가 제기되었고, **관리 프로그램(MDM)으로 유해 사이트·게임을 차단**하고 교실 충전보관함을 보급하는 등 운영 방식을 보완해 왔습니다.\n\n→ 기기 보급만으로는 충분하지 않고, **MDM·디지털 시민성 교육·수업 설계**가 함께 가야 합니다.",
+    },
+    {
+      heading: "동기식 학습과 비동기식 학습",
+      body: "- **동기식(Synchronous) 학습** — 교사와 학생이 **같은 시간에 실시간으로** 함께 학습합니다. 즉각적인 질문·피드백과 상호작용이 장점이고, 시간을 맞춰야 한다는 제약이 있습니다. (예: Zoom·Teams 실시간 수업, 실시간 퀴즈)\n- **비동기식(Asynchronous) 학습** — 학생이 **각자 편한 시간에 자기 속도로** 학습합니다. 반복 학습과 깊은 성찰이 가능하지만, 자기주도성이 필요하고 고립감이 생길 수 있습니다. (예: 녹화 강의, LMS 과제·토론 게시판, 패들렛)\n\n실제 수업은 두 방식을 섞어 씁니다. 메타버스 교수학습 설계 모형의 **교실 수업(동기)** 과 **가정 학습(비동기)** 도 이런 조합입니다.",
+    },
+    {
+      heading: "그 밖의 용어 한 줄 정리",
+      body: "- **Blended / Hybrid**: 대면과 온라인을 섞은 수업 / 대면과 원격 참여가 동시에 이루어지는 수업\n- **Microlearning / On-demand**: 짧은 단위로 핵심만 학습 / 필요할 때 바로 꺼내 학습\n- **PBL / PjBL**: 실제 문제를 해결하며 배우는 학습 / 산출물을 만드는 프로젝트로 배우는 학습\n- **OER**: 자유롭게 사용·수정·공유할 수 있는 공개 교육 자료\n- **Educational Data Mining**: 학습 데이터에서 패턴을 찾아 학습을 이해하고 개선하는 분석\n- **Data Governance**: 학교 데이터의 수집·보관·접근·삭제를 정하는 관리 체계\n- **Dashboard**: 학습·운영 데이터를 한눈에 보여 주는 화면\n- **DX**: 디지털 기술로 업무·수업 방식 자체를 다시 설계하는 디지털 전환\n- **UI / UX**: 사용자가 마주하는 화면과 조작 요소 / 서비스를 쓰며 느끼는 전체 경험",
     },
   ],
 
   compareTables: [
+    {
+      caption: "에듀테크 플랫폼 용어 한눈에 보기",
+      headers: ["용어", "무엇을 다루나", "대표 예"],
+      rows: [
+        ["플랫폼", "도구·콘텐츠·사용자가 모이는 기반 환경", "Google Workspace for Education, Microsoft 365 Education, 웨일 스페이스"],
+        ["LMS", "수업·과제·진도·소통 (학습 과정)", "Google Classroom, Teams, e학습터, EBS 온라인클래스, Canvas, Moodle"],
+        ["CMS", "학습 콘텐츠의 제작·저장·재사용", "WordPress, 에듀넷·티-클리어, 공유 드라이브 자료실"],
+        ["SIS", "학적·출결·성적·생활기록부 (공식 기록)", "나이스(NEIS), PowerSchool SIS"],
+        ["빌더", "교사가 직접 만드는 자료·사이트·앱", "Canva, 미리캔버스, Genially, H5P, Google Sites, Glide"],
+        ["올인원", "위 기능을 하나의 계정·데이터로 통합", "Google·Microsoft 교육 플랫폼, PowerSchool, 교육청 통합 플랫폼(하이러닝 등)"],
+      ],
+    },
     {
       caption: "적응형 학습 vs 개인 맞춤형 학습",
       headers: ["구분", "Adaptive Learning", "Personalized Learning"],
@@ -235,8 +299,28 @@ export const session03: Session = {
       question: "내가 가르치고 싶은 단원 하나를 골라, 그 단원에 맞는 PCK·TPK·TCK를 각각 한 문장으로 적어 보세요.",
     },
     {
+      type: "mcq",
+      question: "학생의 학적·출결·성적·학교생활기록부 같은 공식 기록을 관리하는 시스템은? (예: 나이스)",
+      choices: ["LMS", "CMS", "SIS", "MDM"],
+      answerIndex: 2,
+      explanation: "SIS(학생정보시스템)입니다. LMS는 학습 과정, CMS는 콘텐츠, MDM은 기기를 관리합니다.",
+    },
+    {
+      type: "mcq",
+      question: "정답을 바로 알려 주지 않고 질문·설명·힌트를 주고받는 대화로 학생이 스스로 생각하도록 이끄는 튜터링 시스템은?",
+      choices: ["SIS", "DTS", "CMS", "BYOD"],
+      answerIndex: 1,
+      explanation: "DTS(대화형 튜터링 시스템)는 ITS를 대화 방식으로 구현한 것입니다. 예: AutoTutor, 칸미고.",
+    },
+    {
+      type: "ox",
+      question: "드릴(Drilling)과 프랙티스(Practice)는 모두 같은 유형을 빠르게 반복해 자동화하는 연습을 뜻한다.",
+      answer: false,
+      explanation: "빠른 반복으로 자동화하는 것은 드릴, 배운 개념을 다양한 문제에 적용해 이해를 깊게 하는 것은 프랙티스입니다.",
+    },
+    {
       type: "self",
-      question: "LMS·CMS·SIS를 각각 학교 현장의 실제 상황 하나와 연결해 설명해 보세요.",
+      question: "내가 다닌(또는 근무하는) 학교에서 쓰는 LMS·SIS·MDM을 하나씩 찾아 적고, 각각 무엇을 관리하는지 설명해 보세요.",
     },
   ],
 
@@ -255,11 +339,20 @@ export const session03: Session = {
     { term: "PCK", en: "교수내용 지식", definition: "특정 교과 내용을 이해하기 쉽게 가르치는 지식." },
     { term: "TPK", en: "테크놀로지 교수 지식", definition: "교수 방법에 적절한 테크놀로지를 선정하는 지식." },
     { term: "TCK", en: "테크놀로지 내용 지식", definition: "특정 교과 내용을 가르칠 때 효과적으로 활용되는 테크놀로지를 선별하는 지식." },
-    { term: "ITS", en: "지능형 튜터링 시스템", definition: "학습 데이터를 분석해 적응적 피드백을 주는 시스템." },
-    { term: "LMS", en: "학습관리시스템", definition: "수업 자료·과제·평가·소통을 관리하는 시스템." },
+    { term: "플랫폼", en: "Platform", definition: "교사·학생이 하나의 계정으로 모여 수업 도구·콘텐츠·데이터를 함께 쓰는 기반 환경." },
+    { term: "LMS", en: "학습관리시스템", definition: "수업·과제·진도·소통 등 학습 과정을 관리하는 시스템(예: Google Classroom, e학습터)." },
+    { term: "CMS", en: "콘텐츠관리시스템", definition: "학습 콘텐츠를 제작·저장·재사용하도록 관리하는 시스템(예: WordPress, 에듀넷·티-클리어)." },
+    { term: "SIS", en: "학생정보시스템", definition: "학적·출결·성적·생활기록부 등 공식 기록을 관리하는 시스템(예: 나이스)." },
+    { term: "빌더", en: "Builder", definition: "코딩 없이 교사가 직접 자료·웹사이트·앱을 만드는 저작 도구." },
+    { term: "올인원 교육 플랫폼", en: "All-in-one", definition: "플랫폼·LMS·CMS·SIS·빌더를 하나의 계정과 데이터로 묶은 통합 환경." },
+    { term: "ITS", en: "지능형 튜터링 시스템", definition: "학습 데이터를 분석해 개인에게 맞는 힌트·피드백·다음 문제를 제시하는 시스템." },
+    { term: "DTS", en: "대화형 튜터링 시스템", definition: "질문·설명·힌트를 주고받는 대화로 학생이 스스로 생각하도록 이끄는 ITS." },
+    { term: "AI 코스웨어", en: "AI Courseware", definition: "AI가 학생 수준을 진단해 학습 경로·문항·피드백을 개인에 맞게 조정하는 디지털 학습 프로그램." },
+    { term: "MDM", en: "모바일 기기 관리", definition: "학교의 많은 기기를 원격으로 설정·차단·업데이트하는 관리 시스템." },
+    { term: "드릴과 프랙티스", en: "Drill & Practice", definition: "빠른 반복으로 기초 기능을 자동화하는 드릴, 다양한 문제에 적용해 이해를 깊게 하는 프랙티스." },
+    { term: "BYOD", definition: "학생이 개인 기기를 가져와 수업에 활용하는 방식. 교육청 보급형(예: 서울 ‘디벗’)과 대비된다." },
+    { term: "동기식 / 비동기식 학습", en: "Synchronous / Asynchronous", definition: "같은 시간에 실시간으로 함께하는 학습 / 각자 편한 시간에 자기 속도로 하는 학습." },
     { term: "Adaptive Learning", en: "적응형 학습", definition: "학습자 반응에 따라 난이도·경로를 조정하는 학습." },
-    { term: "Data Governance", en: "데이터 거버넌스", definition: "학교 데이터의 수집·보관·접근·삭제를 규정하는 관리 체계." },
-    { term: "BYOD", definition: "학생 개인 기기를 수업에 활용하는 정책." },
   ],
 
   sources: [
@@ -272,6 +365,14 @@ export const session03: Session = {
       label: "Shulman, L. S. (1986). Those Who Understand: Knowledge Growth in Teaching.",
       note: "Educational Researcher, 15(2), 4–14 — PCK 개념의 출처",
     },
+    {
+      label: "급히 도입해 탈난 AI 교과서 결국 ‘교육자료’ 지위격하 (경향신문)",
+      url: "https://www.khan.co.kr/article/202508041631001",
+      note: "2025년 8월 초·중등교육법 개정",
+      lastVerified: "2026-10-01",
+    },
+    { label: "똑똑! 수학탐험대 (한국교육학술정보원)", url: "https://www.toctocmath.kr/", lastVerified: "2026-10-01" },
+    { label: "칸미고 Khanmigo (칸아카데미)", url: "https://www.khanmigo.ai/", lastVerified: "2026-10-01" },
   ],
 
   cautions: [
