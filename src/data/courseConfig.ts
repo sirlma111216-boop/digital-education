@@ -31,7 +31,7 @@ export const categories: CategoryInfo[] = [
     label: "Google Workspace와 수업 설계",
     range: "4~5차시",
     description:
-      "Google 교육용 생태계와 Classroom·Brisk Teaching으로 수업 흐름을 설계합니다.",
+      "Google 교육용 생태계와 Classroom으로 수업 흐름을 설계하고, Brisk Teaching·Aside로 브라우저 속 AI를 활용합니다.",
   },
   {
     id: "microsoft",
