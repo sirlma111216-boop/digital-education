@@ -20,20 +20,28 @@ service cloud.firestore {
     function notBlocked() {
       return isSignedIn() && (!hasProfile() || profileOf(request.auth.uid).blocked != true);
     }
+    // Q&A 제목·내용: 비어 있지 않은 문자열, 길이 제한.
+    function validQuestionText() {
+      return request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 200
+        && request.resource.data.body is string
+        && request.resource.data.body.size() > 0
+        && request.resource.data.body.size() <= 5000;
+    }
 
-    // 프로필: 본인만 읽기·수정, role/blocked 는 본인이 못 바꿈. 교수자는 전체.
+    // 프로필: 본인만 읽기·수정(표시명·학번만), 교수자는 전체.
+    // role/blocked/email 은 본인이 못 바꾼다(교수자 화면의 수강생 식별 정보 보호).
     match /profiles/{uid} {
       allow read: if isSignedIn() && (request.auth.uid == uid || isInstructor());
       allow create: if isSignedIn()
         && request.auth.uid == uid
         && request.resource.data.role == 'student'
-        && request.resource.data.blocked == false;
-      allow update: if isSignedIn() && (
-        (request.auth.uid == uid
-          && request.resource.data.role == resource.data.role
-          && request.resource.data.blocked == resource.data.blocked)
-        || isInstructor()
-      );
+        && request.resource.data.blocked == false
+        && request.resource.data.email == request.auth.token.get('email', null);
+      allow update: if isInstructor()
+        || (isSignedIn() && request.auth.uid == uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName', 'studentNumber']));
       allow delete: if isInstructor();
     }
 
@@ -43,9 +51,9 @@ service cloud.firestore {
       allow write: if isInstructor();
     }
 
-    // 공지: 읽기는 (차단되지 않은) 로그인 사용자, 쓰기는 교수자만.
+    // 공지: '전체 공개' 공지는 누구나, 나머지는 (차단되지 않은) 로그인 사용자. 쓰기는 교수자만.
     match /notices/{id} {
-      allow read: if isSignedIn() && notBlocked();
+      allow read: if resource.data.visibility == 'public' || notBlocked();
       allow write: if isInstructor();
     }
 
@@ -60,18 +68,39 @@ service cloud.firestore {
       allow read: if isInstructor()
         || (isSignedIn() && notBlocked()
             && (resource.data.isPrivate == false || resource.data.authorId == request.auth.uid));
-      allow create: if isSignedIn() && notBlocked()
-        && request.resource.data.authorId == request.auth.uid;
-      allow update, delete: if isInstructor()
-        || (isSignedIn() && resource.data.authorId == request.auth.uid);
+      // 작성: 본인 프로필의 표시명(실명)으로만, 숨김·답변 상태는 초기값으로만.
+      allow create: if notBlocked()
+        && request.resource.data.keys().hasOnly(['authorId', 'authorName', 'title', 'body', 'isPrivate',
+                                                 'isHidden', 'status', 'answerCount', 'createdAt', 'updatedAt'])
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.authorName == profileOf(request.auth.uid).displayName
+        && validQuestionText()
+        && request.resource.data.isPrivate is bool
+        && request.resource.data.isHidden == false
+        && request.resource.data.status == 'pending'
+        && request.resource.data.answerCount == 0;
+      // 수정: 교수자는 전체. 작성자는 제목·내용·비밀글 여부만(숨김·답변 상태·작성자는 못 바꿈).
+      allow update: if isInstructor()
+        || (notBlocked()
+            && resource.data.authorId == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title', 'body', 'isPrivate', 'updatedAt'])
+            && validQuestionText()
+            && request.resource.data.isPrivate is bool);
+      allow delete: if isInstructor()
+        || (notBlocked() && resource.data.authorId == request.auth.uid);
 
-      // 답변: 질문을 볼 수 있으면 읽기, 작성은 교수자만.
+      // 답변: 질문을 볼 수 있으면 읽기, 작성·수정은 교수자만.
+      // 삭제는 교수자, 또는 질문 작성자가 자기 질문을 지울 때 함께 정리(같은 일괄 쓰기 안에서).
       match /answers/{aid} {
         allow read: if isInstructor()
           || (isSignedIn() && notBlocked()
               && (get(/databases/$(database)/documents/qna/$(qid)).data.isPrivate == false
                   || get(/databases/$(database)/documents/qna/$(qid)).data.authorId == request.auth.uid));
-        allow create, update, delete: if isInstructor();
+        allow create, update: if isInstructor();
+        allow delete: if isInstructor()
+          || (notBlocked()
+              && get(/databases/$(database)/documents/qna/$(qid)).data.authorId == request.auth.uid
+              && !existsAfter(/databases/$(database)/documents/qna/$(qid)));
       }
     }
   }

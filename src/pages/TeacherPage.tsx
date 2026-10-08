@@ -9,10 +9,18 @@ import { BoardNotices } from "@/features/board/BoardNotices";
 import { BoardQna } from "@/features/board/BoardQna";
 import { Loading, ErrorState } from "@/features/board/states";
 
+/**
+ * CSV 칸 하나. 학생이 입력한 값이 =, +, -, @ 등으로 시작하면 엑셀이 수식으로 실행할 수 있으므로
+ * 앞에 작은따옴표를 붙여 글자로 취급되게 한다(CSV 수식 주입 방지).
+ */
+function csvCell(value: string | number): string {
+  let s = String(value);
+  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
+  return `"${s.replace(/"/g, '""')}"`;
+}
+
 function downloadCsv(filename: string, rows: (string | number)[][]) {
-  const csv = rows
-    .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
-    .join("\n");
+  const csv = rows.map((r) => r.map(csvCell).join(",")).join("\n");
   const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }); // 한글 엑셀용 BOM
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);

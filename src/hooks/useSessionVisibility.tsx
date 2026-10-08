@@ -50,8 +50,9 @@ export function SessionVisibilityProvider({ children }: { children: ReactNode })
       setLoading(false);
       return;
     }
-    // Firestore 가 미설정/불통이면 onSnapshot 이 오래 걸릴 수 있으므로
-    // 1.5초 안에 응답이 없으면 안전 기본값(01만 공개)으로 로딩을 끝낸다.
+    // 실제 공개 설정을 받을 때까지 loading 을 유지한다(차시 화면은 그동안 '불러오는 중'으로 기다림).
+    // 너무 짧게 끊으면 느린 학교 네트워크에서 열린 차시도 '01만 공개'로 오판해 학생이 목록으로 튕긴다.
+    // Firestore 가 아예 불통일 때만 8초 뒤 안전 기본값(01만 공개)으로 로딩을 끝낸다.
     let settled = false;
     const settle = () => {
       if (!settled) {
@@ -59,7 +60,7 @@ export function SessionVisibilityProvider({ children }: { children: ReactNode })
         setLoading(false);
       }
     };
-    const timer = window.setTimeout(settle, 1500);
+    const timer = window.setTimeout(settle, 8000);
 
     const ref = doc(db, "courseSettings", "sessionVisibility");
     const unsub = onSnapshot(

@@ -9,23 +9,27 @@ import { listRecentNotices } from "./api";
 import { Loading, ErrorState } from "./states";
 
 export function NoticesPreview({ limit = 3 }: { limit?: number }) {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [notices, setNotices] = useState<Notice[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // 비로그인: '전체 공개' 공지만, 로그인: 전체 공지.
   useEffect(() => {
-    if (!isFirebaseConfigured || !user) return;
+    if (!isFirebaseConfigured || authLoading) return;
     let alive = true;
-    listRecentNotices(limit)
+    setNotices(null);
+    setError(null);
+    listRecentNotices(limit, !user)
       .then((rows) => alive && setNotices(rows))
       .catch((e) => alive && setError(toFriendlyError(e)));
     return () => {
       alive = false;
     };
-  }, [limit, user]);
+  }, [limit, user, authLoading]);
 
   if (!isFirebaseConfigured) return <p className="muted">공지는 백엔드 연결 후 표시됩니다.</p>;
-  if (!user)
+  if (authLoading) return <Loading />;
+  if (!user && (error || notices?.length === 0))
     return (
       <p className="muted">
         공지는 로그인 후 확인할 수 있습니다. <Link to="/login" className="text-link">로그인 →</Link>

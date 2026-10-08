@@ -17,6 +17,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { toMillis } from "@/lib/time";
@@ -44,17 +45,23 @@ function mapNotice(id: string, d: Record<string, unknown>): Notice {
   };
 }
 
-export async function listNotices(): Promise<Notice[]> {
-  const snap = await getDocs(query(collection(db, "notices"), orderBy("createdAt", "desc")));
+/** publicOnly: 비로그인 화면용 — '전체 공개' 공지만 조회(나머지는 보안 규칙이 막음). */
+function noticesQuery(publicOnly: boolean) {
+  const base = collection(db, "notices");
+  return publicOnly
+    ? query(base, where("visibility", "==", "public"), orderBy("createdAt", "desc"))
+    : query(base, orderBy("createdAt", "desc"));
+}
+
+export async function listNotices(publicOnly = false): Promise<Notice[]> {
+  const snap = await getDocs(noticesQuery(publicOnly));
   const rows = snap.docs.map((d) => mapNotice(d.id, d.data() as Record<string, unknown>));
   // 고정 공지 우선
   return rows.sort((a, b) => Number(b.isPinned) - Number(a.isPinned));
 }
 
-export async function listRecentNotices(n: number): Promise<Notice[]> {
-  const snap = await getDocs(
-    query(collection(db, "notices"), orderBy("createdAt", "desc"), fbLimit(n + 5)),
-  );
+export async function listRecentNotices(n: number, publicOnly = false): Promise<Notice[]> {
+  const snap = await getDocs(query(noticesQuery(publicOnly), fbLimit(n + 5)));
   const rows = snap.docs.map((d) => mapNotice(d.id, d.data() as Record<string, unknown>));
   return rows.sort((a, b) => Number(b.isPinned) - Number(a.isPinned)).slice(0, n);
 }
@@ -162,22 +169,17 @@ function mapQuestion(id: string, d: Record<string, unknown>): QnaQuestion {
   };
 }
 
-/** 학생·비로그인 화면: 공개글 + 내 글을 각각 조회해 합치고 숨김 제외. */
-export async function listQuestionsForStudent(uid: string | null): Promise<QnaQuestion[]> {
+/** 학생 화면(로그인 필요): 공개글 + 내 글을 각각 조회해 합치고 숨김 제외. */
+export async function listQuestionsForStudent(uid: string): Promise<QnaQuestion[]> {
   const base = collection(db, "qna");
-  const pubSnap = await getDocs(
-    query(base, where("isPrivate", "==", false), orderBy("createdAt", "desc")),
-  );
+  const [pubSnap, mineSnap] = await Promise.all([
+    getDocs(query(base, where("isPrivate", "==", false), orderBy("createdAt", "desc"))),
+    getDocs(query(base, where("authorId", "==", uid), orderBy("createdAt", "desc"))),
+  ]);
   const rows = new Map<string, QnaQuestion>();
-  pubSnap.docs.forEach((d) => rows.set(d.id, mapQuestion(d.id, d.data() as Record<string, unknown>)));
-  if (uid) {
-    const mineSnap = await getDocs(
-      query(base, where("authorId", "==", uid), orderBy("createdAt", "desc")),
-    );
-    mineSnap.docs.forEach((d) =>
-      rows.set(d.id, mapQuestion(d.id, d.data() as Record<string, unknown>)),
-    );
-  }
+  [...pubSnap.docs, ...mineSnap.docs].forEach((d) =>
+    rows.set(d.id, mapQuestion(d.id, d.data() as Record<string, unknown>)),
+  );
   return [...rows.values()]
     .filter((q) => !q.isHidden)
     .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0));
@@ -213,8 +215,13 @@ export async function updateQuestion(
   await updateDoc(doc(db, "qna", id), { ...patch, updatedAt: serverTimestamp() });
 }
 
+/** 질문 삭제. 하위 답변은 자동으로 지워지지 않으므로 같은 일괄 쓰기로 함께 지운다. */
 export async function deleteQuestion(id: string): Promise<void> {
-  await deleteDoc(doc(db, "qna", id));
+  const answers = await getDocs(collection(db, "qna", id, "answers"));
+  const batch = writeBatch(db);
+  answers.docs.forEach((a) => batch.delete(a.ref));
+  batch.delete(doc(db, "qna", id));
+  await batch.commit();
 }
 
 function mapAnswer(id: string, d: Record<string, unknown>): QnaAnswer {
@@ -239,14 +246,17 @@ export async function addInstructorAnswer(
   qid: string,
   input: { authorId: string; authorName: string; body: string },
 ): Promise<void> {
-  await addDoc(collection(db, "qna", qid, "answers"), {
+  // 답변 저장과 질문 상태 변경을 한 번에(둘 중 하나만 반영되는 일이 없도록).
+  const batch = writeBatch(db);
+  batch.set(doc(collection(db, "qna", qid, "answers")), {
     ...input,
     isInstructor: true,
     createdAt: serverTimestamp(),
   });
-  await updateDoc(doc(db, "qna", qid), {
+  batch.update(doc(db, "qna", qid), {
     status: "answered",
     answerCount: increment(1),
     updatedAt: serverTimestamp(),
   });
+  await batch.commit();
 }

@@ -40,7 +40,7 @@ export function SessionPage() {
   const { param } = useParams();
   const meta = param ? getSessionMetaByRouteParam(param) : undefined;
   const { isBookmarked, toggleBookmarked, visit } = useProgress();
-  const { role } = useAuth();
+  const { role, loading: authLoading } = useAuth();
   const { isOpen, loading: visLoading } = useSessionVisibility();
   const [session, setSession] = useState<Session | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -67,8 +67,9 @@ export function SessionPage() {
   }, [meta, allowed, visit]);
 
   if (!meta) return <Navigate to="/course" replace />;
-  // 잠긴 차시 직접 접근 → 목록으로, 안내 표시
-  if (!visLoading && !allowed)
+  // 잠긴 차시 직접 접근 → 목록으로, 안내 표시.
+  // 로그인(교수자 여부)과 공개 설정을 모두 확인한 뒤에만 판단한다(새로고침 직후 교수자가 튕기지 않도록).
+  if (!visLoading && !authLoading && !allowed)
     return <Navigate to="/course" replace state={{ lockedNotice: true }} />;
 
   const marked = isBookmarked(meta.id);

@@ -9,26 +9,30 @@ import { Loading, ErrorState, EmptyState, NotConfigured, NeedLogin } from "./sta
 
 /** 공지 목록 + (교수자) 작성/고정/삭제. 게시판 탭과 교수자 화면이 함께 재사용. */
 export function BoardNotices() {
-  const { user, role } = useAuth();
+  const { user, role, loading: authLoading } = useAuth();
   const isInstructor = role === "instructor";
+  const guest = !user;
   const [notices, setNotices] = useState<Notice[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // 비로그인: '전체 공개' 공지만, 로그인: 전체 공지.
   const load = useCallback(async () => {
     setError(null);
     try {
-      setNotices(await listNotices());
+      setNotices(await listNotices(guest));
     } catch (e) {
       setError(toFriendlyError(e));
     }
-  }, []);
+  }, [guest]);
 
   useEffect(() => {
-    if (isFirebaseConfigured && user) void load();
-  }, [load, user]);
+    if (isFirebaseConfigured && !authLoading) void load();
+  }, [load, authLoading]);
 
   if (!isFirebaseConfigured) return <NotConfigured />;
-  if (!user) return <NeedLogin action="공지 확인" />;
+  if (authLoading) return <Loading />;
+  // 비로그인: 전체 공개 공지가 없거나 불러오지 못하면 로그인 안내만 보여 준다.
+  if (guest && (error || notices?.length === 0)) return <NeedLogin action="공지 확인" />;
 
   return (
     <div className="board-panel">
@@ -39,6 +43,7 @@ export function BoardNotices() {
         </div>
       </div>
 
+      {guest && <NeedLogin action="수강생 공지 확인" />}
       {isInstructor && user && <NoticeForm authorId={user.uid} onCreated={load} />}
 
       {error ? (
@@ -147,7 +152,7 @@ function NoticeForm({ authorId, onCreated }: { authorId: string; onCreated: () =
               <label className="label" htmlFor="n-vis">공개 범위</label>
               <select id="n-vis" className="select" value={visibility} onChange={(e) => setVisibility(e.target.value as Visibility)}>
                 <option value="authenticated">수강생만</option>
-                <option value="public">전체 공개</option>
+                <option value="public">전체 공개 (로그인 없이도 보임)</option>
               </select>
             </div>
           </div>

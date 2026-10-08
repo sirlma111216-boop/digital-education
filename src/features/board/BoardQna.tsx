@@ -1,5 +1,6 @@
 /* 실명 Q&A 게시판. 비밀글(작성자·교수자만), 답변대기/답변완료, 교수자 답변·숨김·삭제. */
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { isFirebaseConfigured, toFriendlyError } from "@/lib/firebase";
 import { fmtDateTime } from "@/lib/time";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,7 +19,7 @@ import { Loading, ErrorState, EmptyState, NotConfigured, NeedLogin, NeedOnboardi
 const PAGE = 8;
 
 export function BoardQna() {
-  const { user, role, needsOnboarding, profile } = useAuth();
+  const { user, role, needsOnboarding, profile, loading: authLoading } = useAuth();
   const isInstructor = role === "instructor";
   const [questions, setQuestions] = useState<QnaQuestion[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -26,19 +27,21 @@ export function BoardQna() {
   const [page, setPage] = useState(0);
 
   const load = useCallback(async () => {
+    if (!user) return;
     setError(null);
     try {
-      setQuestions(isInstructor ? await listAllQuestions() : await listQuestionsForStudent(user?.uid ?? null));
+      setQuestions(isInstructor ? await listAllQuestions() : await listQuestionsForStudent(user.uid));
     } catch (e) {
       setError(toFriendlyError(e));
     }
   }, [isInstructor, user]);
 
   useEffect(() => {
-    if (isFirebaseConfigured) void load();
-  }, [load]);
+    if (isFirebaseConfigured && user) void load();
+  }, [load, user]);
 
   if (!isFirebaseConfigured) return <NotConfigured />;
+  if (authLoading) return <Loading />;
 
   const filtered = (questions ?? []).filter(
     (q) => !query || q.title.includes(query) || q.body.includes(query),
@@ -58,51 +61,59 @@ export function BoardQna() {
         </div>
       </div>
 
+      {/* Q&A 는 실명 게시판이라 로그인한 수강생에게만 보인다(보안 규칙과 동일). */}
       {!user ? (
-        <NeedLogin action="질문 작성" />
+        <NeedLogin action="Q&A 이용" />
       ) : needsOnboarding ? (
         <NeedOnboarding />
+      ) : !profile?.displayName?.trim() ? (
+        <div className="alert alert-info board-state">
+          <p>
+            질문은 표시명(실명)으로 등록됩니다.{" "}
+            <Link to="/account" className="text-link">내 계정에서 표시명 입력하기 →</Link>
+          </p>
+        </div>
       ) : (
-        <NewQuestionForm
-          authorId={user.uid}
-          authorName={profile?.displayName ?? "수강생"}
-          onCreated={load}
-        />
+        <NewQuestionForm authorId={user.uid} authorName={profile.displayName} onCreated={load} />
       )}
 
-      <div className="board-panel__head anon-controls">
-        <input
-          className="input"
-          type="search"
-          placeholder="제목·내용 검색"
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setPage(0);
-          }}
-          aria-label="질문 검색"
-        />
-      </div>
-
-      {error ? (
-        <ErrorState message={error} onRetry={load} />
-      ) : !questions ? (
-        <Loading />
-      ) : filtered.length === 0 ? (
-        <EmptyState>아직 질문이 없습니다. 첫 질문을 남겨 보세요.</EmptyState>
-      ) : (
+      {user && (
         <>
-          <ul className="post-list">
-            {pageItems.map((q) => (
-              <QuestionItem key={q.id} q={q} onChanged={load} />
-            ))}
-          </ul>
-          {totalPages > 1 && (
-            <div className="pager">
-              <button className="btn btn-secondary btn-sm" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>이전</button>
-              <span className="muted">{page + 1} / {totalPages}</span>
-              <button className="btn btn-secondary btn-sm" disabled={page >= totalPages - 1} onClick={() => setPage((p) => p + 1)}>다음</button>
-            </div>
+          <div className="board-panel__head anon-controls">
+            <input
+              className="input"
+              type="search"
+              placeholder="제목·내용 검색"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setPage(0);
+              }}
+              aria-label="질문 검색"
+            />
+          </div>
+
+          {error ? (
+            <ErrorState message={error} onRetry={load} />
+          ) : !questions ? (
+            <Loading />
+          ) : filtered.length === 0 ? (
+            <EmptyState>아직 질문이 없습니다. 첫 질문을 남겨 보세요.</EmptyState>
+          ) : (
+            <>
+              <ul className="post-list">
+                {pageItems.map((q) => (
+                  <QuestionItem key={q.id} q={q} onChanged={load} />
+                ))}
+              </ul>
+              {totalPages > 1 && (
+                <div className="pager">
+                  <button className="btn btn-secondary btn-sm" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>이전</button>
+                  <span className="muted">{page + 1} / {totalPages}</span>
+                  <button className="btn btn-secondary btn-sm" disabled={page >= totalPages - 1} onClick={() => setPage((p) => p + 1)}>다음</button>
+                </div>
+              )}
+            </>
           )}
         </>
       )}
@@ -116,18 +127,20 @@ function QuestionItem({ q, onChanged }: { q: QnaQuestion; onChanged: () => void 
   const isOwner = user?.uid === q.authorId;
   const [open, setOpen] = useState(false);
 
-  async function toggleHidden() {
-    await updateQuestion(q.id, { isHidden: !q.isHidden });
-    onChanged();
+  /** 실패(권한 없음 등)를 조용히 삼키지 않고 알린다. */
+  async function run(action: () => Promise<void>) {
+    try {
+      await action();
+      onChanged();
+    } catch (err) {
+      alert(toFriendlyError(err));
+    }
   }
-  async function remove() {
+  const toggleHidden = () => run(() => updateQuestion(q.id, { isHidden: !q.isHidden }));
+  const togglePrivate = () => run(() => updateQuestion(q.id, { isPrivate: !q.isPrivate }));
+  function remove() {
     if (!confirm("이 질문을 삭제할까요?")) return;
-    await deleteQuestion(q.id);
-    onChanged();
-  }
-  async function togglePrivate() {
-    await updateQuestion(q.id, { isPrivate: !q.isPrivate });
-    onChanged();
+    void run(() => deleteQuestion(q.id));
   }
 
   return (
@@ -291,11 +304,11 @@ function NewQuestionForm({
         <form onSubmit={submit} className="stack">
           <div className="field">
             <label className="label" htmlFor="q-title">제목</label>
-            <input id="q-title" className="input" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input id="q-title" className="input" maxLength={200} value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <div className="field">
             <label className="label" htmlFor="q-body">내용</label>
-            <textarea id="q-body" className="textarea" value={body} onChange={(e) => setBody(e.target.value)} />
+            <textarea id="q-body" className="textarea" maxLength={5000} value={body} onChange={(e) => setBody(e.target.value)} />
             <p className="field-hint">실명({authorName})으로 등록됩니다.</p>
           </div>
           <label className="check">

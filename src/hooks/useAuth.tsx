@@ -122,8 +122,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return {};
     } catch (err) {
       const code = (err as { code?: string })?.code ?? "";
-      // 팝업이 막히면 리다이렉트로 대체
-      if (/popup-blocked|popup-closed-by-user|cancelled-popup-request|operation-not-supported/i.test(code)) {
+      // 팝업을 띄울 수 없을 때만 리다이렉트로 대체. 사용자가 창을 닫은 경우(popup-closed-by-user)는
+      // 그 의사를 존중해 안내만 한다.
+      if (/popup-blocked|operation-not-supported/i.test(code)) {
         try {
           await signInWithRedirect(auth, googleProvider);
           return {};
