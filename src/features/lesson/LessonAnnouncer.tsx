@@ -9,8 +9,9 @@ export const LESSON_PATH = "/lesson";
 /**
  * 사이트 안 수업 안내 팝업.
  * - 입장 가능 시간에만, 사이트를 열어 둔 사람에게만 표시(브라우저 알림·푸시 없음)
- * - 닫으면 같은 탭에서 같은 수업으로는 다시 자동으로 뜨지 않고, 작은 배너만 남김
- * - 영상 시청을 마치면 배너까지 숨김
+ * - 닫으면 사이트 안에서 이동하는 동안은 다시 뜨지 않고 작은 배너만 남김.
+ *   어느 페이지에서든 새로고침하면 다시 뜸(수업 페이지 포함)
+ * - 영상 시청을 끝까지 마치면 같은 탭에서는 새로고침해도 다시 뜨지 않음
  */
 export function LessonAnnouncer() {
   const { status, preview, endMs } = useLessonWindow();
@@ -20,9 +21,11 @@ export function LessonAnnouncer() {
   const popup = usePopupState(popupId);
   const { pathname } = useLocation();
 
-  if (!lesson || !popupId || status !== "open" || popup === "ended" || pathname === LESSON_PATH) return null;
+  if (!lesson || !popupId || status !== "open" || popup === "ended") return null;
 
   if (popup === "dismissed") {
+    // 수업 페이지에서는 배너가 필요 없음(바로 '수업 시작' 가능)
+    if (pathname === LESSON_PATH) return null;
     return (
       <Link to={LESSON_PATH} className="lesson-banner" aria-label={`온라인 수업 진행 중: ${lesson.title}. 수업 페이지로 이동`}>
         <span className="lesson-banner__dot" aria-hidden="true" />
@@ -36,6 +39,7 @@ export function LessonAnnouncer() {
 
 function AnnounceDialog({ id, title, endMs, preview }: { id: string; title: string; endMs: number; preview: boolean }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const goRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -66,7 +70,7 @@ function AnnounceDialog({ id, title, endMs, preview }: { id: string; title: stri
             className="btn btn-primary"
             onClick={() => {
               writePopupState(id, "dismissed");
-              navigate(LESSON_PATH);
+              if (pathname !== LESSON_PATH) navigate(LESSON_PATH);
             }}
           >
             수업 페이지로 이동

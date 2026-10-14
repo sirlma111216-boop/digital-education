@@ -115,29 +115,35 @@ export function fmtKst(ms: number): string {
   return KST_FORMAT.format(ms);
 }
 
-/* ---- 팝업 억제 상태(sessionStorage, 수업 ID별). 재생 위치는 어디에도 저장하지 않는다. ---- */
+/* ---- 팝업 억제 상태(수업 ID별). 재생 위치는 어디에도 저장하지 않는다. ----
+   - "dismissed"(닫음): 메모리에만 보관 → 페이지 이동 중에는 다시 뜨지 않고, 새로고침하면 다시 뜸
+   - "ended"(시청 완료): sessionStorage에 보관 → 같은 탭에서는 새로고침해도 다시 뜨지 않음 */
 export type PopupState = "dismissed" | "ended" | null;
 /** 미리보기는 실제 수업과 다른 키를 쓴다. */
 export const popupKeyId = (id: string, preview: boolean) => (preview ? `${id}:preview` : id);
 const popupKey = (id: string) => `lesson-popup:${id}`;
 export const LESSON_POPUP_EVENT = "lesson-popup-change";
+const memory = new Map<string, PopupState>();
 
 export function readPopupState(id: string): PopupState {
   try {
-    const v = sessionStorage.getItem(popupKey(id));
-    return v === "dismissed" || v === "ended" ? v : null;
+    if (sessionStorage.getItem(popupKey(id)) === "ended") return "ended";
   } catch {
-    return null;
+    /* 저장소 사용 불가 — 메모리 상태만 사용 */
   }
+  return memory.get(id) ?? null;
 }
 
 export function writePopupState(id: string, state: Exclude<PopupState, null>) {
   // "ended"는 "dismissed"보다 우선(시청 완료 후에는 배너도 숨김).
   if (state === "dismissed" && readPopupState(id) === "ended") return;
-  try {
-    sessionStorage.setItem(popupKey(id), state);
-  } catch {
-    /* 저장 불가(사생활 보호 모드 등) — 이 탭의 메모리 상태만으로 동작 */
+  memory.set(id, state);
+  if (state === "ended") {
+    try {
+      sessionStorage.setItem(popupKey(id), state);
+    } catch {
+      /* 저장 불가(사생활 보호 모드 등) — 메모리 상태만으로 동작 */
+    }
   }
   window.dispatchEvent(new CustomEvent(LESSON_POPUP_EVENT, { detail: { id, state } }));
 }
