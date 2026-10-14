@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
+import { LessonAnnouncer } from "@/features/lesson/LessonAnnouncer";
 
 export function Layout() {
   const { pathname } = useLocation();
@@ -19,6 +20,7 @@ export function Layout() {
       <main id="main">
         <Outlet />
       </main>
+      <LessonAnnouncer />
     </>
   );
 }

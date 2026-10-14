@@ -9,6 +9,7 @@ import { ContactPage } from "@/pages/ContactPage";
 import { CoursePage } from "@/pages/CoursePage";
 import { SessionPage } from "@/pages/SessionPage";
 import { ToolsPage } from "@/pages/ToolsPage";
+import { LessonPage } from "@/pages/LessonPage";
 import { GlossaryPage } from "@/pages/GlossaryPage";
 import { AboutPage } from "@/pages/AboutPage";
 import { LoginPage } from "@/pages/LoginPage";
@@ -29,6 +30,7 @@ export function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/course" element={<CoursePage />} />
         <Route path="/course/:param" element={<SessionPage />} />
+        <Route path="/lesson" element={<LessonPage />} />
         <Route path="/tools" element={<ToolsPage />} />
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/about" element={<AboutPage />} />
