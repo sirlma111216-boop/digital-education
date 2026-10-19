@@ -538,6 +538,27 @@ table.data-table {
   color: var(--color-muted);
   font-style: italic;
 }
+/* 본문(마크다운) 표 — 좁은 화면에서는 표만 가로 스크롤 */
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-body-sm);
+}
+.prose th,
+.prose td {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-hairline);
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  background-color: var(--color-surface-soft);
+  color: var(--color-body-strong);
+  font-weight: 600;
+  white-space: nowrap;
+}
 
 /* --- Divider --- */
 .hr {
