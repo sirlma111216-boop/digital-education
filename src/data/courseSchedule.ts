@@ -22,7 +22,7 @@ export const courseSchedule: CourseScheduleItem[] = [
   { week: 3, sessionId: "03", title: "개인 맞춤형 학습, ITS, TPACK과 핵심 용어", date: null, mode: "추후 안내", status: "예정" },
   { week: 4, sessionId: "04", title: "Google Workspace for Education과 Google Classroom", date: null, mode: "추후 안내", status: "예정" },
   { week: 5, sessionId: "05", title: "구글의 교육용 AI 서비스", date: null, mode: "추후 안내", status: "예정" },
-  { week: 6, sessionId: "06", title: "Microsoft 365 Education과 A3 생태계", date: null, mode: "추후 안내", status: "예정" },
+  { week: 6, sessionId: "06", title: "Microsoft 365 Education과 OneDrive", date: null, mode: "추후 안내", status: "예정" },
   { week: 7, sessionId: "07", title: "OneDrive와 SharePoint 기반 파일 협업", date: null, mode: "추후 안내", status: "예정" },
   { week: 8, sessionId: "08", title: "Teams for Education과 학습 가속기", date: null, mode: "추후 안내", status: "예정" },
   { week: 9, sessionId: "09", title: "OneNote Class Notebook과 Whiteboard", date: null, mode: "추후 안내", status: "예정" },
