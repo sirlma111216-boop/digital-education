@@ -96,6 +96,7 @@ export async function deleteNotice(id: string): Promise<void> {
 function mapMs365(id: string, d: Record<string, unknown>): Ms365Registration {
   return {
     id,
+    classSection: (d.classSection as string) ?? null,
     studentNumber: (d.studentNumber as string) ?? "",
     studentName: (d.studentName as string) ?? "",
     ms365Email: (d.ms365Email as string) ?? "",
@@ -112,7 +113,7 @@ export async function getMyMs365(uid: string): Promise<Ms365Registration | null>
 
 export async function upsertMs365(
   uid: string,
-  input: { studentNumber: string; studentName: string; ms365Email: string; note: string | null },
+  input: { classSection: string; studentNumber: string; studentName: string; ms365Email: string; note: string | null },
 ): Promise<void> {
   await setDoc(
     doc(db, "ms365Registrations", uid),

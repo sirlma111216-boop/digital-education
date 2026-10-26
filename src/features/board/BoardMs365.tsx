@@ -5,9 +5,9 @@ import { useAuth } from "@/hooks/useAuth";
 import type { Ms365Registration } from "@/types/board";
 import { getMyMs365, upsertMs365 } from "./api";
 import { Loading, NotConfigured, NeedLogin } from "./states";
+import { CLASS_SECTIONS, SCHOOL_DOMAIN, isClassSection } from "./ms365";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const SCHOOL_DOMAIN = "@office.khu.ac.kr";
 
 export function BoardMs365() {
   const { user, role } = useAuth();
@@ -47,6 +47,7 @@ function StudentRegistration({ uid }: { uid: string }) {
   const { profile } = useAuth();
   const [reg, setReg] = useState<Ms365Registration | null>(null);
   const [loading, setLoading] = useState(true);
+  const [classSection, setClassSection] = useState("");
   const [studentNumber, setStudentNumber] = useState("");
   const [studentName, setStudentName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,6 +64,8 @@ function StudentRegistration({ uid }: { uid: string }) {
       const r = await getMyMs365(uid);
       if (r) {
         setReg(r);
+        // 예전에 등록해 수업 종류가 없거나 선택지가 바뀌었으면 비워 두어 다시 고르게 한다
+        setClassSection(isClassSection(r.classSection) ? (r.classSection as string) : "");
         setStudentNumber(r.studentNumber);
         setStudentName(r.studentName);
         setEmail(r.ms365Email);
@@ -89,6 +92,7 @@ function StudentRegistration({ uid }: { uid: string }) {
     e.preventDefault();
     setError(null);
     setMsg(null);
+    if (!isClassSection(classSection)) return setError("수업 종류를 선택해 주세요.");
     if (!studentNumber.trim() || !studentName.trim()) return setError("학번과 이름을 입력해 주세요.");
     if (!EMAIL_RE.test(email)) return setError("올바른 이메일 형식이 아닙니다.");
     if (email !== emailConfirm) return setError("확인용 이메일이 일치하지 않습니다.");
@@ -97,6 +101,7 @@ function StudentRegistration({ uid }: { uid: string }) {
     setBusy(true);
     try {
       await upsertMs365(uid, {
+        classSection,
         studentNumber: studentNumber.trim(),
         studentName: studentName.trim(),
         ms365Email: email.trim().toLowerCase(),
@@ -116,6 +121,26 @@ function StudentRegistration({ uid }: { uid: string }) {
   return (
     <form onSubmit={submit} className="card stack ms365-form">
       {reg && <span className="status-chip status-chip--done">등록 완료 — 아래에서 수정할 수 있습니다</span>}
+      {reg && !isClassSection(reg.classSection) && (
+        <p className="alert alert-info" role="status">수업 종류가 아직 선택되지 않았습니다. 아래에서 내 수업을 고른 뒤 ‘등록 정보 수정’을 눌러 주세요.</p>
+      )}
+      <fieldset className="field choice-group">
+        <legend className="label">수업 종류</legend>
+        <div className="choice-group__options">
+          {CLASS_SECTIONS.map((s) => (
+            <label key={s} className="check choice-group__option">
+              <input
+                type="radio"
+                name="class-section"
+                value={s}
+                checked={classSection === s}
+                onChange={() => setClassSection(s)}
+              />
+              <span>{s}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <div className="form-row">
         <div className="field">
           <label className="label" htmlFor="sn">학번 / 수강생 번호</label>

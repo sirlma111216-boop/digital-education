@@ -6,6 +6,15 @@ import { usePopupState } from "./usePopupState";
 
 export const LESSON_PATH = "/lesson";
 
+/** 수업 안내 팝업(대화상자)이 지금 떠 있는지. 다른 안내 팝업이 겹쳐 뜨지 않게 할 때 쓴다. */
+export function useLessonDialogOpen(): boolean {
+  const { status, preview } = useLessonWindow();
+  const lesson = lessonConfig.ok ? lessonConfig.lesson : null;
+  const popupId = lesson ? popupKeyId(lesson.id, preview) : null;
+  const popup = usePopupState(popupId);
+  return Boolean(lesson && popupId && status === "open" && popup !== "ended" && popup !== "dismissed");
+}
+
 /**
  * 사이트 안 수업 안내 팝업.
  * - 입장 가능 시간에만, 사이트를 열어 둔 사람에게만 표시(브라우저 알림·푸시 없음)

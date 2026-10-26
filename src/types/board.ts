@@ -34,6 +34,8 @@ export interface Notice {
 /** ms365Registrations/{uid} — uid 를 문서 ID로 써서 1인 1건 보장 */
 export interface Ms365Registration {
   id: string; // == uid
+  /** 수업 종류(예: "월요일 5:00 수업"). 이전에 등록해 값이 없으면 null. */
+  classSection: string | null;
   studentNumber: string;
   studentName: string;
   ms365Email: string;

@@ -8,6 +8,10 @@ import { listMs365, listProfiles, setBlocked } from "@/features/board/api";
 import { BoardNotices } from "@/features/board/BoardNotices";
 import { BoardQna } from "@/features/board/BoardQna";
 import { Loading, ErrorState } from "@/features/board/states";
+import { CLASS_SECTIONS, isClassSection } from "@/features/board/ms365";
+
+/** 수업 종류를 고르지 않은(예전에 등록한) 학생 표시 */
+const NO_SECTION = "수업 미선택";
 
 /**
  * CSV 칸 하나. 학생이 입력한 값이 =, +, -, @ 등으로 시작하면 엑셀이 수식으로 실행할 수 있으므로
@@ -115,6 +119,7 @@ function Ms365Admin() {
   const [profiles, setProfiles] = useState<Profile[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [section, setSection] = useState<string>("all");
   const [masked, setMasked] = useState(true);
 
   const load = useCallback(async () => {
@@ -137,32 +142,50 @@ function Ms365Admin() {
 
   const registeredIds = new Set(rows.map((r) => r.id));
   const missing = profiles.filter((p) => p.role === "student" && !registeredIds.has(p.id));
-  const filtered = rows.filter(
-    (r) => !query || r.studentName.includes(query) || r.studentNumber.includes(query) || r.ms365Email.includes(query),
+  const sectionOf = (r: Ms365Registration) => (isClassSection(r.classSection) ? (r.classSection as string) : NO_SECTION);
+  // 수업 순서(선택지 순) → 학번 순으로 정렬
+  const order = [...CLASS_SECTIONS, NO_SECTION] as string[];
+  const sorted = [...rows].sort(
+    (a, b) => order.indexOf(sectionOf(a)) - order.indexOf(sectionOf(b)) || a.studentNumber.localeCompare(b.studentNumber),
   );
+  const filtered = sorted.filter(
+    (r) =>
+      (section === "all" || sectionOf(r) === section) &&
+      (!query || r.studentName.includes(query) || r.studentNumber.includes(query) || r.ms365Email.includes(query)),
+  );
+  const counts = order.map((s) => [s, rows.filter((r) => sectionOf(r) === s).length] as const);
 
   return (
     <div className="stack">
       <div className="board-panel__head ms365-admin-head">
         <input className="input" type="search" placeholder="이름·학번·이메일 검색" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="등록 검색" />
+        <select className="select" value={section} onChange={(e) => setSection(e.target.value)} aria-label="수업 종류로 보기">
+          <option value="all">전체 수업</option>
+          {order.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
         <div className="ms365-admin-actions">
           <label className="check">
             <input type="checkbox" checked={masked} onChange={(e) => setMasked(e.target.checked)} /> 이메일 마스킹
           </label>
           <button className="btn btn-secondary btn-sm" disabled={rows.length === 0} onClick={() =>
             downloadCsv("ms365-registrations.csv", [
-              ["학번", "이름", "MS365 이메일", "비고"],
-              ...rows.map((r) => [r.studentNumber, r.studentName, r.ms365Email, r.note ?? ""]),
+              ["수업", "학번", "이름", "MS365 이메일", "비고"],
+              ...sorted.map((r) => [sectionOf(r), r.studentNumber, r.studentName, r.ms365Email, r.note ?? ""]),
             ])}>CSV 내보내기</button>
         </div>
       </div>
-      <p className="muted">등록 {rows.length}명 · 미등록 {missing.length}명</p>
+      <p className="muted">
+        등록 {rows.length}명({counts.map(([s, n]) => `${s} ${n}`).join(" · ")}) · 미등록 {missing.length}명
+      </p>
       <div className="table-wrap">
         <table className="data-table">
-          <thead><tr><th>학번</th><th>이름</th><th>MS365 이메일</th><th>비고</th></tr></thead>
+          <thead><tr><th>수업</th><th>학번</th><th>이름</th><th>MS365 이메일</th><th>비고</th></tr></thead>
           <tbody>
             {filtered.map((r) => (
               <tr key={r.id}>
+                <td>{sectionOf(r)}</td>
                 <td>{r.studentNumber}</td>
                 <td>{r.studentName}</td>
                 <td className="mono-cell">{masked ? maskEmail(r.ms365Email) : r.ms365Email}</td>
