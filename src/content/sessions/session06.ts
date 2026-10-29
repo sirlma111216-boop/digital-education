@@ -55,7 +55,7 @@ export const session06: Session = {
     },
     {
       heading: "교육용 Microsoft 365 — A1·A3·A5",
-      body: "학교는 **교육용 라이선스**에 따라 쓸 수 있는 기능이 달라집니다(아래 A1·A3·A5 비교표 참고).\n\n- **A1**: 요건을 갖춘 학교에 **무료**. 웹·모바일 오피스 앱, Teams, OneDrive, Forms 등 기본 도구\n- **A3**: A1 + **PC용(데스크톱) 오피스 앱**, 확장된 관리·보안·분석 기능\n- **A5**: A3 + 최고 수준의 보안·규정 준수·분석\n\n그림은 **A3**에 포함된 기능을 범주별로 정리한 표입니다.\n\n- **학습 및 지침**: Minecraft 교육, Microsoft 화이트보드, **학습 능력 키우기**(읽기·검색·수학·스피커 과정과 도우미 — 8차시의 학습 가속기), 리플렉트(감정 체크인)\n- **접근성 및 포괄성**: 몰입형 리더, 내레이터, 번역기, 음성 입력, Live 캡션 — 모든 학생이 함께 배우도록 돕는 도구\n- **자동화·AI 및 분석**: Power Apps·Power Automate, 교육 인사이트(학습 데이터 분석), 교직원용 Copilot(데이터 보호 적용)\n- **생산성 및 협업**: 오피스 온라인·데스크톱 앱, Teams for Education, OneNote Class Notebook, Forms, Loop, SharePoint, OneDrive 등\n- **보안·ID·규정 준수**: 다단계 인증(MFA), Microsoft Defender, 데이터 보호·감사 기능\n- **단순한 관리**: School Data Sync(학생 명단 자동 연동), **Intune for Education**(학교 기기 관리 — 3차시의 MDM), Windows Autopilot\n\n빨간 테두리로 표시된 항목(데스크톱 앱, Minecraft 교육, Loop, Copilot, Intune for Education 등)은 특히 눈여겨볼 기능입니다.\n\n> 이 표는 정리된 시점이 조금 지나 일부 이름이 바뀌었습니다: Yammer → **Viva Engage**, Azure Active Directory → **Microsoft Entra ID**, Power Virtual Agents → **Copilot Studio**. 라이선스 구성은 자주 바뀌므로 학교에서 쓸 때는 공식 문서와 학교 관리자에게 확인하세요.",
+      body: "학교는 **교육용 라이선스**에 따라 쓸 수 있는 기능이 달라집니다(아래 A1·A3·A5 비교표 참고).\n\n- **A1**: 요건을 갖춘 학교에 **무료**. 웹·모바일 오피스 앱, Teams, OneDrive, Forms 등 기본 도구\n- **A3**: A1 + **PC용(데스크톱) 오피스 앱**, 확장된 관리·보안·분석 기능\n- **A5**: A3 + 최고 수준의 보안·규정 준수·분석\n\n그림은 **A3**에 포함된 기능을 범주별로 정리한 표입니다.\n\n- **학습 및 지침**: Minecraft 교육, Microsoft 화이트보드, **학습 능력 키우기**(읽기·검색·수학·스피커 과정과 도우미 — 7차시의 학습 가속기), 리플렉트(감정 체크인)\n- **접근성 및 포괄성**: 몰입형 리더, 내레이터, 번역기, 음성 입력, Live 캡션 — 모든 학생이 함께 배우도록 돕는 도구\n- **자동화·AI 및 분석**: Power Apps·Power Automate, 교육 인사이트(학습 데이터 분석), 교직원용 Copilot(데이터 보호 적용)\n- **생산성 및 협업**: 오피스 온라인·데스크톱 앱, Teams for Education, OneNote Class Notebook, Forms, Loop, SharePoint, OneDrive 등\n- **보안·ID·규정 준수**: 다단계 인증(MFA), Microsoft Defender, 데이터 보호·감사 기능\n- **단순한 관리**: School Data Sync(학생 명단 자동 연동), **Intune for Education**(학교 기기 관리 — 3차시의 MDM), Windows Autopilot\n\n빨간 테두리로 표시된 항목(데스크톱 앱, Minecraft 교육, Loop, Copilot, Intune for Education 등)은 특히 눈여겨볼 기능입니다.\n\n> 이 표는 정리된 시점이 조금 지나 일부 이름이 바뀌었습니다: Yammer → **Viva Engage**, Azure Active Directory → **Microsoft Entra ID**, Power Virtual Agents → **Copilot Studio**. 라이선스 구성은 자주 바뀌므로 학교에서 쓸 때는 공식 문서와 학교 관리자에게 확인하세요.",
       images: [
         {
           src: "/assets/sessions/06/ms365-a3-features.webp",
@@ -66,7 +66,7 @@ export const session06: Session = {
     },
     {
       heading: "MS365 플랫폼의 세 축 — OneDrive → Teams → OneNote",
-      body: "수업과 업무에서 MS365를 쓸 때 가장 중요한 세 앱은 다음과 같이 이어집니다.\n\n1. **OneDrive — 클라우드 기반 스토리지**: 파일을 저장하고 백업합니다. OneDrive에 있는 파일을 Word·PowerPoint 등 다른 오피스 도구로 열어 **공유하고 협업**합니다. (이번 차시)\n2. **Microsoft Teams — MS 교육 플랫폼의 LMS**: 흩어진 오피스 도구들을 **연결**합니다. 온라인 교무실, 온라인 학습(수업 팀), 별도의 커뮤니티를 만들 수 있습니다. (8차시)\n3. **OneNote — 다목적 노트 도구**: **업무를 플랫폼화**합니다. 수업 활동과 각종 업무를 디지털로 보관하고 필기합니다. (9차시)\n\n저장(OneDrive)에서 연결(Teams)로, 연결에서 기록·보관(OneNote)으로 확장되는 흐름입니다.",
+      body: "수업과 업무에서 MS365를 쓸 때 가장 중요한 세 앱은 다음과 같이 이어집니다.\n\n1. **OneDrive — 클라우드 기반 스토리지**: 파일을 저장하고 백업합니다. OneDrive에 있는 파일을 Word·PowerPoint 등 다른 오피스 도구로 열어 **공유하고 협업**합니다. (이번 차시)\n2. **Microsoft Teams — MS 교육 플랫폼의 LMS**: 흩어진 오피스 도구들을 **연결**합니다. 온라인 교무실, 온라인 학습(수업 팀), 별도의 커뮤니티를 만들 수 있습니다. (7차시)\n3. **OneNote — 다목적 노트 도구**: **업무를 플랫폼화**합니다. 수업 활동과 각종 업무를 디지털로 보관하고 필기합니다. (8차시)\n\n저장(OneDrive)에서 연결(Teams)로, 연결에서 기록·보관(OneNote)으로 확장되는 흐름입니다.",
       images: [
         {
           src: "/assets/sessions/06/ms365-platform-flow.webp",
@@ -90,7 +90,7 @@ export const session06: Session = {
     /* ================= Part 2. OneDrive 실습 ================= */
     {
       heading: "OneDrive — 학교 계정의 개인 클라우드 저장소",
-      body: "**OneDrive**는 학교 계정에 딸린 **개인 클라우드 저장소**입니다. 웹(office.com → OneDrive)이나 PC 앱으로 들어갈 수 있습니다.\n\n- **어디서나 같은 파일**: 학교 PC, 집 노트북, 휴대폰에서 같은 파일을 엽니다. USB를 들고 다닐 필요가 없습니다.\n- **자동 저장과 버전 기록**: 저장 버튼을 누르지 않아도 저장되고, 예전 버전으로 되돌릴 수 있으며, 지운 파일은 휴지통에서 복구할 수 있습니다.\n- **공유와 공동 편집**: 파일을 보내는 대신 **링크로 공유**하고, 여러 사람이 동시에 편집합니다.\n\n단, OneDrive는 **나 개인의 공간**입니다. 학년·교과·팀이 함께 쓰는 자료는 Teams·SharePoint의 공동 저장소에 두는 것이 원칙입니다(7차시).",
+      body: "**OneDrive**는 학교 계정에 딸린 **개인 클라우드 저장소**입니다. 웹(office.com → OneDrive)이나 PC 앱으로 들어갈 수 있습니다.\n\n- **어디서나 같은 파일**: 학교 PC, 집 노트북, 휴대폰에서 같은 파일을 엽니다. USB를 들고 다닐 필요가 없습니다.\n- **자동 저장과 버전 기록**: 저장 버튼을 누르지 않아도 저장되고, 예전 버전으로 되돌릴 수 있으며, 지운 파일은 휴지통에서 복구할 수 있습니다.\n- **공유와 공동 편집**: 파일을 보내는 대신 **링크로 공유**하고, 여러 사람이 동시에 편집합니다.\n\n단, OneDrive는 **나 개인의 공간**입니다. 학년·교과·팀이 함께 쓰는 자료는 Teams 팀의 공동 저장소(SharePoint)에 두는 것이 원칙입니다(7차시 Teams 참고).",
     },
     {
       heading: "OneDrive 실습 ① 화면 구성",
@@ -264,14 +264,14 @@ export const session06: Session = {
   terms: [
     { term: "Microsoft 365 Education", definition: "하나의 학교 계정과 클라우드로 수업·협업·평가·관리가 연결되는 Microsoft의 학교 플랫폼." },
     { term: "A1/A3/A5", definition: "교육용 Microsoft 365 라이선스 등급. A1은 무료 웹 중심, A3는 PC 앱·관리 확장, A5는 고급 보안·분석." },
-    { term: "Teams for Education", definition: "MS365 교육 플랫폼의 LMS이자 업무를 연결하는 중심 허브(8차시)." },
+    { term: "Teams for Education", definition: "MS365 교육 플랫폼의 LMS이자 업무를 연결하는 중심 허브(7차시)." },
     { term: "OneDrive", definition: "학교 계정에 딸린 개인 클라우드 저장소. 저장·백업·링크 공유·공동 편집의 출발점." },
-    { term: "SharePoint", definition: "팀·조직이 함께 쓰는 공동 저장소이자 사이트. Teams의 파일이 저장되는 곳(7차시)." },
+    { term: "SharePoint", definition: "팀·조직이 함께 쓰는 공동 저장소이자 사이트. Teams의 파일이 저장되는 곳(7차시 Teams와 연결)." },
     { term: "파일 요청", en: "File request", definition: "링크를 받은 사람이 지정 폴더에 파일을 올리기만 할 수 있게 하는 OneDrive 기능." },
     { term: "폴더 백업", definition: "PC의 문서·사진·바탕 화면 폴더를 OneDrive로 옮겨 동기화하는 기능. 학교 계정에서는 꺼 두는 것이 안전." },
     { term: "요청 시 파일", en: "Files On-Demand", definition: "파일을 온라인 전용·이 디바이스에서·항상 사용 가능 상태로 나누어 PC 공간을 아끼는 OneDrive 앱 기능." },
     { term: "공간 확보", definition: "클라우드 파일은 남기고 PC에 내려받은 사본만 지워 온라인 전용으로 바꾸는 기능." },
-    { term: "학습 가속기", en: "Learning Accelerators", definition: "읽기·검색·수학·발표 과정 등 학생 역량 데이터를 제공하는 Teams 기반 학습 도구 묶음(8차시)." },
+    { term: "학습 가속기", en: "Learning Accelerators", definition: "읽기·검색·수학·발표 과정 등 학생 역량 데이터를 제공하는 Teams 기반 학습 도구 묶음(7차시)." },
     { term: "Intune for Education", definition: "학교 기기를 원격으로 설정·관리하는 Microsoft의 MDM 서비스." },
   ],
 

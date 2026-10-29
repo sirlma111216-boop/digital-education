@@ -1,7 +1,7 @@
-# 디지털 교육 · 15차시 웹 포털
+# 디지털 교육 · 14차시 웹 포털
 
 경희대 「디지털 교육」 강의용 **콘텐츠 중심 학습 포털**입니다.
-15차시 학습, 전체 일정, 교수 소개·연락, 그리고 **Firebase 기반**의 수업 게시판(공지 · MS365 계정 등록 · Q&A)과 교수자 화면을 포함합니다.
+14차시 학습, 전체 일정, 교수 소개·연락, 그리고 **Firebase 기반**의 수업 게시판(공지 · MS365 계정 등록 · Q&A)과 교수자 화면을 포함합니다.
 
 > 교육이 먼저이고, 기술은 배움을 더 깊고 공평하게 만드는 수단입니다.
 
@@ -28,7 +28,7 @@ npm run preview              # 빌드 결과 미리보기
 ```
 
 환경 변수(`.env.local`)가 없어도 앱은 실행됩니다. 이 경우 `isFirebaseConfigured === false`가 되어
-게시판·로그인만 "백엔드 미연결" 안내가 뜨고, 15차시 학습·북마크(로컬 저장)는 그대로 동작합니다.
+게시판·로그인만 "백엔드 미연결" 안내가 뜨고, 14차시 학습·북마크(로컬 저장)는 그대로 동작합니다.
 이때 로컬 개발 서버(`npm run dev`)에서는 콘텐츠 편집 미리보기를 위해 15개 차시가 모두 열립니다(배포 빌드는 해당 없음).
 
 ---
@@ -111,7 +111,7 @@ qna/{questionId}/answers/{id}     authorId, authorName, isInstructor, body, crea
 - 팝업이 막히는 환경에서는 자동으로 리다이렉트 로그인으로 대체됩니다(사용자가 로그인 창을 직접 닫은 경우는 제외).
 
 ### 게시판 "MS365 계정 등록" 탭
-로그인이 구글로 바뀌어도 이 탭은 유지됩니다. 6~10차시(MS365) 수업을 위해 학생의 학교 MS365 계정
+로그인이 구글로 바뀌어도 이 탭은 유지됩니다. 6~9차시(MS365) 수업을 위해 학생의 학교 MS365 계정
 (`@office.khu.ac.kr`)을 수집하는 비공개 폼입니다. 입력값이 해당 도메인으로 끝나는지 검사해 **안내만** 하고 막지는 않습니다.
 
 ---
@@ -125,7 +125,7 @@ qna/{questionId}/answers/{id}     authorId, authorName, isInstructor, body, crea
 - 차시 화면은 로그인 정보와 공개 설정을 모두 받은 뒤에만 잠김 여부를 판단합니다(느린 네트워크·새로고침 직후 오판 방지, Firestore 불통 시 8초 후 "01만 공개").
 
 ### 콘텐츠 보호 수준 (정직하게)
-차시 본문은 `React`/Vite 동적 import로 **차시별 청크(session01~15.js)**로 분리되어, 잠긴 차시 본문이 메인 번들에
+차시 본문은 `React`/Vite 동적 import로 **차시별 청크(session01~14.js)**로 분리되어, 잠긴 차시 본문이 메인 번들에
 실리지 않습니다. 다만 청크 URL을 직접 요청하면 열람이 가능합니다(완전 차단 아님). 수업 운영(미리보기 방지)에는
 충분하며, 완전 차단이 필요하면 차시 본문을 Firestore로 옮기는 별도 작업이 필요합니다.
 ※ `src/content/sessions/meta.ts`는 목록·라우팅용 경량 메타데이터입니다. 새 차시를 추가하면 이 파일도 함께 갱신하세요.
@@ -148,7 +148,7 @@ qna/{questionId}/answers/{id}     authorId, authorName, isInstructor, body, crea
 ```
 src/
   data/                 # 설정·일정·교수·도구·용어
-  content/sessions/     # meta.ts(경량 메타) + session01~15.ts(본문) + index.ts(레지스트리·동적 로드)
+  content/sessions/     # meta.ts(경량 메타) + session01~14.ts(본문) + index.ts(레지스트리·동적 로드)
   types/                # content / board 타입
   styles/               # tokens.css · global.css · components.css · pages.css
   components/

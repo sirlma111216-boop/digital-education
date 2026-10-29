@@ -1,4 +1,4 @@
-/* 실습 활동 — 4~15차시에만 표시. 체크리스트는 localStorage 진행 상태에 연동. */
+/* 실습 활동 — 4~14차시에만 표시. 체크리스트는 localStorage 진행 상태에 연동. */
 import type { PracticeLab } from "@/types/content";
 import { useProgress } from "@/hooks/useProgress";
 import { Block } from "./blocks";

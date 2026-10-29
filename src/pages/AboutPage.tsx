@@ -11,8 +11,8 @@ export function AboutPage() {
 
         <div className="prose intro-prose">
           <p className="lead">
-            이 포털은 ‘디지털 교육’ 15차시를 하나의 흐름으로 학습하고, 교수자가 콘텐츠를 쉽게
-            수정·확장할 수 있도록 만든 <strong>콘텐츠 중심 학습 포털</strong>입니다. 동시에 15차시의
+            이 포털은 ‘디지털 교육’ 14차시를 하나의 흐름으로 학습하고, 교수자가 콘텐츠를 쉽게
+            수정·확장할 수 있도록 만든 <strong>콘텐츠 중심 학습 포털</strong>입니다. 동시에 14차시의
             마지막 주제인 <strong>바이브 코딩</strong>으로 만든 교육용 웹앱의 사례이기도 합니다.
           </p>
 
@@ -39,7 +39,7 @@ export function AboutPage() {
         </div>
 
         <div className="intro-cta">
-          <Link to="/course" className="btn btn-primary">15차시 보기</Link>
+          <Link to="/course" className="btn btn-primary">14차시 보기</Link>
           <Link to="/board" className="btn btn-secondary">게시판 가기</Link>
         </div>
       </div>

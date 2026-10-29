@@ -36,21 +36,21 @@ export const categories: CategoryInfo[] = [
   {
     id: "microsoft",
     label: "Microsoft 365 Education과 학교 플랫폼",
-    range: "6~10차시",
+    range: "6~9차시",
     description:
-      "MS365 Education 생태계, OneDrive·SharePoint, Teams, OneNote, 교사 워크플로를 다룹니다.",
+      "MS365 Education 생태계와 OneDrive, Teams, OneNote, 교사 워크플로를 다룹니다.",
   },
   {
     id: "edutech",
     label: "다양한 에듀테크와 몰입·평가",
-    range: "11~12차시",
+    range: "10~11차시",
     description:
       "퀴즈·게임 기반 학습과 메타버스·XR, 과정 중심 평가 도구를 비교하고 설계합니다.",
   },
   {
     id: "genai",
     label: "생성형 AI와 바이브 코딩",
-    range: "13~15차시",
+    range: "12~14차시",
     description:
       "생성형 AI의 원리와 교육적 활용, 바이브 코딩으로 교육용 웹앱을 만드는 캡스톤까지 이어집니다.",
   },

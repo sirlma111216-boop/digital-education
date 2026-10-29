@@ -6,9 +6,9 @@
 export type CategoryId =
   | "theory" // 1~3차시: 디지털 교육의 이론과 기반
   | "google" // 4~5차시: Google Workspace와 수업 설계
-  | "microsoft" // 6~10차시: Microsoft 365 Education과 학교 플랫폼
-  | "edutech" // 11~12차시: 다양한 에듀테크와 몰입·평가
-  | "genai"; // 13~15차시: 생성형 AI와 바이브 코딩
+  | "microsoft" // 6~9차시: Microsoft 365 Education과 학교 플랫폼
+  | "edutech" // 10~11차시: 다양한 에듀테크와 몰입·평가
+  | "genai"; // 12~14차시: 생성형 AI와 바이브 코딩
 
 export type SessionLevel = "입문" | "중급" | "심화";
 
@@ -88,7 +88,7 @@ export interface CaseStudy {
   body: string;
 }
 
-/** A hands-on practice lab (ONLY sessions 4~15). */
+/** A hands-on practice lab (ONLY sessions 4~14). */
 export interface PracticeLab {
   title: string;
   goal: string;
@@ -165,7 +165,7 @@ export interface Session extends SessionMeta {
   theoryBlocks: TheoryBlock[];
   compareTables?: CompareTable[];
   caseStudies?: CaseStudy[];
-  /** Present ONLY for sessions 4~15. Sessions 1~3 must omit this. */
+  /** Present ONLY for sessions 4~14. Sessions 1~3 must omit this. */
   practice?: PracticeLab;
   quiz: QuizItem[];
   reflection: string[];

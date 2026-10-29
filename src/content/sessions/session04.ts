@@ -97,7 +97,7 @@ export const session04: Session = {
     },
     {
       heading: "④ Gemini — 교육 환경을 바꾸는 AI",
-      body: "Google은 Workspace for Education에 다음 AI 도구를 **무료로** 포함하고 있다고 안내합니다(학교 관리자가 사용을 허용해야 함).\n\n- **Gemini for Education**: 수업 계획, 개인에 맞춘 학습 지원, 일상 업무를 돕는 교육용 AI 어시스턴트\n- **Gemini Notebook**: 교사가 올린 자료(PDF·웹사이트·YouTube·Docs 등)**만을 근거로** 요약·수업 계획·학습 가이드·퀴즈를 만들고 출처를 함께 보여 주는 AI\n- **클래스룸의 Gemini**: 클래스룸 안에서 쓰는 교사용 AI 도구 모음\n- **Workspace Studio**: 반복 업무를 맡기는 AI 에이전트를 만드는 공간\n\nGoogle은 교육용 계정의 데이터를 **사람이 검토하거나 AI 모델 학습에 쓰지 않고**, 만 18세 미만 학생에게는 추가 보호 기능을 적용한다고 밝히고 있습니다. 생성형 AI의 원리와 본격적인 활용은 13~14차시에서 다룹니다.",
+      body: "Google은 Workspace for Education에 다음 AI 도구를 **무료로** 포함하고 있다고 안내합니다(학교 관리자가 사용을 허용해야 함).\n\n- **Gemini for Education**: 수업 계획, 개인에 맞춘 학습 지원, 일상 업무를 돕는 교육용 AI 어시스턴트\n- **Gemini Notebook**: 교사가 올린 자료(PDF·웹사이트·YouTube·Docs 등)**만을 근거로** 요약·수업 계획·학습 가이드·퀴즈를 만들고 출처를 함께 보여 주는 AI\n- **클래스룸의 Gemini**: 클래스룸 안에서 쓰는 교사용 AI 도구 모음\n- **Workspace Studio**: 반복 업무를 맡기는 AI 에이전트를 만드는 공간\n\nGoogle은 교육용 계정의 데이터를 **사람이 검토하거나 AI 모델 학습에 쓰지 않고**, 만 18세 미만 학생에게는 추가 보호 기능을 적용한다고 밝히고 있습니다. 생성형 AI의 원리와 본격적인 활용은 12~13차시에서 다룹니다.",
       imageLayout: "side",
       images: [
         {
@@ -273,7 +273,7 @@ export const session04: Session = {
       question: "Google for Education의 네 축에 해당하지 않는 것은?",
       choices: ["Chromebook", "Classroom", "Workspace 앱", "MS Teams"],
       answerIndex: 3,
-      explanation: "네 축은 Chromebook·Classroom·Workspace 앱(Docs·Forms·Gmail 등)·Gemini입니다. Teams는 Microsoft 365의 도구입니다(6~10차시).",
+      explanation: "네 축은 Chromebook·Classroom·Workspace 앱(Docs·Forms·Gmail 등)·Gemini입니다. Teams는 Microsoft 365의 도구입니다(6~9차시).",
     },
     {
       type: "mcq",

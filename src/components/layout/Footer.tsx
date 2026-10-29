@@ -17,7 +17,7 @@ export function Footer() {
         <nav className="footer__col" aria-label="학습">
           <h2 className="footer__heading">학습</h2>
           <Link to="/introduction">과정 소개</Link>
-          <Link to="/course">15차시</Link>
+          <Link to="/course">14차시</Link>
           <Link to="/schedule">전체 일정</Link>
           <Link to="/tools">도구 사전</Link>
           <Link to="/glossary">용어 사전</Link>

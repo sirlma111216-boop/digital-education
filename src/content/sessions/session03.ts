@@ -176,7 +176,7 @@ export const session03: Session = {
     },
     {
       heading: "① 플랫폼 (Platform)",
-      body: "에듀테크에서 **플랫폼**은 교사·학생·학부모가 **하나의 계정으로 모여 수업 도구, 콘텐츠, 데이터를 함께 쓰는 기반 환경**입니다. 기차역 승강장(platform)에 여러 열차가 들어오고 사람들이 오가듯, 플랫폼 위에 여러 서비스가 올라타고 사용자들이 그 안에서 만납니다. 아래의 LMS·CMS·SIS 같은 기능들은 대부분 플랫폼 위에서 작동합니다.\n\n**대표 서비스**\n- [Google Workspace for Education](https://edu.google.com/workspace-for-education/) — Classroom·Drive·Docs·Forms를 하나의 학교 계정으로 연결 (4~5차시)\n- [Microsoft 365 Education](https://www.microsoft.com/en-us/education) — Teams·OneDrive·OneNote 등 (6~10차시)\n- [웨일 스페이스](https://whale.naver.com/space/) — 네이버 웨일 브라우저 기반의 국내 교육 플랫폼",
+      body: "에듀테크에서 **플랫폼**은 교사·학생·학부모가 **하나의 계정으로 모여 수업 도구, 콘텐츠, 데이터를 함께 쓰는 기반 환경**입니다. 기차역 승강장(platform)에 여러 열차가 들어오고 사람들이 오가듯, 플랫폼 위에 여러 서비스가 올라타고 사용자들이 그 안에서 만납니다. 아래의 LMS·CMS·SIS 같은 기능들은 대부분 플랫폼 위에서 작동합니다.\n\n**대표 서비스**\n- [Google Workspace for Education](https://edu.google.com/workspace-for-education/) — Classroom·Drive·Docs·Forms를 하나의 학교 계정으로 연결 (4~5차시)\n- [Microsoft 365 Education](https://www.microsoft.com/en-us/education) — Teams·OneDrive·OneNote 등 (6~9차시)\n- [웨일 스페이스](https://whale.naver.com/space/) — 네이버 웨일 브라우저 기반의 국내 교육 플랫폼",
     },
     {
       heading: "② LMS — 학습관리시스템 (Learning Management System)",
@@ -192,7 +192,7 @@ export const session03: Session = {
     },
     {
       heading: "⑤ 빌더 (Builder)",
-      body: "**빌더**는 코딩을 몰라도(노코드·로우코드) **교사가 직접 학습 자료, 웹사이트, 앱을 만들 수 있게 해 주는 저작 도구**입니다. 이미 만들어진 콘텐츠를 쓰는 데 그치지 않고, **우리 반 학생에게 맞는 자료를 교사가 직접 설계**할 수 있게 해 준다는 점에서 의미가 큽니다.\n\n**대표 서비스**\n- 디자인·발표 자료: [Canva for Education](https://www.canva.com/education/), [미리캔버스](https://www.miricanvas.com/)\n- 인터랙티브 학습 자료: [Genially](https://genially.com/), [H5P](https://h5p.org/)(퀴즈·드래그앤드롭 등)\n- 웹사이트: [Google Sites](https://sites.google.com/)\n- 앱: [Glide](https://www.glideapps.com/) 같은 노코드 앱 빌더, 그리고 말로 설명해 앱을 만드는 AI 바이브 코딩 도구(15차시)",
+      body: "**빌더**는 코딩을 몰라도(노코드·로우코드) **교사가 직접 학습 자료, 웹사이트, 앱을 만들 수 있게 해 주는 저작 도구**입니다. 이미 만들어진 콘텐츠를 쓰는 데 그치지 않고, **우리 반 학생에게 맞는 자료를 교사가 직접 설계**할 수 있게 해 준다는 점에서 의미가 큽니다.\n\n**대표 서비스**\n- 디자인·발표 자료: [Canva for Education](https://www.canva.com/education/), [미리캔버스](https://www.miricanvas.com/)\n- 인터랙티브 학습 자료: [Genially](https://genially.com/), [H5P](https://h5p.org/)(퀴즈·드래그앤드롭 등)\n- 웹사이트: [Google Sites](https://sites.google.com/)\n- 앱: [Glide](https://www.glideapps.com/) 같은 노코드 앱 빌더, 그리고 말로 설명해 앱을 만드는 AI 바이브 코딩 도구(14차시)",
     },
     {
       heading: "⑥ 올인원(All-in-one) 교육 플랫폼",

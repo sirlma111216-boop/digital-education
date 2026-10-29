@@ -5,7 +5,7 @@ import { courseConfig } from "@/data/courseConfig";
 import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
-  { to: "/course", label: "15차시" },
+  { to: "/course", label: "14차시" },
   { to: "/schedule", label: "전체 일정" },
   { to: "/tools", label: "도구 사전" },
   { to: "/glossary", label: "용어 사전" },

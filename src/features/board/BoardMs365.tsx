@@ -20,7 +20,7 @@ export function BoardMs365() {
         <div>
           <h2 className="display-sm">MS365 계정 등록</h2>
           <p className="muted">
-            6~10차시 수업에서 사용할 <strong>학교 Microsoft 365 계정</strong>을 등록하는 비공개 폼입니다.
+            6~9차시 수업에서 사용할 <strong>학교 Microsoft 365 계정</strong>을 등록하는 비공개 폼입니다.
             입력한 정보는 다른 학생에게 공개되지 않습니다.
           </p>
         </div>

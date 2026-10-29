@@ -13,7 +13,7 @@ export function SchedulePage() {
       <div className="container">
         <div className="page-head">
           <p className="eyebrow">Schedule · 전체 일정</p>
-          <h1 className="display-lg">15주 전체 일정</h1>
+          <h1 className="display-lg">14차시 전체 일정</h1>
           <p className="lead">
             정확한 수업 날짜는 아직 확정되지 않았습니다. 날짜가 없는 주차는{" "}
             <strong>일정 추후 안내</strong>로 표시되며, 확정되면 일정이 갱신됩니다.

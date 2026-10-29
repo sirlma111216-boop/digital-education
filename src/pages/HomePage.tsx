@@ -25,14 +25,14 @@ export function HomePage() {
             <p className="hero__key">{courseConfig.subtitle}</p>
             <p className="hero__lead lead">
               디지털 교육은 새로운 도구를 빠르게 익히는 수업이 아닙니다. 학습자의 차이를 이해하고,
-              수업·평가·협업을 더 나은 방식으로 다시 설계하는 과정입니다. 15주 동안 교육 이론에서
+              수업·평가·협업을 더 나은 방식으로 다시 설계하는 과정입니다. 한 학기 동안 교육 이론에서
               Google과 Microsoft의 학교 플랫폼, 다양한 에듀테크, 생성형 AI와 바이브 코딩까지 이어지는
               여정을 통해 ‘도구를 사용하는 사람’을 넘어 ‘교육 문제를 기술로 해결하는 수업 설계자’로
               성장합니다.
             </p>
             <div className="hero__actions">
               <Link to="/course" className="btn btn-primary">
-                15차시 살펴보기
+                14차시 살펴보기
               </Link>
               <Link to="/schedule" className="btn btn-secondary">
                 전체 일정 보기
@@ -99,11 +99,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* --- 15차시 미리보기 --- */}
+      {/* --- 14차시 미리보기 --- */}
       <section className="section section--tight">
         <div className="container">
           <div className="section-head section-head--row">
-            <h2 className="display-md">15차시 미리보기</h2>
+            <h2 className="display-md">14차시 미리보기</h2>
             <Link to="/course" className="text-link">전체 보기 →</Link>
           </div>
           <div className="grid grid-3">

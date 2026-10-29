@@ -156,7 +156,7 @@ function ReminderDialog({
               )}
             </p>
             <p className="lesson-announce__text">
-              6~10차시 Microsoft 365 수업에서는 경희대학교 MS365 계정(<strong>{SCHOOL_DOMAIN}</strong>)을 사용합니다.{" "}
+              6~9차시 Microsoft 365 수업에서는 경희대학교 MS365 계정(<strong>{SCHOOL_DOMAIN}</strong>)을 사용합니다.{" "}
               <strong>{deadlineLabel}까지</strong> 게시판의 ‘MS365 계정 등록’에서 <strong>{SCHOOL_DOMAIN}</strong>로 끝나는
               계정과 수업 종류를 {kind === "missing" ? "등록" : "수정"}해 주세요.
             </p>

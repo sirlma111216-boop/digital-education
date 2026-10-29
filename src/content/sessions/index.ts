@@ -24,10 +24,13 @@ export function getSessionBySlug(slug: string): SessionMeta | undefined {
   return bySlug.get(slug);
 }
 
-/** Route param is `NN-slug` (e.g. "01-digital-education-foundations"). */
+/**
+ * Route param is `NN-slug` (e.g. "01-digital-education-foundations").
+ * 이름(slug)을 먼저 찾는다 — 차시 번호가 바뀌어도(예: 7차시 삭제로 08→07) 예전 주소가
+ * 엉뚱한 차시가 아니라 원래 내용으로 열리도록. 이름이 없으면 번호로 찾는다.
+ */
 export function getSessionMetaByRouteParam(param: string): SessionMeta | undefined {
-  const id = param.slice(0, 2);
-  return byId.get(id) ?? bySlug.get(param.replace(/^\d+-/, ""));
+  return bySlug.get(param.replace(/^\d+-/, "")) ?? byId.get(param.slice(0, 2));
 }
 export function sessionRouteParam(s: SessionMeta): string {
   return `${s.id}-${s.slug}`;
@@ -82,7 +85,7 @@ if (import.meta.env.DEV) {
       const week = Number(m.id);
       const isTheory = week >= 1 && week <= 3;
       if (isTheory && full.practice) console.warn(`[content] 1~3차시에는 실습이 없어야 합니다: ${m.id}`);
-      if (!isTheory && !full.practice) console.warn(`[content] 4~15차시에는 실습이 있어야 합니다: ${m.id}`);
+      if (!isTheory && !full.practice) console.warn(`[content] 4~14차시에는 실습이 있어야 합니다: ${m.id}`);
     }),
   );
 }

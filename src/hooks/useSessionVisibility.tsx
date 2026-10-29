@@ -15,8 +15,10 @@ import {
 } from "react";
 import { doc, onSnapshot, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db, isFirebaseConfigured, toFriendlyError } from "@/lib/firebase";
+import { sessionMetas } from "@/content/sessions/meta";
 
-const SESSION_IDS = Array.from({ length: 15 }, (_, i) => String(i + 1).padStart(2, "0"));
+/** 차시 ID 목록 — 차시 메타데이터(meta.ts)에서 자동으로 가져온다(차시를 더하거나 빼도 따로 고칠 필요 없음). */
+const SESSION_IDS = sessionMetas.map((s) => s.id);
 
 function firstOnly(): Record<string, boolean> {
   return Object.fromEntries(SESSION_IDS.map((id) => [id, id === "01"]));

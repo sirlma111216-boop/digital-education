@@ -9,7 +9,7 @@ export function NotFoundPage() {
         <p className="lead">주소가 바뀌었거나 없는 페이지입니다.</p>
         <div className="intro-cta">
           <Link to="/" className="btn btn-primary">홈으로</Link>
-          <Link to="/course" className="btn btn-secondary">15차시 보기</Link>
+          <Link to="/course" className="btn btn-secondary">14차시 보기</Link>
         </div>
       </div>
     </div>

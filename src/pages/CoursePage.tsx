@@ -53,10 +53,10 @@ export function CoursePage() {
       <div className="container">
         <div className="page-head">
           <p className="eyebrow">Course · 전체 과정</p>
-          <h1 className="display-lg">15차시 전체 과정</h1>
+          <h1 className="display-lg">14차시 전체 과정</h1>
           <p className="lead">
-            디지털 교육의 이론에서 생성형 AI·바이브 코딩까지, 15차시를 순서대로 학습합니다.
-            1~3차시는 이론 중심이며, 4~15차시에는 실습이 포함됩니다.
+            디지털 교육의 이론에서 생성형 AI·바이브 코딩까지, 14차시를 순서대로 학습합니다.
+            1~3차시는 이론 중심이며, 4~14차시에는 실습이 포함됩니다.
           </p>
         </div>
 

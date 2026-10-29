@@ -2,124 +2,127 @@ import type { Session } from "@/types/content";
 
 export const session10: Session = {
   id: "10",
-  slug: "microsoft-365-other-tools-workflow",
-  title: "Microsoft 365 기타 도구와 교사 워크플로",
-  category: "microsoft",
-  summary: "Forms·Outlook·To Do·Copilot·Loop·Sway·Clipchamp 등을 조합해 업무·수업 흐름을 줄인다.",
+  slug: "quiz-game-based-learning",
+  title: "퀴즈·게임 기반 학습과 콘텐츠 저작 도구",
+  category: "edutech",
+  summary: "게임성이 학습 목표를 강화하도록 설계하고, 대표 퀴즈 도구를 기준으로 비교한다.",
   duration: 90,
   level: "중급",
-  keywords: ["Forms", "Copilot", "Loop", "Sway", "Clipchamp", "도구 선택 매트릭스"],
+  keywords: ["Kahoot", "Blooket", "Quizlet", "게임 기반 학습", "형성평가"],
   theoryRatio: 45,
   practiceRatio: 55,
   published: true,
   lastUpdated: "2026-07-10",
-  sourceFiles: ["디지털 교육 교안 10강"],
+  sourceFiles: ["디지털 교육 교안 11강"],
 
   overview:
-    "모든 도구를 다 쓰는 것이 아니라, 업무와 수업의 흐름을 줄여 주는 조합을 선택하는 것이 핵심입니다. 이 차시에서는 MS365의 다양한 도구를 훑고, ‘목적–학습자–시간–데이터–난이도–정책’ 기준으로 조합을 고르는 법을 익힙니다.",
+    "게임성은 학습 목표를 강화할 때 의미가 있으며, 속도 경쟁이나 보상 구조가 학습을 가리지 않도록 설계해야 합니다. 이 차시에서는 대표 퀴즈·게임 도구를 공통 기준으로 비교하고, 같은 목표를 세 가지 방식으로 바꾸어 설계합니다.",
 
   objectives: [
-    "업무·수업에 맞는 MS365 도구 조합을 선택할 수 있다.",
-    "Copilot·Agent 활용 시 데이터 보호·라이선스 확인의 필요성을 설명할 수 있다.",
-    "접근성 기능을 수업에 반영할 수 있다.",
+    "퀴즈·게임 도구를 공통 기준으로 비교·선택할 수 있다.",
+    "게임 기반 학습의 한계(속도 경쟁 등)를 설명할 수 있다.",
+    "같은 학습 목표를 실시간·반복·협력의 세 방식으로 설계할 수 있다.",
   ],
 
   keyQuestion:
-    "‘다 쓰기’가 아니라 ‘잘 고르기’라면, 나는 어떤 기준으로 도구를 선택할까?",
+    "게임이 ‘재미’를 넘어 ‘학습 목표’를 강화하려면 무엇을 설계해야 할까?",
 
   conceptMap: {
-    title: "도구 선택 매트릭스",
-    caption: "목적·학습자·시간·데이터·난이도·정책을 축으로 최소 조합을 고른다.",
+    title: "목적별 도구 선택",
+    caption: "진단·형성·복습·협력 등 목적에 따라 도구와 방식이 달라진다.",
     nodes: [
-      { label: "목적", description: "무엇을 이루려는가" },
-      { label: "학습자·시간", description: "부담과 여건" },
-      { label: "데이터", description: "무엇이 남는가" },
-      { label: "정책·난이도", description: "기관 정책·진입 장벽" },
+      { label: "진단·형성", description: "이해 확인" },
+      { label: "복습·반복", description: "기억 강화" },
+      { label: "협력 게임", description: "상호작용" },
+      { label: "서술·깊은 사고", description: "게임형 한계 지점" },
     ],
   },
 
   theoryBlocks: [
     {
-      heading: "생산성·소통 도구",
-      body: "- **Forms**: 설문·퀴즈·분기·자동 채점·Excel 내보내기·Teams 연동\n- **Outlook**: 메일·일정·회의·카테고리\n- **To Do**: 개인 할 일과 업무 연결",
+      heading: "대표 도구 개관",
+      body: "Kahoot!, 퀴즈앤, 클래스카드, Blooket, ZEP Quiz, Quizlet 등은 각각 강점이 다릅니다. ‘무엇이 최고냐’가 아니라 ‘어떤 수업 장면에 맞느냐’로 접근합니다.",
     },
     {
-      heading: "AI·협업 도구",
-      body: "- **Copilot·Agent**: 문서 초안·요약·데이터 분석 보조, 맞춤형 에이전트 개념. **기관 데이터 보호와 라이선스 확인**이 전제\n- **Loop**: 실시간 공동 편집 컴포넌트, 프로젝트 역할·할 일·상태 관리",
+      heading: "비교 기준",
+      body: "다음 기준으로 비교합니다.\n\n- 실시간 vs 자기주도\n- 문항 유형\n- 게임성\n- 통계·오답 분석\n- 반복 학습\n- 한글 사용성\n- 기기·네트워크\n- 무료/유료 범위\n- 학생 부담\n- 적합한 수업 장면",
     },
     {
-      heading: "표현·영상 도구",
-      body: "- **Sway**: 카드뉴스·브로슈어·인터랙티브 보고서\n- **Clipchamp**: 영상 편집·자동 자막·수업용 짧은 영상\n- **PowerPoint 발표 연습**: 스피커 코치 기능\n- **Minecraft Education**: 몰입형 프로젝트·교과 융합·협업/평가",
+      heading: "게임 기반 학습의 한계",
+      body: "- 속도 경쟁이 깊은 사고를 가릴 수 있음\n- 서술형·과정 평가에는 부적합\n- 게임 규칙 설명에 시간 소요\n- 학습 목표보다 게임 자체에 몰입\n\n이 한계를 알고 **에듀테크 선택 체크리스트**로 점검해야 합니다.",
     },
     {
-      heading: "접근성",
-      body: "몰입형 리더, 자막, 음성 입력 등 접근성 기능은 UDL의 ‘표상·표현’을 실제로 구현하는 수단입니다. 도구를 고를 때 접근성을 함께 고려하세요.",
+      heading: "콘텐츠 저작 도구",
+      body: "Canva·Notion·Goodnotes 등은 자료 제작·정리·필기를 돕습니다. 필요 시 Loop 등 다른 차시 도구와 연결할 수 있습니다.",
     },
   ],
 
   compareTables: [
     {
-      caption: "표현 도구 비교",
-      headers: ["도구", "결과물", "적합 상황"],
+      caption: "퀴즈 도구 비교(예시 · 세부 기능은 변동)",
+      headers: ["도구", "방식", "강점", "유의점"],
       rows: [
-        ["Sway", "인터랙티브 보고서", "카드뉴스·안내문"],
-        ["Clipchamp", "짧은 영상", "수업 영상·자막"],
-        ["PowerPoint", "발표 자료", "발표+연습 코치"],
+        ["Kahoot!", "실시간", "높은 참여", "속도 경쟁"],
+        ["Blooket", "실시간·게임", "게임성 다양", "게임에 몰입 과다"],
+        ["Quizlet", "자기주도", "반복 학습", "단순 암기 편향"],
+        ["클래스카드", "자기주도", "한글 어휘 학습", "선택형 위주"],
       ],
     },
   ],
 
   practice: {
-    title: "3개 도구로 워크플로 설계",
-    goal: "수업 준비–배포–학생 활동–피드백–공유까지 3개 MS 도구로 워크플로를 설계한다.",
+    title: "같은 목표, 세 가지 방식으로",
+    goal: "하나의 학습 목표를 실시간 퀴즈·반복 학습·협력 게임의 세 방식으로 바꾸어 설계한다.",
     steps: [
-      "하나의 수업 목적을 정한다.",
-      "준비·배포·활동·피드백·공유 단계에 각각 도구를 배치한다(총 3개 이내).",
-      "Copilot/Agent를 쓴다면 데이터 보호·라이선스 확인 항목을 적는다.",
-      "접근성 기능을 최소 1개 포함한다.",
+      "학습 목표 1개를 정한다.",
+      "실시간 퀴즈 버전을 설계한다(도구·문항·운영).",
+      "반복 학습 버전을 설계한다.",
+      "협력 게임 버전을 설계하고, 각 방식의 장단점을 비교한다.",
     ],
     checklist: [
-      "도구가 3개 이내로 최소화되었는가",
-      "각 단계가 하나의 도구와 연결되는가",
-      "접근성·데이터 보호를 반영했는가",
+      "세 방식이 같은 목표를 향하는가",
+      "속도 경쟁의 한계를 보완했는가",
+      "학생 부담을 고려했는가",
     ],
-    deliverable: "5단계 워크플로 표(도구·이유 포함).",
+    deliverable: "3방식 설계 비교표 + 선택 이유.",
   },
 
   quiz: [
     {
       type: "mcq",
-      question: "Copilot/Agent를 학교에서 사용할 때 우선 확인해야 하는 것은?",
-      choices: ["색상 테마", "기관 데이터 보호와 라이선스", "글꼴", "아이콘"],
-      answerIndex: 1,
-      explanation: "기관 데이터 보호·라이선스 확인이 전제입니다.",
+      question: "게임 기반 학습의 대표적 한계로 보기 어려운 것은?",
+      choices: ["속도 경쟁이 사고를 가릴 수 있음", "서술형 평가에 부적합", "규칙 설명 시간 소요", "반복 학습이 전혀 불가능"],
+      answerIndex: 3,
+      explanation: "Quizlet 등은 반복 학습에 강합니다. 반복 자체가 불가능한 것은 아닙니다.",
     },
     {
       type: "ox",
-      question: "좋은 워크플로는 가능한 한 많은 도구를 쓰는 것이다.",
+      question: "도구 선택은 ‘가장 유명한 것’을 고르는 것이 원칙이다.",
       answer: false,
-      explanation: "흐름을 줄여 주는 최소 조합을 고르는 것이 좋습니다.",
+      explanation: "수업 목적·장면에 맞는 도구를 고르는 것이 원칙입니다.",
     },
     {
       type: "self",
-      question: "내 반복 업무 하나를 골라 어떤 도구로 자동화·간소화할지 적어 보세요.",
+      question: "내 수업에서 게임형이 오히려 방해가 됐던 순간이 있다면 무엇이었나요?",
     },
   ],
 
   reflection: [
-    "지금 쓰는 도구 중 겹치거나 불필요한 것은 없나요?",
-    "접근성 기능을 기본값으로 넣는다면 무엇부터 시작하겠어요?",
+    "‘재미’와 ‘학습 목표’ 사이에서 나는 어디에 무게를 두고 있나요?",
+    "에듀테크 선택 체크리스트에 내가 꼭 넣고 싶은 항목은?",
   ],
 
   terms: [
-    { term: "Copilot", definition: "문서·데이터 작업을 돕는 MS의 AI 어시스턴트." },
-    { term: "Loop", definition: "실시간 공동 편집 컴포넌트·워크스페이스." },
-    { term: "Sway", definition: "인터랙티브 보고서·카드뉴스 저작 도구." },
-    { term: "Clipchamp", definition: "자동 자막을 지원하는 영상 편집 도구." },
-    { term: "몰입형 리더", en: "Immersive Reader", definition: "읽기·이해를 돕는 접근성 기능." },
+    { term: "게임 기반 학습", en: "Game-Based Learning", definition: "게임 요소로 학습 동기·참여를 높이는 방식." },
+    { term: "형성평가", definition: "학습 중 이해를 확인해 수업을 조정하는 평가." },
+    { term: "오답 분석", definition: "틀린 문항을 분석해 학습을 보완하는 활동." },
+    { term: "반복 학습", en: "Spaced Practice", definition: "간격을 두고 반복해 기억을 강화하는 학습." },
+    { term: "에듀테크 선택 체크리스트", definition: "도구 도입 전 안전·근거·부담 등을 점검하는 목록." },
   ],
 
   sources: [
-    { label: "Microsoft 365 (공식)", url: "https://www.microsoft.com/microsoft-365", lastVerified: "2026-07-10" },
-    { label: "Minecraft Education (공식)", url: "https://education.minecraft.net/", lastVerified: "2026-07-10" },  ],
+    { label: "Kahoot! (공식)", url: "https://kahoot.com/", lastVerified: "2026-07-10" },
+    { label: "Quizlet (공식)", url: "https://quizlet.com/", lastVerified: "2026-07-10" },  ],
+
+  cautions: ["도구의 무료/유료 범위와 기능은 변동될 수 있으니 공식 문서를 확인하세요."],
 };
