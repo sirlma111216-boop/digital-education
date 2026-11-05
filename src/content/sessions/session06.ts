@@ -66,7 +66,7 @@ export const session06: Session = {
     },
     {
       heading: "MS365 플랫폼의 세 축 — OneDrive → Teams → OneNote",
-      body: "수업과 업무에서 MS365를 쓸 때 가장 중요한 세 앱은 다음과 같이 이어집니다.\n\n1. **OneDrive — 클라우드 기반 스토리지**: 파일을 저장하고 백업합니다. OneDrive에 있는 파일을 Word·PowerPoint 등 다른 오피스 도구로 열어 **공유하고 협업**합니다. (이번 차시)\n2. **Microsoft Teams — MS 교육 플랫폼의 LMS**: 흩어진 오피스 도구들을 **연결**합니다. 온라인 교무실, 온라인 학습(수업 팀), 별도의 커뮤니티를 만들 수 있습니다. (7차시)\n3. **OneNote — 다목적 노트 도구**: **업무를 플랫폼화**합니다. 수업 활동과 각종 업무를 디지털로 보관하고 필기합니다. (8차시)\n\n저장(OneDrive)에서 연결(Teams)로, 연결에서 기록·보관(OneNote)으로 확장되는 흐름입니다.",
+      body: "수업과 업무에서 MS365를 쓸 때 가장 중요한 세 앱은 다음과 같이 이어집니다.\n\n1. **OneDrive — 클라우드 기반 스토리지**: 파일을 저장하고 백업합니다. OneDrive에 있는 파일을 Word·PowerPoint 등 다른 오피스 도구로 열어 **공유하고 협업**합니다. (이번 차시)\n2. **Microsoft Teams — MS 교육 플랫폼의 LMS**: 흩어진 오피스 도구들을 **연결**합니다. 온라인 교무실, 온라인 학습(수업 팀), 별도의 커뮤니티를 만들 수 있습니다. (7차시)\n3. **OneNote — 다목적 노트 도구**: **업무를 플랫폼화**합니다. 수업 활동과 각종 업무를 디지털로 보관하고 필기합니다. (8차시에서 활용 사례를 봅니다)\n\n저장(OneDrive)에서 연결(Teams)로, 연결에서 기록·보관(OneNote)으로 확장되는 흐름입니다.",
       images: [
         {
           src: "/assets/sessions/06/ms365-platform-flow.webp",

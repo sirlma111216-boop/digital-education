@@ -38,7 +38,7 @@ export const categories: CategoryInfo[] = [
     label: "Microsoft 365 Education과 학교 플랫폼",
     range: "6~9차시",
     description:
-      "MS365 Education 생태계와 OneDrive, Teams, OneNote, 교사 워크플로를 다룹니다.",
+      "MS365 Education 생태계와 OneDrive, Teams, 학교 안 활용 사례, 교사 워크플로를 다룹니다.",
   },
   {
     id: "edutech",
