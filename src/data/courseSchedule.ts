@@ -25,7 +25,7 @@ export const courseSchedule: CourseScheduleItem[] = [
   { week: 6, sessionId: "06", title: "Microsoft 365 Education과 OneDrive", date: null, mode: "추후 안내", status: "예정" },
   { week: 7, sessionId: "07", title: "Teams for Education, Forms와 학습 가속기", date: null, mode: "추후 안내", status: "예정" },
   { week: 8, sessionId: "08", title: "학교 안 팀즈의 활용 사례", date: null, mode: "추후 안내", status: "예정" },
-  { week: 9, sessionId: "09", title: "Microsoft 365 기타 도구와 교사 워크플로", date: null, mode: "추후 안내", status: "예정" },
+  { week: 9, sessionId: "09", title: "원노트 소개와 교육적 활용 예시", date: null, mode: "추후 안내", status: "예정" },
   { week: 10, sessionId: "10", title: "퀴즈·게임 기반 학습과 콘텐츠 저작 도구", date: null, mode: "추후 안내", status: "예정" },
   { week: 11, sessionId: "11", title: "메타버스·XR와 과정 중심 평가", date: null, mode: "추후 안내", status: "예정" },
   { week: 12, sessionId: "12", title: "생성형 AI의 이해: 머신러닝에서 LLM과 Agent까지", date: null, mode: "추후 안내", status: "예정" },
