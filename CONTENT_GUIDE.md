@@ -10,20 +10,20 @@
 
 ## 1. 새 차시 추가
 
-1. `src/content/sessions/` 폴더에서 기존 파일(예: `session04.ts`)을 복사해 `session16.ts` 로 만듭니다.
-   (안의 `export const session04` 도 `session16` 으로 바꿉니다.)
+1. `src/content/sessions/` 폴더에서 기존 파일(예: `session04.ts`)을 복사해 `session13.ts` 로 만듭니다.
+   (안의 `export const session04` 도 `session13` 으로 바꿉니다.)
 2. 내용을 새 차시에 맞게 수정합니다. 특히 맨 위 항목:
-   - `id`: `"16"` 처럼 두 자리 문자열
+   - `id`: `"13"` 처럼 두 자리 문자열
    - `slug`: 영어 소문자·하이픈 (예: `"my-new-topic"`) — 주소에 쓰입니다
    - `title`, `summary`, `keywords`, `duration`(분), `level`(입문/중급/심화)
    - `theoryRatio` / `practiceRatio`: 합이 100
 3. **`src/content/sessions/meta.ts`** 의 `sessionMetas` 배열에 같은 메타데이터(id·slug·title·category·summary·duration·level·keywords·theoryRatio·practiceRatio·published·lastUpdated)를 한 줄 추가합니다.
 
 ```ts
-{ id: "16", slug: "my-new-topic", title: "...", category: "genai", summary: "...", duration: 90, level: "심화", keywords: ["..."], theoryRatio: 40, practiceRatio: 60, published: true, lastUpdated: "2026-09-09" },
+{ id: "13", slug: "my-new-topic", title: "...", category: "genai", summary: "...", duration: 90, level: "심화", keywords: ["..."], theoryRatio: 40, practiceRatio: 60, published: true, lastUpdated: "2026-09-09" },
 ```
 
-이러면 홈·과정 목록·검색·이전/다음 이동에 자동으로 나타납니다. 본문(session16.ts)은 필요할 때
+이러면 홈·과정 목록·검색·이전/다음 이동에 자동으로 나타납니다. 본문(session13.ts)은 필요할 때
 동적으로 로드되고, `meta.ts` 는 목록·라우팅에 쓰입니다. **두 곳의 id·slug·title 은 반드시 일치**해야 하며,
 개발 모드에서 불일치 시 콘솔 경고가 표시됩니다.
 
@@ -60,7 +60,7 @@
 { type: "self", question: "..." }
 ```
 
-## 4. 실습 활동 추가/수정 (4~14차시)
+## 4. 실습 활동 추가/수정 (4~12차시)
 
 ```ts
 practice: {

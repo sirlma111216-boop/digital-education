@@ -32,7 +32,7 @@ export function HomePage() {
             </p>
             <div className="hero__actions">
               <Link to="/course" className="btn btn-primary">
-                14차시 살펴보기
+                12차시 살펴보기
               </Link>
               <Link to="/schedule" className="btn btn-secondary">
                 전체 일정 보기
@@ -64,8 +64,8 @@ export function HomePage() {
             {[
               { t: "디지털 교육의 이론과 수업 설계", d: "정렬(Alignment), ISTE, UDL로 교육 먼저의 관점을 세웁니다." },
               { t: "Google Workspace와 Microsoft 365", d: "학교 플랫폼으로 수업의 흐름을 설계합니다." },
-              { t: "퀴즈·메타버스·과정 중심 평가", d: "몰입과 평가를 학습 목표와 연결합니다." },
-              { t: "생성형 AI와 바이브 코딩", d: "AI를 협력 도구로 쓰고, 교육용 웹앱을 만듭니다." },
+              { t: "MS365 앱과 수업용 퀴즈 도구", d: "영상·안내 자료를 만들고, 퀴즈로 배움을 확인합니다." },
+              { t: "바이브 코딩으로 만드는 수업 도구", d: "캔바 코드와 Google AI Studio로 내 수업에 맞는 앱을 만듭니다." },
             ].map((c) => (
               <div key={c.t} className="card learn-card">
                 <h3 className="title-md">{c.t}</h3>
@@ -99,11 +99,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* --- 14차시 미리보기 --- */}
+      {/* --- 12차시 미리보기 --- */}
       <section className="section section--tight">
         <div className="container">
           <div className="section-head section-head--row">
-            <h2 className="display-md">14차시 미리보기</h2>
+            <h2 className="display-md">12차시 미리보기</h2>
             <Link to="/course" className="text-link">전체 보기 →</Link>
           </div>
           <div className="grid grid-3">

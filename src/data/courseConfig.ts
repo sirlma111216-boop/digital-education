@@ -8,7 +8,7 @@ import type { CategoryInfo, CategoryId } from "@/types/content";
 export const courseConfig = {
   title: "디지털 교육",
   subtitle: "교육이 먼저이고, 기술은 배움을 더 깊고 공평하게 만드는 수단입니다.",
-  totalWeeks: 15,
+  totalWeeks: 12,
   contactEmail: "sirlma@naver.com",
   contactSubject: "[디지털교육 수업 문의]",
   contactBodyTemplate:
@@ -17,7 +17,7 @@ export const courseConfig = {
   microsoftReferenceUrl: "https://microsofta3.com/",
 } as const;
 
-/** The 5 top-level groupings that organize the 15 sessions. */
+/** The 5 top-level groupings that organize the 12 sessions. */
 export const categories: CategoryInfo[] = [
   {
     id: "theory",
@@ -42,17 +42,17 @@ export const categories: CategoryInfo[] = [
   },
   {
     id: "edutech",
-    label: "다양한 에듀테크와 몰입·평가",
-    range: "10~11차시",
+    label: "MS365 앱과 수업용 퀴즈 도구",
+    range: "10차시",
     description:
-      "퀴즈·게임 기반 학습과 메타버스·XR, 과정 중심 평가 도구를 비교하고 설계합니다.",
+      "Clipchamp·Sway·Outlook 등 MS365의 다른 앱과, Kahoot!·퀴즈앤·Gimkit·ZEP QUIZ·Blooket 같은 퀴즈 앱을 수업 장면에 맞춰 고릅니다.",
   },
   {
     id: "genai",
-    label: "생성형 AI와 바이브 코딩",
-    range: "12~14차시",
+    label: "바이브 코딩으로 만드는 수업 도구",
+    range: "11~12차시",
     description:
-      "생성형 AI의 원리와 교육적 활용, 바이브 코딩으로 교육용 웹앱을 만드는 캡스톤까지 이어집니다.",
+      "바이브 코딩의 개념을 익히고, 캔바 코드와 Google AI Studio로 수업 도구를 직접 만들며 교육적 활용과 안전 원칙을 정리합니다.",
   },
 ];
 

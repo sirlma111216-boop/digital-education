@@ -2,7 +2,7 @@
 
 ## 콘텐츠 재구성 고지
 
-이 포털의 15차시 본문은 **업로드된 ‘디지털 교육’ 강의 교안을 재구성**한 것입니다.
+이 포털의 12차시 본문은 **업로드된 ‘디지털 교육’ 강의 교안을 재구성**한 것입니다.
 원 교안의 구조와 핵심 개념을 학습용 웹 콘텐츠로 다시 정리했으며, 외부 자료를 무단 복제하지 않았습니다.
 개념도는 외부 이미지를 핫링크하지 않고 CSS/SVG 컴포넌트로 재구성했습니다.
 
@@ -36,13 +36,20 @@
 - Gemini (Google): https://gemini.google.com/
 - Claude (Anthropic): https://claude.ai/ · Claude Code: https://claude.com/claude-code
 
-### 에듀테크 / 평가 / XR
+### MS365 앱 / 퀴즈 도구 (확인일: 2026-11-19)
+- Clipchamp for education: https://clipchamp.com/en/clipchamp-for-education/
+- Sway (웹): https://sway.cloud.microsoft/ (Windows 앱은 2026-06-01 지원 종료)
 - Kahoot!: https://kahoot.com/
-- Quizlet: https://quizlet.com/
-- Canva for Education: https://www.canva.com/education/
-- Desmos: https://www.desmos.com/
-- Spatial: https://www.spatial.io/ (이용 가능 플랫폼은 변경될 수 있음)
-- Minecraft Education: https://education.minecraft.net/
+- 퀴즈앤: https://www.quizn.show/
+- 클래스카드: https://www.classcard.net/
+- Gimkit: https://www.gimkit.com/
+- ZEP QUIZ 가이드: https://docs.channel.io/zepquiz/ko
+- Blooket: https://www.blooket.com/
+
+### 바이브 코딩 (확인일: 2026-11-19)
+- Canva Code: https://www.canva.com/newsroom/news/Canva-Code/
+- Google AI Studio Build 문서: https://ai.google.dev/gemini-api/docs/aistudio-build-mode
+- Lovable: https://lovable.dev/ · Replit: https://replit.com/ · Cursor: https://cursor.com/
 
 ### 표준 / 프레임워크
 - ISTE Standards: https://iste.org/standards

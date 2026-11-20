@@ -85,7 +85,7 @@ if (import.meta.env.DEV) {
       const week = Number(m.id);
       const isTheory = week >= 1 && week <= 3;
       if (isTheory && full.practice) console.warn(`[content] 1~3차시에는 실습이 없어야 합니다: ${m.id}`);
-      if (!isTheory && !full.practice) console.warn(`[content] 4~14차시에는 실습이 있어야 합니다: ${m.id}`);
+      if (!isTheory && !full.practice) console.warn(`[content] 4~12차시에는 실습이 있어야 합니다: ${m.id}`);
     }),
   );
 }

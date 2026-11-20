@@ -192,7 +192,7 @@ export const session03: Session = {
     },
     {
       heading: "⑤ 빌더 (Builder)",
-      body: "**빌더**는 코딩을 몰라도(노코드·로우코드) **교사가 직접 학습 자료, 웹사이트, 앱을 만들 수 있게 해 주는 저작 도구**입니다. 이미 만들어진 콘텐츠를 쓰는 데 그치지 않고, **우리 반 학생에게 맞는 자료를 교사가 직접 설계**할 수 있게 해 준다는 점에서 의미가 큽니다.\n\n**대표 서비스**\n- 디자인·발표 자료: [Canva for Education](https://www.canva.com/education/), [미리캔버스](https://www.miricanvas.com/)\n- 인터랙티브 학습 자료: [Genially](https://genially.com/), [H5P](https://h5p.org/)(퀴즈·드래그앤드롭 등)\n- 웹사이트: [Google Sites](https://sites.google.com/)\n- 앱: [Glide](https://www.glideapps.com/) 같은 노코드 앱 빌더, 그리고 말로 설명해 앱을 만드는 AI 바이브 코딩 도구(14차시)",
+      body: "**빌더**는 코딩을 몰라도(노코드·로우코드) **교사가 직접 학습 자료, 웹사이트, 앱을 만들 수 있게 해 주는 저작 도구**입니다. 이미 만들어진 콘텐츠를 쓰는 데 그치지 않고, **우리 반 학생에게 맞는 자료를 교사가 직접 설계**할 수 있게 해 준다는 점에서 의미가 큽니다.\n\n**대표 서비스**\n- 디자인·발표 자료: [Canva for Education](https://www.canva.com/education/), [미리캔버스](https://www.miricanvas.com/)\n- 인터랙티브 학습 자료: [Genially](https://genially.com/), [H5P](https://h5p.org/)(퀴즈·드래그앤드롭 등)\n- 웹사이트: [Google Sites](https://sites.google.com/)\n- 앱: [Glide](https://www.glideapps.com/) 같은 노코드 앱 빌더, 그리고 말로 설명해 앱을 만드는 AI 바이브 코딩 도구(11~12차시)",
     },
     {
       heading: "⑥ 올인원(All-in-one) 교육 플랫폼",

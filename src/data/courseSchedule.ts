@@ -1,5 +1,5 @@
 /* ==========================================================================
-   전체 일정(14차시). 정확한 날짜가 미정이므로 date는 null로 두고, 확정되면 이 파일만 수정.
+   전체 일정(12차시). 정확한 날짜가 미정이므로 date는 null로 두고, 확정되면 이 파일만 수정.
    `일정 추후 안내` 처리는 UI가 date == null 을 보고 자동으로 표시합니다.
    ========================================================================== */
 
@@ -8,7 +8,7 @@ export type ScheduleStatus = "예정" | "진행 중" | "완료";
 
 export interface CourseScheduleItem {
   week: number;
-  sessionId: string; // matches Session.id ("01".."15")
+  sessionId: string; // matches Session.id ("01".."12")
   title: string;
   date?: string | null; // YYYY-MM-DD or null(미정)
   mode?: ScheduleMode;
@@ -26,11 +26,9 @@ export const courseSchedule: CourseScheduleItem[] = [
   { week: 7, sessionId: "07", title: "Teams for Education, Forms와 학습 가속기", date: null, mode: "추후 안내", status: "예정" },
   { week: 8, sessionId: "08", title: "학교 안 팀즈의 활용 사례", date: null, mode: "추후 안내", status: "예정" },
   { week: 9, sessionId: "09", title: "원노트 소개와 교육적 활용 예시", date: null, mode: "추후 안내", status: "예정" },
-  { week: 10, sessionId: "10", title: "퀴즈·게임 기반 학습과 콘텐츠 저작 도구", date: null, mode: "추후 안내", status: "예정" },
-  { week: 11, sessionId: "11", title: "메타버스·XR와 과정 중심 평가", date: null, mode: "추후 안내", status: "예정" },
-  { week: 12, sessionId: "12", title: "생성형 AI의 이해: 머신러닝에서 LLM과 Agent까지", date: null, mode: "추후 안내", status: "예정" },
-  { week: 13, sessionId: "13", title: "생성형 AI의 교육적 실제와 멀티모달 활용", date: null, mode: "추후 안내", status: "예정" },
-  { week: 14, sessionId: "14", title: "바이브 코딩과 교육용 웹앱 제작 캡스톤", date: null, mode: "추후 안내", status: "예정" },
+  { week: 10, sessionId: "10", title: "MS365의 다른 앱들과 수업용 퀴즈 앱", date: null, mode: "추후 안내", status: "예정" },
+  { week: 11, sessionId: "11", title: "바이브 코딩 개요와 캔바 코드로 만드는 첫 앱", date: null, mode: "추후 안내", status: "예정" },
+  { week: 12, sessionId: "12", title: "바이브 코딩 솔루션, Google AI Studio 실습과 교육적 활용", date: null, mode: "추후 안내", status: "예정" },
 ];
 
 /** Format a schedule date for display; null → 일정 추후 안내. */
