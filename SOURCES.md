@@ -36,14 +36,16 @@
 - Gemini (Google): https://gemini.google.com/
 - Claude (Anthropic): https://claude.ai/ · Claude Code: https://claude.com/claude-code
 
-### MS365 앱 / 퀴즈 도구 (확인일: 2026-11-19)
+### MS365 앱 / 퀴즈 도구 (확인일: 2026-11-22)
 - Clipchamp for education: https://clipchamp.com/en/clipchamp-for-education/
 - Sway (웹): https://sway.cloud.microsoft/ (Windows 앱은 2026-06-01 지원 종료)
-- Kahoot!: https://kahoot.com/
+- Microsoft Whiteboard: https://www.microsoft.com/ko-kr/microsoft-365/microsoft-whiteboard/digital-whiteboard-app
+- Minecraft Education: https://education.minecraft.net/ (2026-11-22 접속 불가로 미대조)
+- Kahoot!: https://kahoot.com/schools/
 - 퀴즈앤: https://www.quizn.show/
 - 클래스카드: https://www.classcard.net/
 - Gimkit: https://www.gimkit.com/
-- ZEP QUIZ 가이드: https://docs.channel.io/zepquiz/ko
+- ZEP QUIZ: https://quiz.zep.us/ · 가이드: https://docs.channel.io/zepquiz/ko
 - Blooket: https://www.blooket.com/
 
 ### 바이브 코딩 (확인일: 2026-11-19)

@@ -45,7 +45,7 @@ export const categories: CategoryInfo[] = [
     label: "MS365 앱과 수업용 퀴즈 도구",
     range: "10차시",
     description:
-      "Clipchamp·Sway·Outlook 등 MS365의 다른 앱과, Kahoot!·퀴즈앤·Gimkit·ZEP QUIZ·Blooket 같은 퀴즈 앱을 수업 장면에 맞춰 고릅니다.",
+      "Clipchamp·Whiteboard·Sway·Minecraft Education 등 MS365의 다른 앱과, Kahoot!·퀴즈앤·클래스카드 배틀·Blooket·Gimkit·ZEP QUIZ 같은 퀴즈 앱을 수업 장면에 맞춰 고릅니다.",
   },
   {
     id: "genai",
