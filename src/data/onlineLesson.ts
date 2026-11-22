@@ -29,14 +29,14 @@ export interface OnlineLessonConfig {
 }
 
 export const onlineLesson: OnlineLessonConfig = {
-  id: "lesson-01",
+  id: "lesson-02",
   title: "디지털교육 비대면 수업",
-  videoUrl: "https://video.labbitory.com/lesson-01.mp4",
-  startAt: "2026-10-15T17:00:00+09:00",
-  endAt: "2026-10-15T19:30:00+09:00",
+  videoUrl: "https://video.labbitory.com/lesson-02.mp4",
+  startAt: "2026-11-23T16:30:00+09:00",
+  endAt: "2026-11-23T18:30:00+09:00",
   notice:
-    "오후 5시부터 7시 반까지만 팝업이 열립니다. 그 시간 안에 모든 학습을 마치시기 바랍니다.\n" +
-    "늦어도 6시 45분까지는 시작하세요.\n" +
+    "오후 4시 반부터 6시 반까지만 팝업이 열립니다. 그 시간 안에 모든 학습을 마치시기 바랍니다.\n" +
+    "영상은 약 36분입니다. 늦어도 5시 45분까지는 시작하세요.\n" +
     "영상의 처음과 끝에 있는 인증을 모두 해야 '출석'으로 인정됩니다.",
-  instructorPreview: { startAt: "2026-10-14T23:00:00+09:00", endAt: "2026-10-14T23:45:00+09:00" },
+  instructorPreview: { startAt: "2026-11-22T12:00:00+09:00", endAt: "2026-11-23T16:00:00+09:00" },
 };
